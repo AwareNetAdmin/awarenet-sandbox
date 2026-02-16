@@ -12,3 +12,6 @@
 # Backup files
 *.bak
 *~
+
+# Service account credentials - NEVER COMMIT
+service-account-key.json
