@@ -134,6 +134,90 @@
             box-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
         }
         
+        /* Process Cards */
+        .process-card:hover {
+            transform: scale(1.02);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            background: rgba(229, 243, 255, 0.95) !important;
+        }
+        
+        /* Modal Styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        
+        .modal-content {
+            background: white;
+            border-radius: 12px;
+            max-width: 600px;
+            max-height: 80vh;
+            width: 90%;
+            padding: 2rem;
+            position: relative;
+            overflow-y: auto;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #666;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: all 0.2s;
+        }
+        
+        .modal-close:hover {
+            background: #f1f5f9;
+            color: #333;
+        }
+        
+        .modal-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #1e40af;
+            margin-bottom: 1rem;
+            padding-right: 2rem;
+        }
+        
+        .modal-body {
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .modal-body h3 {
+            color: #1e40af;
+            margin: 1.5rem 0 0.5rem 0;
+            font-size: 1.2rem;
+        }
+        
+        .modal-body ul {
+            margin: 0.5rem 0;
+            padding-left: 1.5rem;
+        }
+        
+        .modal-body li {
+            margin-bottom: 0.5rem;
+        }
+        
         /* Value Propositions */
         .values {
             padding: 4rem 0;
@@ -414,17 +498,20 @@
         <div class="container">
             <h1>Neighborhood Crime Disruption</h1>
             <div style="display: flex; flex-direction: column; gap: 1rem; margin-top: 1rem;">
-                <div style="background: rgba(219, 234, 254, 0.9); color: #1e40af; padding: 1rem; border-radius: 8px; display: flex; align-items: center; gap: 0.75rem;">
+                <div class="process-card" data-modal="modal1" style="background: rgba(219, 234, 254, 0.9); color: #1e40af; padding: 1rem; border-radius: 8px; display: flex; align-items: center; gap: 0.75rem; cursor: pointer; transition: all 0.3s ease;">
                     <span style="background: #1e40af; color: white; width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; flex-shrink: 0;">1</span>
                     <span style="font-size: 1.6rem; line-height: 1.1;"><strong style="color: #ef4444;">Alert monitoring</strong> identifies suspicious and criminal activity.</span>
+                    <span style="margin-left: auto; opacity: 0.6; font-size: 0.9rem;">Click for details →</span>
                 </div>
-                <div style="background: rgba(219, 234, 254, 0.9); color: #1e40af; padding: 1rem; border-radius: 8px; display: flex; align-items: center; gap: 0.75rem;">
+                <div class="process-card" data-modal="modal2" style="background: rgba(219, 234, 254, 0.9); color: #1e40af; padding: 1rem; border-radius: 8px; display: flex; align-items: center; gap: 0.75rem; cursor: pointer; transition: all 0.3s ease;">
                     <span style="background: #1e40af; color: white; width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; flex-shrink: 0;">2</span>
                     <span style="font-size: 1.6rem; line-height: 1.1;"><strong style="color: #ef4444;">Professional response</strong> disrupts crimes in progress.</span>
+                    <span style="margin-left: auto; opacity: 0.6; font-size: 0.9rem;">Click for details →</span>
                 </div>
-                <div style="background: rgba(219, 234, 254, 0.9); color: #1e40af; padding: 1rem; border-radius: 8px; display: flex; align-items: center; gap: 0.75rem;">
+                <div class="process-card" data-modal="modal3" style="background: rgba(219, 234, 254, 0.9); color: #1e40af; padding: 1rem; border-radius: 8px; display: flex; align-items: center; gap: 0.75rem; cursor: pointer; transition: all 0.3s ease;">
                     <span style="background: #1e40af; color: white; width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; flex-shrink: 0;">3</span>
                     <span style="font-size: 1.6rem; line-height: 1.1;"><strong style="color: #ef4444;">Consistent intervention</strong> creates future deterrence.</span>
+                    <span style="margin-left: auto; opacity: 0.6; font-size: 0.9rem;">Click for details →</span>
                 </div>
             </div>
             <div class="cta-buttons" style="margin-top: 2rem;">
@@ -602,5 +689,148 @@
             <p>&copy; 2026 Aware<em>Net</em>. All rights reserved.</p>
         </div>
     </footer>
+
+    <!-- Modal Overlays -->
+    <div id="modal1" class="modal-overlay">
+        <div class="modal-content">
+            <button class="modal-close">&times;</button>
+            <h2 class="modal-title">Alert Monitoring</h2>
+            <div class="modal-body">
+                <p><strong>Alert monitoring</strong> is the foundation of our crime disruption system. This phase involves the continuous surveillance and immediate detection of suspicious and criminal activity through your existing security camera network.</p>
+                
+                <h3>How It Works</h3>
+                <ul>
+                    <li><strong>Motion Detection:</strong> Your cameras automatically detect person and vehicle movement during monitored hours (10pm-6am)</li>
+                    <li><strong>Email Alerts:</strong> When motion is detected, cameras send email alerts with video clips to our monitoring system</li>
+                    <li><strong>Real-time Processing:</strong> Our trained security professionals receive and review these alerts within seconds</li>
+                    <li><strong>Immediate Assessment:</strong> Each alert is quickly evaluated for threat level and appropriate response</li>
+                </ul>
+                
+                <h3>Key Benefits</h3>
+                <ul>
+                    <li>24/7 vigilance during peak crime hours</li>
+                    <li>No false positive fatigue - professional human review</li>
+                    <li>Works with your existing camera investment</li>
+                    <li>Comprehensive neighborhood coverage</li>
+                </ul>
+                
+                <p>This critical first phase ensures that no suspicious activity goes unnoticed, forming the eyes and ears of your neighborhood's defense system.</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal2" class="modal-overlay">
+        <div class="modal-content">
+            <button class="modal-close">&times;</button>
+            <h2 class="modal-title">Professional Response</h2>
+            <div class="modal-body">
+                <p><strong>Professional response</strong> is where detection transforms into action. Our trained security professionals don't just watch - they actively intervene to disrupt criminal activity as it unfolds.</p>
+                
+                <h3>Immediate Intervention</h3>
+                <ul>
+                    <li><strong>Real-time Decision Making:</strong> Within seconds of alert review, professionals determine appropriate response level</li>
+                    <li><strong>Direct Communication:</strong> Contact with authorities, property owners, or security services as needed</li>
+                    <li><strong>Coordinated Response:</strong> Multiple response options including police dispatch, security patrol, or resident notification</li>
+                    <li><strong>Documentation:</strong> Complete incident logging for follow-up and pattern analysis</li>
+                </ul>
+                
+                <h3>Response Options</h3>
+                <ul>
+                    <li>Emergency services dispatch for active crimes</li>
+                    <li>Property owner/resident immediate notification</li>
+                    <li>Security patrol deployment to area</li>
+                    <li>Coordinated neighbor watch activation</li>
+                </ul>
+                
+                <h3>Why Professional Response Matters</h3>
+                <p>The difference between a security system and crime disruption is immediate, professional human intervention. Our trained responders know how to assess threats, escalate appropriately, and coordinate the most effective response to stop crimes in progress.</p>
+                
+                <p>This active intervention is what turns your neighborhood from a target into a hardened, responsive community that criminals quickly learn to avoid.</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal3" class="modal-overlay">
+        <div class="modal-content">
+            <button class="modal-close">&times;</button>
+            <h2 class="modal-title">Consistent Intervention</h2>
+            <div class="modal-body">
+                <p><strong>Consistent intervention</strong> is the long-term strategy that transforms your neighborhood's reputation and creates lasting crime deterrence through proven, reliable response.</p>
+                
+                <h3>Building Deterrent Reputation</h3>
+                <ul>
+                    <li><strong>Pattern Recognition:</strong> Criminals quickly learn which neighborhoods actively respond to incidents</li>
+                    <li><strong>Word-of-Mouth Effect:</strong> Consistent intervention creates reputation among criminal networks</li>
+                    <li><strong>Behavioral Change:</strong> Criminals choose easier targets, avoiding neighborhoods with active response</li>
+                    <li><strong>Community Confidence:</strong> Residents feel safer knowing their neighborhood actively fights crime</li>
+                </ul>
+                
+                <h3>The Compounding Effect</h3>
+                <ul>
+                    <li>Each successful intervention reinforces the deterrent effect</li>
+                    <li>Criminals share information about "hard targets" to avoid</li>
+                    <li>Property values benefit from reduced crime reputation</li>
+                    <li>Community cohesion strengthens through shared security</li>
+                </ul>
+                
+                <h3>Proven Results</h3>
+                <p>Our data from existing neighborhoods shows that consistent intervention doesn't just stop individual crimes - it fundamentally changes criminal behavior patterns in your area.</p>
+                
+                <p>When criminals know that your neighborhood will respond professionally and immediately to any suspicious activity, they simply move on to easier targets. This is the power of building a reputation for active crime disruption.</p>
+                
+                <p><em>See our published results from St. Louis Hills showing significant crime reduction after implementing consistent intervention protocols.</em></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Modal functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.process-card');
+            const modals = document.querySelectorAll('.modal-overlay');
+            const closeButtons = document.querySelectorAll('.modal-close');
+            
+            // Open modals
+            cards.forEach(card => {
+                card.addEventListener('click', function() {
+                    const modalId = this.getAttribute('data-modal');
+                    const modal = document.getElementById(modalId);
+                    if (modal) {
+                        modal.style.display = 'flex';
+                        // Prevent body scroll when modal is open
+                        document.body.style.overflow = 'hidden';
+                    }
+                });
+            });
+            
+            // Close modals
+            closeButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    this.closest('.modal-overlay').style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                });
+            });
+            
+            // Close modal when clicking overlay
+            modals.forEach(modal => {
+                modal.addEventListener('click', function(e) {
+                    if (e.target === this) {
+                        this.style.display = 'none';
+                        document.body.style.overflow = 'auto';
+                    }
+                });
+            });
+            
+            // Close modal with Escape key
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    modals.forEach(modal => {
+                        modal.style.display = 'none';
+                        document.body.style.overflow = 'auto';
+                    });
+                }
+            });
+        });
+    </script>
 </body>
 </html>
