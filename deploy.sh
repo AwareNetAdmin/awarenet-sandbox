@@ -16,10 +16,10 @@ export GOOGLE_APPLICATION_CREDENTIALS="$(pwd)/service-account-key.json"
 echo "📁 Syncing files..."
 ~/google-cloud-sdk/bin/gsutil -m rsync -r -d . $BUCKET
 
-# Set cache control headers
-echo "⏰ Setting cache headers..."
-~/google-cloud-sdk/bin/gsutil -m setmeta -h "Cache-Control:public, max-age=3600" $BUCKET/*.html
-~/google-cloud-sdk/bin/gsutil -m setmeta -h "Cache-Control:public, max-age=86400" $BUCKET/logo.svg
+# Set cache control headers (sandbox = no cache for easy testing)
+echo "⏰ Setting cache headers (no-cache for sandbox)..."
+~/google-cloud-sdk/bin/gsutil -m setmeta -h "Cache-Control:no-cache, no-store, must-revalidate" $BUCKET/*.html
+~/google-cloud-sdk/bin/gsutil -m setmeta -h "Cache-Control:no-cache, no-store, must-revalidate" $BUCKET/logo.svg
 
 # Set website configuration
 echo "🌐 Configuring website settings..."
