@@ -161,10 +161,17 @@
             max-width: 600px;
             max-height: 80vh;
             width: 90%;
-            padding: 2rem;
             position: relative;
-            overflow-y: auto;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .modal-inner {
+            overflow-y: auto;
+            padding: 2rem;
+            flex: 1;
         }
         
         .modal-close {
@@ -694,6 +701,7 @@
     <div id="modal1" class="modal-overlay">
         <div class="modal-content">
             <button class="modal-close">&times;</button>
+            <div class="modal-inner">
             <h2 class="modal-title">Alert Monitoring</h2>
             <div class="modal-body">
                 <p><strong>Reviewing alerts</strong> is the foundation of our crime disruption system.</p>
@@ -715,12 +723,14 @@
                 
                 <p>This critical first phase ensures that no suspicious activity goes unnoticed, forming the eyes and ears of your neighborhood's defense system.</p>
             </div>
+            </div>
         </div>
     </div>
 
     <div id="modal2" class="modal-overlay">
         <div class="modal-content">
             <button class="modal-close">&times;</button>
+            <div class="modal-inner">
             <h2 class="modal-title">Professional Response</h2>
             <div class="modal-body">
                 <p><strong>Professional response</strong> is where detection transforms into action. Your designated reviewer — a volunteer or hired security officer — doesn't just watch; they actively intervene to disrupt criminal activity as it unfolds.</p>
@@ -746,12 +756,14 @@
                 
                 <p>This active intervention is what turns your neighborhood from a target into a hardened, responsive community that criminals quickly learn to avoid.</p>
             </div>
+            </div>
         </div>
     </div>
 
     <div id="modal3" class="modal-overlay">
         <div class="modal-content">
             <button class="modal-close">&times;</button>
+            <div class="modal-inner">
             <h2 class="modal-title">Consistent Intervention</h2>
             <div class="modal-body">
                 <p><strong>Consistent intervention</strong> is the long-term strategy that transforms your neighborhood's reputation and creates lasting crime deterrence through proven, reliable response.</p>
@@ -778,6 +790,7 @@
                 <p>When criminals know that your neighborhood will respond professionally and immediately to any suspicious activity, they simply move on to easier targets. This is the power of building a reputation for active crime disruption.</p>
                 
                 <p><em>See our published results from St. Louis Hills showing significant crime reduction after implementing consistent intervention protocols.</em></p>
+            </div>
             </div>
         </div>
     </div>
