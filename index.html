@@ -416,9 +416,10 @@
         .form-group select {
             width: 100%;
             padding: 0.75rem;
-            border: none;
+            border: 1px solid #e2e8f0;
             border-radius: 4px;
             font-size: 1rem;
+            color: #333;
         }
         
         /* Footer */
@@ -523,52 +524,56 @@
                 </div>
             </div>
             <div class="cta-buttons" style="margin-top: 2rem;">
-                <a href="#contact" class="btn btn-primary" style="font-size: 1.2rem;">Get Free Assessment</a>
+                <button class="btn btn-primary process-card" data-modal="modal-contact" style="font-size: 1.2rem; border: none; cursor: pointer;">Get Free Assessment</button>
                 <a href="#how-it-works" class="btn btn-secondary">▶ View Demo</a>
             </div>
         </div>
     </section>
 
     <!-- Value Propositions -->
-    <!-- Call-to-Action -->
-    <section class="cta-section" id="contact">
-        <div class="container">
-            <h2>Ready to Make Your Neighborhood Safer?</h2>
-            <div class="contact-form">
-                <form>
-                    <div class="form-group">
-                        <label>Neighborhood/HOA Name</label>
-                        <input type="text" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Number of Participating Homes</label>
-                        <input type="number" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Current Camera Count (estimate)</label>
-                        <input type="number" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Best Contact Method</label>
-                        <select required>
-                            <option value="">Select...</option>
-                            <option value="email">Email</option>
-                            <option value="phone">Phone</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>Email Address</label>
-                        <input type="email" required>
-                    </div>
-                    <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1rem;">Schedule Free Assessment</button>
-                </form>
+
+    <!-- Contact Modal -->
+    <div id="modal-contact" class="modal-overlay">
+        <div class="modal-content">
+            <button class="modal-close">&times;</button>
+            <h2 class="modal-title">Ready to Make Your Neighborhood Safer?</h2>
+            <div class="modal-inner">
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label>Neighborhood/HOA Name</label>
+                            <input type="text" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Number of Participating Homes</label>
+                            <input type="number" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Current Camera Count (estimate)</label>
+                            <input type="number" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Best Contact Method</label>
+                            <select required>
+                                <option value="">Select...</option>
+                                <option value="email">Email</option>
+                                <option value="phone">Phone</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Email Address</label>
+                            <input type="email" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1rem;">Schedule Free Assessment</button>
+                    </form>
+                    <p style="margin-top: 1.5rem; text-align: center; color: #666;">
+                        <strong>Contact Info:</strong><br>
+                        Email: info@awarenet.us
+                    </p>
+                </div>
             </div>
-            <p style="margin-top: 2rem;">
-                <strong>Contact Info:</strong><br>
-                Email: info@awarenet.us
-            </p>
         </div>
-    </section>
+    </div>
 
     <!-- Footer -->
     <footer>
