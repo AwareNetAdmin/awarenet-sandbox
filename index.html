@@ -542,23 +542,23 @@
                     <form>
                         <div class="form-group">
                             <label>Neighborhood/HOA Name</label>
-                            <input type="text" required>
+                            <input type="text" id="f-neighborhood" required>
                         </div>
                         <div class="form-group">
                             <label>Zipcode (primary)</label>
-                            <input type="text" required>
+                            <input type="text" id="f-zipcode" required>
                         </div>
                         <div class="form-group">
                             <label>Number of Homes (estimate)</label>
-                            <input type="number" required>
+                            <input type="number" id="f-homes" required>
                         </div>
                         <div class="form-group">
                             <label>Number of Businesses (estimate)</label>
-                            <input type="number">
+                            <input type="number" id="f-businesses">
                         </div>
                         <div class="form-group">
                             <label>Best Contact Method</label>
-                            <select required>
+                            <select id="f-contact-method" required>
                                 <option value="">Select...</option>
                                 <option value="email">Email</option>
                                 <option value="phone">Phone</option>
@@ -572,7 +572,8 @@
                             <label>Phone Number</label>
                             <input type="tel" id="input-phone">
                         </div>
-                        <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1rem;">Schedule Free Assessment</button>
+                        <div id="form-message" style="display: none; padding: 0.75rem; border-radius: 4px; text-align: center; margin-bottom: 1rem;"></div>
+                        <button type="submit" id="form-submit" class="btn btn-primary" style="width: 100%; margin-top: 1rem;">Schedule Free Assessment</button>
                     </form>
                     <p style="margin-top: 1.5rem; text-align: center; color: #666;">
                         <strong>Contact Info:</strong><br>
@@ -701,7 +702,7 @@
             });
             
             // Contact method toggle
-            const contactSelect = document.querySelector('#modal-contact select');
+            const contactSelect = document.getElementById('f-contact-method');
             const fieldEmail = document.getElementById('field-email');
             const fieldPhone = document.getElementById('field-phone');
             const inputEmail = document.getElementById('input-email');
@@ -724,6 +725,62 @@
                         inputEmail.removeAttribute('required');
                         inputPhone.removeAttribute('required');
                     }
+                });
+            }
+
+            // Assessment form submission
+            const assessmentForm = document.querySelector('#modal-contact form');
+            if (assessmentForm) {
+                assessmentForm.addEventListener('submit', async function(e) {
+                    e.preventDefault();
+                    const btn = document.getElementById('form-submit');
+                    const msg = document.getElementById('form-message');
+                    const contactMethod = document.getElementById('f-contact-method').value;
+                    const contactValue = contactMethod === 'phone'
+                        ? document.getElementById('input-phone').value
+                        : document.getElementById('input-email').value;
+
+                    btn.disabled = true;
+                    btn.textContent = 'Sending…';
+                    msg.style.display = 'none';
+
+                    try {
+                        // TODO: Replace with your deployed Cloud Function URL
+                        const FUNCTION_URL = 'https://REGION-PROJECT_ID.cloudfunctions.net/assessment-form';
+
+                        const res = await fetch(FUNCTION_URL, {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({
+                                neighborhood_name: document.getElementById('f-neighborhood').value,
+                                zipcode:           document.getElementById('f-zipcode').value,
+                                num_homes:         document.getElementById('f-homes').value,
+                                num_businesses:    document.getElementById('f-businesses').value,
+                                contact_method:    contactMethod,
+                                contact_value:     contactValue,
+                            }),
+                        });
+
+                        const data = await res.json();
+                        if (res.ok) {
+                            msg.style.background = '#d1fae5';
+                            msg.style.color = '#065f46';
+                            msg.textContent = 'Thank you! We\'ll be in touch shortly.';
+                            assessmentForm.reset();
+                            document.getElementById('field-email').style.display = 'none';
+                            document.getElementById('field-phone').style.display = 'none';
+                        } else {
+                            throw new Error(data.error || 'Unknown error');
+                        }
+                    } catch (err) {
+                        msg.style.background = '#fee2e2';
+                        msg.style.color = '#991b1b';
+                        msg.textContent = err.message || 'Something went wrong. Please email info@awarenet.us directly.';
+                    }
+
+                    msg.style.display = 'block';
+                    btn.disabled = false;
+                    btn.textContent = 'Schedule Free Assessment';
                 });
             }
 
