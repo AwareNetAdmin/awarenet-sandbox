@@ -564,9 +564,13 @@
                                 <option value="phone">Phone</option>
                             </select>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group" id="field-email">
                             <label>Email Address</label>
-                            <input type="email" required>
+                            <input type="email" id="input-email" required>
+                        </div>
+                        <div class="form-group" id="field-phone" style="display: none;">
+                            <label>Phone Number</label>
+                            <input type="tel" id="input-phone">
                         </div>
                         <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1rem;">Schedule Free Assessment</button>
                     </form>
@@ -696,6 +700,28 @@
                 });
             });
             
+            // Contact method toggle
+            const contactSelect = document.querySelector('#modal-contact select');
+            const fieldEmail = document.getElementById('field-email');
+            const fieldPhone = document.getElementById('field-phone');
+            const inputEmail = document.getElementById('input-email');
+            const inputPhone = document.getElementById('input-phone');
+            if (contactSelect) {
+                contactSelect.addEventListener('change', function() {
+                    if (this.value === 'phone') {
+                        fieldEmail.style.display = 'none';
+                        fieldPhone.style.display = 'block';
+                        inputEmail.removeAttribute('required');
+                        inputPhone.setAttribute('required', 'required');
+                    } else {
+                        fieldEmail.style.display = 'block';
+                        fieldPhone.style.display = 'none';
+                        inputEmail.setAttribute('required', 'required');
+                        inputPhone.removeAttribute('required');
+                    }
+                });
+            }
+
             // Close modal with Escape key
             document.addEventListener('keydown', function(e) {
                 if (e.key === 'Escape') {
