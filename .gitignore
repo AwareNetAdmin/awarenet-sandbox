@@ -1,0 +1,17 @@
+# macOS
+.DS_Store
+
+# Temporary files
+*.tmp
+*.log
+
+# IDE files
+.vscode/
+.idea/
+
+# Backup files
+*.bak
+*~
+
+# Service account credentials - NEVER COMMIT
+service-account-key.json
