@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="version" content="0.1.22">
+    <meta name="version" content="0.1.23">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Our Team - AwareNet</title>
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&display=swap" rel="stylesheet">
@@ -282,11 +282,11 @@
         }
 
         .photo-modal img {
-            max-width: 90vw;
-            max-height: 85vh;
-            border-radius: 8px;
+            width: min(80vw, 70vh);
+            height: min(80vw, 70vh);
+            border-radius: 50%;
             box-shadow: 0 8px 40px rgba(0,0,0,0.6);
-            object-fit: contain;
+            object-fit: cover;
         }
 
         .photo-modal-close {
