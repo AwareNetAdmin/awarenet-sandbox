@@ -4,14 +4,10 @@
     <meta charset="UTF-8">
     <meta name="version" content="0.1.31">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact Us - AwareNet</title>
+    <title>Alert Process - AwareNet</title>
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -42,15 +38,6 @@
             padding: 1rem 0;
         }
 
-        .logo {
-            height: 40px;
-        }
-
-        .logo img {
-            height: 100%;
-            width: auto;
-        }
-
         .nav-links {
             display: flex;
             list-style: none;
@@ -64,9 +51,7 @@
             transition: color 0.3s;
         }
 
-        .nav-links a:hover {
-            color: #1e40af;
-        }
+        .nav-links a:hover { color: #1e40af; }
 
         /* Hamburger */
         .hamburger {
@@ -85,17 +70,14 @@
             height: 3px;
             background: white;
             border-radius: 2px;
-            transition: all 0.3s;
         }
 
-        /* Slide-out drawer */
+        /* Drawer */
         .drawer-overlay {
             display: none;
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
             background: rgba(0,0,0,0.4);
             z-index: 999;
         }
@@ -114,9 +96,7 @@
             box-shadow: 4px 0 15px rgba(0,0,0,0.3);
         }
 
-        .drawer.open {
-            left: 0;
-        }
+        .drawer.open { left: 0; }
 
         .drawer-header {
             padding: 1.5rem;
@@ -134,10 +114,8 @@
 
         .drawer-close {
             position: absolute;
-            top: 1rem;
-            right: 1rem;
-            background: none;
-            border: none;
+            top: 1rem; right: 1rem;
+            background: none; border: none;
             color: white;
             font-size: 1.6rem;
             cursor: pointer;
@@ -160,15 +138,12 @@
             padding: 0.75rem 1.5rem;
             border-bottom: 1px solid rgba(255,255,255,0.15);
             transition: background 0.2s;
-            text-align: left;
             display: block;
             width: 100%;
             box-sizing: border-box;
         }
 
-        .drawer nav a:hover {
-            background: rgba(255,255,255,0.15);
-        }
+        .drawer nav a:hover { background: rgba(255,255,255,0.15); }
 
         .drawer nav a.drawer-sub-item {
             font-size: 1.2rem;
@@ -178,11 +153,7 @@
             border-bottom: 1px solid rgba(255,255,255,0.08);
         }
 
-        .drawer-group {
-            display: flex;
-            flex-direction: column;
-            width: 100%;
-        }
+        .drawer-group { display: flex; flex-direction: column; width: 100%; }
 
         .drawer-toggle {
             display: flex !important;
@@ -192,17 +163,10 @@
             box-sizing: border-box;
         }
 
-        .drawer-sub-items {
-            display: none;
-            flex-direction: column;
-        }
-
-        .drawer-sub-items.open {
-            display: flex;
-        }
+        .drawer-sub-items { display: none; flex-direction: column; }
+        .drawer-sub-items.open { display: flex; }
 
         .drawer-chevron {
-            float: right;
             transition: transform 0.3s;
             display: inline-block;
             margin-left: 0.75rem;
@@ -211,9 +175,7 @@
             line-height: 1;
         }
 
-        .drawer-toggle.open .drawer-chevron {
-            transform: rotate(90deg);
-        }
+        .drawer-toggle.open .drawer-chevron { transform: rotate(90deg); }
 
         /* Page hero */
         .page-hero {
@@ -235,67 +197,81 @@
             opacity: 0.9;
         }
 
-        /* Contact section */
-        .contact-section {
-            padding: 0.5rem 0 4rem 0;
+        /* Steps section */
+        .steps-section {
+            padding: 3rem 0 4rem 0;
             background: #f8fafc;
         }
 
-        .contact-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-            max-width: 900px;
-            margin-left: auto;
-            margin-right: auto;
+        .steps-list {
+            max-width: 760px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 0;
         }
 
-        .contact-card {
+        .step-item {
+            display: flex;
+            gap: 1.5rem;
+            align-items: flex-start;
+        }
+
+        .step-connector {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex-shrink: 0;
+        }
+
+        .step-number {
+            width: 3rem;
+            height: 3rem;
+            background: #1e40af;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .step-line {
+            width: 3px;
+            flex: 1;
+            background: #cbd5e1;
+            min-height: 2rem;
+            margin: 0.25rem 0;
+        }
+
+        .step-item:last-child .step-line {
+            display: none;
+        }
+
+        .step-content {
             background: white;
             border-radius: 10px;
-            padding: 2rem;
-            text-align: center;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-            transition: transform 0.2s, box-shadow 0.2s;
+            padding: 1.5rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.07);
+            margin-bottom: 1.5rem;
+            flex: 1;
         }
 
-        .contact-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+        .step-content p {
+            font-size: 1.2rem;
+            color: #333;
+            line-height: 1.7;
         }
 
-        .contact-icon {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-        }
-
-        .contact-card h3 {
-            font-size: 1.44rem;
-            font-weight: 700;
-            color: #1e40af;
-            margin-bottom: 0.5rem;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-
-        .contact-card p {
-            color: #666;
-            font-size: 1.14rem;
-            margin-bottom: 0.75rem;
-        }
-
-        .contact-card a {
-            display: inline-block;
+        .step-content a {
             color: #1e40af;
             text-decoration: none;
-            font-size: 1.32rem;
-            font-weight: 600;
-            transition: color 0.2s;
+            font-weight: 500;
         }
 
-        .contact-card a:hover {
-            color: #3b82f6;
+        .step-content a:hover {
             text-decoration: underline;
         }
 
@@ -307,40 +283,11 @@
             text-align: center;
         }
 
-        .footer-links {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            margin-bottom: 1rem;
-            flex-wrap: wrap;
-        }
-
-        .footer-links a {
-            color: #9ca3af;
-            text-decoration: none;
-        }
-
-        .footer-links a:hover {
-            color: white;
-        }
-
         /* Responsive */
         @media (max-width: 768px) {
-            .page-hero h1 {
-                font-size: 2rem;
-            }
-
-            .nav-links {
-                display: none;
-            }
-
-            .hamburger {
-                display: flex;
-            }
-
-            .logo {
-                height: 35px;
-            }
+            .page-hero h1 { font-size: 2rem; }
+            .nav-links { display: none; }
+            .hamburger { display: flex; }
         }
     </style>
 </head>
@@ -351,9 +298,7 @@
         <div class="container">
             <nav>
                 <button class="hamburger" id="hamburger" aria-label="Open menu">
-                    <span></span>
-                    <span></span>
-                    <span></span>
+                    <span></span><span></span><span></span>
                 </button>
                 <div class="logo" style="height: 48px; display: flex; align-items: center; gap: 0.5rem;">
                     <span style="background: rgba(255,255,255,0.45); border-radius: 50px; padding: 2px 6px; display: flex; align-items: center;">
@@ -444,35 +389,44 @@
     <!-- Page Hero -->
     <section class="page-hero">
         <div class="container">
-            <h1>Contact Us</h1>
-            <p>We're here to help. Reach out anytime.</p>
+            <h1>Alert Process</h1>
+            <p>How AwareNet detects, receives, and responds to alerts.</p>
         </div>
     </section>
 
-    <!-- Contact Cards -->
-    <section class="contact-section">
+    <!-- Steps -->
+    <section class="steps-section">
         <div class="container">
-            <div class="contact-grid">
+            <div class="steps-list">
 
-                <div class="contact-card">
-                    <div class="contact-icon">📈</div>
-                    <h3>Sales</h3>
-                    <p>Questions about getting AwareNet for your neighborhood?</p>
-                    <a href="mailto:sales@awarenet.us">sales@awarenet.us</a>
+                <div class="step-item">
+                    <div class="step-connector">
+                        <div class="step-number">1</div>
+                        <div class="step-line"></div>
+                    </div>
+                    <div class="step-content">
+                        <p>The camera automatically detects a person moving and immediately sends an email or webhook to AwareNet that includes the video clip it recorded.</p>
+                    </div>
                 </div>
 
-                <div class="contact-card">
-                    <div class="contact-icon">🛠️</div>
-                    <h3>Support</h3>
-                    <p>Need help with your existing AwareNet setup?</p>
-                    <a href="mailto:support@awarenet.us">support@awarenet.us</a>
+                <div class="step-item">
+                    <div class="step-connector">
+                        <div class="step-number">2</div>
+                        <div class="step-line"></div>
+                    </div>
+                    <div class="step-content">
+                        <p>AwareNet automatically receives the email or webhook, verifies it is from an enrolled camera, and immediately displays the alert to the person designated by the neighborhood to monitor the alerts (safety committee volunteer or paid security personnel).</p>
+                    </div>
                 </div>
 
-                <div class="contact-card">
-                    <div class="contact-icon">📞</div>
-                    <h3>Phone</h3>
-                    <p>Prefer to talk? Give us a call.</p>
-                    <a href="tel:+13144061166">(314) 406-1166</a>
+                <div class="step-item">
+                    <div class="step-connector">
+                        <div class="step-number">3</div>
+                        <div class="step-line"></div>
+                    </div>
+                    <div class="step-content">
+                        <p>The people receiving the alerts <a href="review-alert.html">review the video clip</a> and determine what, if any, action should be taken (e.g. call 911).</p>
+                    </div>
                 </div>
 
             </div>
@@ -488,7 +442,6 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Collapsible drawer groups
             document.querySelectorAll('.drawer-toggle').forEach(toggle => {
                 toggle.addEventListener('click', function(e) {
                     e.preventDefault();
@@ -503,7 +456,6 @@
                 });
             });
 
-            // Slide-out drawer
             const hamburger = document.getElementById('hamburger');
             const drawer = document.getElementById('drawer');
             const drawerOverlay = document.getElementById('drawer-overlay');
