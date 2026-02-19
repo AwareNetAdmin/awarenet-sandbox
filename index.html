@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AwareNet - Neighborhood Crime Disruption Network</title>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -25,8 +26,9 @@
         
         /* Header */
         header {
-            background: #fff;
+            background: linear-gradient(rgba(255,255,255,0.20), rgba(255,255,255,0.20)), url('street.jpg') center center / cover no-repeat;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border-bottom: 4px solid #1e40af;
             position: sticky;
             top: 0;
             z-index: 100;
@@ -155,16 +157,35 @@
             z-index: 1000;
         }
         
+        @keyframes slideFromRight {
+            from {
+                transform: translateX(300px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
         .modal-content {
             background: white;
             border-radius: 12px;
             max-width: 600px;
             max-height: 80vh;
             width: 90%;
-            padding: 2rem;
             position: relative;
-            overflow-y: auto;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            animation: slideFromRight 1.4s ease-out;
+        }
+
+        .modal-inner {
+            overflow-y: auto;
+            padding: 2rem;
+            flex: 1;
         }
         
         .modal-close {
@@ -194,8 +215,9 @@
             font-size: 1.8rem;
             font-weight: 700;
             color: #1e40af;
-            margin-bottom: 1rem;
-            padding-right: 2rem;
+            padding: 1.5rem 2rem 1rem 2rem;
+            border-bottom: 1px solid #e2e8f0;
+            flex-shrink: 0;
         }
         
         .modal-body {
@@ -408,9 +430,10 @@
         .form-group select {
             width: 100%;
             padding: 0.75rem;
-            border: none;
+            border: 1px solid #94a3b8;
             border-radius: 4px;
             font-size: 1rem;
+            color: #333;
         }
         
         /* Footer */
@@ -438,21 +461,172 @@
             color: white;
         }
         
+        /* Hamburger */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 6px 4px;
+            background: none;
+            border: none;
+        }
+
+        .hamburger span {
+            display: block;
+            width: 26px;
+            height: 3px;
+            background: white;
+            border-radius: 2px;
+            transition: all 0.3s;
+        }
+
+        /* Slide-out drawer */
+        .drawer-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.4);
+            z-index: 999;
+        }
+
+        .drawer {
+            position: fixed;
+            top: 0;
+            left: -280px;
+            width: 280px;
+            height: 100%;
+            background: #1e40af;
+            z-index: 1000;
+            transition: left 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 4px 0 15px rgba(0,0,0,0.3);
+        }
+
+        .drawer.open {
+            left: 0;
+        }
+
+        .drawer-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .drawer-logo-text {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #fff;
+        }
+
+        .drawer-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.6rem;
+            cursor: pointer;
+            line-height: 1;
+        }
+
+        .drawer nav {
+            display: flex;
+            flex-direction: column;
+            padding: 1rem 0;
+            overflow-y: auto;
+            flex: 1;
+        }
+
+        .drawer nav a {
+            text-decoration: none;
+            color: white;
+            font-size: 1.35rem;
+            font-weight: 500;
+            padding: 0.75rem 1.5rem;
+            border-bottom: 1px solid rgba(255,255,255,0.15);
+            transition: background 0.2s;
+            text-align: left;
+            display: block;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .drawer nav a:hover {
+            background: rgba(255,255,255,0.15);
+        }
+
+        .drawer nav a.drawer-sub-item {
+            font-size: 1.2rem;
+            font-weight: 400;
+            padding: 0.5rem 1.5rem 0.5rem 2.5rem;
+            opacity: 0.85;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .drawer-group {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+        }
+
+        .drawer-toggle {
+            display: flex !important;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .drawer-sub-items {
+            display: none;
+            flex-direction: column;
+        }
+
+        .drawer-sub-items.open {
+            display: flex;
+        }
+
+        .drawer-chevron {
+            float: right;
+            transition: transform 0.3s;
+            display: inline-block;
+            margin-left: 0.75rem;
+            font-size: 1.4rem;
+            font-weight: bold;
+            line-height: 1;
+        }
+
+        .drawer-toggle.open .drawer-chevron {
+            transform: rotate(90deg);
+        }
+
         /* Responsive */
         @media (max-width: 768px) {
             .hero h1 {
                 font-size: 2rem;
             }
-            
+
             .nav-links {
                 display: none;
             }
-            
+
+            .hamburger {
+                display: flex;
+            }
+
             .cta-buttons {
                 flex-direction: column;
                 align-items: center;
             }
-            
+
             .logo {
                 height: 35px;
             }
@@ -479,9 +653,16 @@
     <header>
         <div class="container">
             <nav>
-                <div class="logo" style="height: 40px; display: flex; align-items: center; gap: 0.5rem;">
-                    <img src="logo.svg" alt="AwareNet" style="height: 40px; width: auto;" />
-                    <span style="font-size: 1.5rem; font-weight: bold; color: #1e40af;">Aware<em>Net</em></span>
+                <button class="hamburger" id="hamburger" aria-label="Open menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <div class="logo" style="height: 48px; display: flex; align-items: center; gap: 0.5rem;">
+                    <span style="background: rgba(255,255,255,0.45); border-radius: 50px; padding: 2px 6px; display: flex; align-items: center;">
+                        <img src="logo.svg" alt="AwareNet" style="height: 48px; width: auto;" />
+                    </span>
+                    <span style="font-size: 3rem; font-weight: bold; color: #1e40af; text-shadow: -1px -1px 0 white, 1px -1px 0 white, -1px 1px 0 white, 1px 1px 0 white;">Aware<em>Net</em></span>
                 </div>
                 <ul class="nav-links">
                     <li><a href="#how-it-works">How It Works</a></li>
@@ -493,199 +674,160 @@
         </div>
     </header>
 
+    <!-- Slide-out drawer -->
+    <div class="drawer-overlay" id="drawer-overlay"></div>
+    <div class="drawer" id="drawer">
+        <button class="drawer-close" id="drawer-close">&times;</button>
+        <div class="drawer-header">
+            <span style="background: rgba(255,255,255,0.45); border-radius: 50px; padding: 2px 6px; display: flex; align-items: center;">
+                <img src="logo.svg" alt="AwareNet" style="height: 40px; width: auto;" />
+            </span>
+            <span class="drawer-logo-text">Aware<em>Net</em></span>
+        </div>
+        <nav>
+            <a href="#" class="drawer-item">Home</a>
+
+            <div class="drawer-group">
+                <a href="#" class="drawer-item drawer-toggle">About <span class="drawer-chevron">›</span></a>
+                <div class="drawer-sub-items">
+                    <a href="#" class="drawer-sub-item">Contact Us</a>
+                    <a href="#" class="drawer-sub-item">Feature Summary</a>
+                    <a href="#" class="drawer-sub-item">Introduction Slide Deck</a>
+                    <a href="#" class="drawer-sub-item">Our Team</a>
+                    <a href="#" class="drawer-sub-item">Customers</a>
+                </div>
+            </div>
+
+            <a href="#" class="drawer-item">Getting Started</a>
+
+            <div class="drawer-group">
+                <a href="#" class="drawer-item drawer-toggle">FAQ <span class="drawer-chevron">›</span></a>
+                <div class="drawer-sub-items">
+                    <a href="#" class="drawer-sub-item">Alert Process</a>
+                    <a href="#" class="drawer-sub-item">Review Alert</a>
+                    <a href="#" class="drawer-sub-item">Privacy Masking</a>
+                </div>
+            </div>
+
+            <a href="#" class="drawer-item">Supported Cameras</a>
+
+            <div class="drawer-group">
+                <a href="#" class="drawer-item drawer-toggle">Reolink Email Setup <span class="drawer-chevron">›</span></a>
+                <div class="drawer-sub-items">
+                    <a href="#" class="drawer-sub-item">Gmail App Password</a>
+                    <a href="#" class="drawer-sub-item">Email Sent Folder</a>
+                </div>
+            </div>
+
+            <a href="#" class="drawer-item">Enroll a Camera</a>
+            <a href="#" class="drawer-item">Camera Location</a>
+
+            <div class="drawer-group">
+                <a href="#" class="drawer-item drawer-toggle">Configuration Notes <span class="drawer-chevron">›</span></a>
+                <div class="drawer-sub-items">
+                    <a href="#" class="drawer-sub-item">Duo, Duo 2, Duo 3</a>
+                    <a href="#" class="drawer-sub-item">False Alerts</a>
+                </div>
+            </div>
+
+            <a href="#" class="drawer-item">Pricing</a>
+
+            <div class="drawer-group">
+                <a href="#" class="drawer-item drawer-toggle">Legal <span class="drawer-chevron">›</span></a>
+                <div class="drawer-sub-items">
+                    <a href="#" class="drawer-sub-item">Member TOS</a>
+                    <a href="#" class="drawer-sub-item">Customer TOS</a>
+                    <a href="#" class="drawer-sub-item">Customer Order Form</a>
+                </div>
+            </div>
+        </nav>
+    </div>
+
     <!-- Hero Section -->
     <section class="hero">
         <div class="container">
-            <h1>Neighborhood Crime Disruption</h1>
+            <h1 style="font-family: 'Oswald', sans-serif; letter-spacing: 0.02em; font-size: 2.5rem;">Neighborhood Crime Disruption</h1>
             <div style="display: flex; flex-direction: column; gap: 1rem; margin-top: 1rem;">
-                <div class="process-card" data-modal="modal1" style="background: rgba(219, 234, 254, 0.9); color: #1e40af; padding: 1rem; border-radius: 8px; display: flex; align-items: center; gap: 0.75rem; cursor: pointer; transition: all 0.3s ease;">
-                    <span style="background: #1e40af; color: white; width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; flex-shrink: 0;">1</span>
-                    <span style="font-size: 1.6rem; line-height: 1.1;"><strong style="color: #ef4444;">Alert monitoring</strong> identifies suspicious and criminal activity.</span>
-                    <span style="margin-left: auto; opacity: 0.6; font-size: 0.9rem;">Click for details →</span>
+                <div class="process-card" data-modal="modal1" style="background: rgba(219, 234, 254, 0.9); color: #1e40af; padding: 1rem; border-radius: 8px; display: flex; align-items: center; gap: 0.75rem; cursor: pointer; transition: all 0.3s ease; border-left: 5px solid #16a34a;">
+                    <span style="background: #1e40af; color: white; width: 2rem; height: 2rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.5rem; flex-shrink: 0;">1</span>
+                    <span style="font-size: 1.6rem; line-height: 1.1;"><strong style="color: #1e40af;">Deploy Security Cameras</strong></span>
+                    <span style="margin-left: auto; opacity: 0.6; font-size: 0.9rem;">Learn more →</span>
                 </div>
-                <div class="process-card" data-modal="modal2" style="background: rgba(219, 234, 254, 0.9); color: #1e40af; padding: 1rem; border-radius: 8px; display: flex; align-items: center; gap: 0.75rem; cursor: pointer; transition: all 0.3s ease;">
-                    <span style="background: #1e40af; color: white; width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; flex-shrink: 0;">2</span>
-                    <span style="font-size: 1.6rem; line-height: 1.1;"><strong style="color: #ef4444;">Professional response</strong> disrupts crimes in progress.</span>
-                    <span style="margin-left: auto; opacity: 0.6; font-size: 0.9rem;">Click for details →</span>
+                <div class="process-card" data-modal="modal2" style="background: rgba(219, 234, 254, 0.9); color: #1e40af; padding: 1rem; border-radius: 8px; display: flex; align-items: center; gap: 0.75rem; cursor: pointer; transition: all 0.3s ease; border-left: 5px solid #f97316;">
+                    <span style="background: #1e40af; color: white; width: 2rem; height: 2rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.5rem; flex-shrink: 0;">2</span>
+                    <span style="font-size: 1.6rem; line-height: 1.1;"><strong style="color: #1e40af;">Monitor Automated Alerts</strong></span>
+                    <span style="margin-left: auto; opacity: 0.6; font-size: 0.9rem;">Learn more →</span>
                 </div>
-                <div class="process-card" data-modal="modal3" style="background: rgba(219, 234, 254, 0.9); color: #1e40af; padding: 1rem; border-radius: 8px; display: flex; align-items: center; gap: 0.75rem; cursor: pointer; transition: all 0.3s ease;">
-                    <span style="background: #1e40af; color: white; width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; flex-shrink: 0;">3</span>
-                    <span style="font-size: 1.6rem; line-height: 1.1;"><strong style="color: #ef4444;">Consistent intervention</strong> creates future deterrence.</span>
-                    <span style="margin-left: auto; opacity: 0.6; font-size: 0.9rem;">Click for details →</span>
+                <div class="process-card" data-modal="modal3" style="background: rgba(219, 234, 254, 0.9); color: #1e40af; padding: 1rem; border-radius: 8px; display: flex; align-items: center; gap: 0.75rem; cursor: pointer; transition: all 0.3s ease; border-left: 5px solid #ef4444;">
+                    <span style="background: #1e40af; color: white; width: 2rem; height: 2rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.5rem; flex-shrink: 0;">3</span>
+                    <span style="font-size: 1.6rem; line-height: 1.1;"><strong style="color: #1e40af;">Activate Professional Response</strong></span>
+                    <span style="margin-left: auto; opacity: 0.6; font-size: 0.9rem;">Learn more →</span>
                 </div>
             </div>
             <div class="cta-buttons" style="margin-top: 2rem;">
-                <a href="#contact" class="btn btn-primary" style="font-size: 1.2rem;">Get Free Assessment</a>
+                <button class="btn btn-primary process-card" data-modal="modal-contact" style="font-size: 1.2rem; border: none; cursor: pointer;">Request Free Assessment</button>
                 <a href="#how-it-works" class="btn btn-secondary">▶ View Demo</a>
             </div>
         </div>
     </section>
 
     <!-- Value Propositions -->
-    <section class="values">
-        <div class="container">
-            <h2 class="section-title">Why Choose Aware<em>Net</em>?</h2>
-            <div class="values-grid">
-                <div class="value-item">
-                    <h3>🎯 Proven Crime Reduction</h3>
-                    <p>Real results from neighborhoods like yours. See our St. Louis Hills case study with documented crime reduction data.</p>
-                </div>
-                <div class="value-item">
-                    <h3>💰 No Cost to Residents</h3>
-                    <p>Your HOA or neighborhood organization pays. Residents participate at no individual cost.</p>
-                </div>
-                <div class="value-item">
-                    <h3>📹 Works with Your Cameras</h3>
-                    <p>Compatible with Reolink (residential-grade, $100-200) and Axis (commercial-grade) cameras. Not consumer devices like Ring or Blink.</p>
-                </div>
-            </div>
-        </div>
-    </section>
 
-    <!-- How It Works -->
-    <section class="how-it-works" id="how-it-works">
-        <div class="container">
-            <h2 class="section-title">How It Works</h2>
-            <div class="steps-grid">
-                <div class="step">
-                    <div class="step-number">1</div>
-                    <h3>Motion Detection</h3>
-                    <p>Your cameras detect person/vehicle motion and email video clips automatically</p>
-                </div>
-                <div class="step">
-                    <div class="step-number">2</div>
-                    <h3>Professional Review</h3>
-                    <p>Trained security reviewer monitors alerts in real-time during peak hours (10pm-6am)</p>
-                </div>
-                <div class="step">
-                    <div class="step-number">3</div>
-                    <h3>Immediate Response</h3>
-                    <p>Suspicious activity triggers immediate notification to appropriate authorities</p>
-                </div>
-                <div class="step">
-                    <div class="step-number">4</div>
-                    <h3>Reporting & Analytics</h3>
-                    <p>Consolidated neighborhood security reports and trend analysis</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Pricing -->
-    <section class="pricing" id="pricing">
-        <div class="container">
-            <h2 class="section-title">Transparent Pricing</h2>
-            <div class="pricing-box">
-                <h3>Monthly Investment</h3>
-                <div class="pricing-item">
-                    <span><strong>Base Service:</strong></span>
-                    <span><strong>$129/month</strong></span>
-                </div>
-                <div class="pricing-item">
-                    <span><strong>Per Camera:</strong></span>
-                    <span><strong>$4.50/month</strong></span>
-                </div>
-                <div class="pricing-example">
-                    <strong>Example:</strong> 20 cameras = $219/month total<br>
-                    <small>Protect property value for less than $11 per home per month</small>
-                </div>
-                <p class="special-note">Special: St. Louis City neighborhoods served at no-profit</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Social Proof -->
-    <section class="social-proof" id="results">
-        <div class="container">
-            <h2 class="section-title">Proven Results</h2>
-            <div class="proof-grid">
-                <div class="proof-item">
-                    <h3>Current Impact</h3>
-                    <p><strong>Protecting 4 neighborhoods</strong> with proven results</p>
-                </div>
-                <div class="proof-item">
-                    <h3>Case Study</h3>
-                    <p><strong>St. Louis Hills Results</strong></p>
-                    <a href="https://stlhills.com/wp-content/uploads/2023/06/2023-YTD.pdf" style="color: #1e40af;">View detailed results →</a>
-                </div>
-                <div class="proof-item">
-                    <div class="testimonial">"Professional-grade security monitoring that actually works."</div>
-                    <div class="testimonial-author">— Charles Betts, Retired SLMPD, The City's Finest Security</div>
+    <!-- Contact Modal -->
+    <div id="modal-contact" class="modal-overlay">
+        <div class="modal-content">
+            <button class="modal-close">&times;</button>
+            <h2 class="modal-title">Request Free Assessment</h2>
+            <div class="modal-inner">
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label>Neighborhood/HOA Name</label>
+                            <input type="text" id="f-neighborhood" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Zipcode (primary)</label>
+                            <input type="text" id="f-zipcode" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Number of Homes (estimate)</label>
+                            <input type="number" id="f-homes" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Number of Businesses (estimate)</label>
+                            <input type="number" id="f-businesses">
+                        </div>
+                        <div class="form-group">
+                            <label>Best Contact Method</label>
+                            <select id="f-contact-method" required>
+                                <option value="">Select...</option>
+                                <option value="email">Email</option>
+                                <option value="phone">Phone</option>
+                            </select>
+                        </div>
+                        <div class="form-group" id="field-email" style="display: none;">
+                            <label>Email Address</label>
+                            <input type="email" id="input-email">
+                        </div>
+                        <div class="form-group" id="field-phone" style="display: none;">
+                            <label>Phone Number</label>
+                            <input type="tel" id="input-phone">
+                        </div>
+                        <div id="form-message" style="display: none; padding: 0.75rem; border-radius: 4px; text-align: center; margin-bottom: 1rem;"></div>
+                        <button type="submit" id="form-submit" class="btn btn-primary" style="width: 100%; margin-top: 1rem;">Schedule Free Assessment</button>
+                    </form>
+                    <p style="margin-top: 1.5rem; text-align: center; color: #666;">
+                        <strong>Contact Info:</strong><br>
+                        Email: info@awarenet.us
+                    </p>
                 </div>
             </div>
         </div>
-    </section>
-
-    <!-- Technical Requirements -->
-    <section class="tech-requirements">
-        <div class="container">
-            <h2 class="section-title">Technical Requirements</h2>
-            <div class="requirements-grid">
-                <div class="req-section">
-                    <h3 class="compatible">✅ Supported Camera Systems</h3>
-                    <ul>
-                        <li><strong>Reolink:</strong> $100-200 range, recommended for residential</li>
-                        <li><strong>Axis:</strong> $600-5000 range, enterprise-grade</li>
-                    </ul>
-                </div>
-                <div class="req-section">
-                    <h3 class="not-compatible">❌ Not Compatible</h3>
-                    <p>Ring, Blink, Wyze, SimpliSafe</p>
-                    <small>(Consumer systems lack required email alert functionality)</small>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Call-to-Action -->
-    <section class="cta-section" id="contact">
-        <div class="container">
-            <h2>Ready to Make Your Neighborhood Safer?</h2>
-            <div class="contact-form">
-                <form>
-                    <div class="form-group">
-                        <label>Neighborhood/HOA Name</label>
-                        <input type="text" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Number of Participating Homes</label>
-                        <input type="number" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Current Camera Count (estimate)</label>
-                        <input type="number" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Best Contact Method</label>
-                        <select required>
-                            <option value="">Select...</option>
-                            <option value="email">Email</option>
-                            <option value="phone">Phone</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>Email Address</label>
-                        <input type="email" required>
-                    </div>
-                    <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1rem;">Schedule Free Assessment</button>
-                </form>
-            </div>
-            <p style="margin-top: 2rem;">
-                <strong>Contact Info:</strong><br>
-                Email: info@awarenet.us
-            </p>
-        </div>
-    </section>
+    </div>
 
     <!-- Footer -->
     <footer>
         <div class="container">
-            <div class="footer-links">
-                <a href="#">About</a>
-                <a href="#">Privacy Policy</a>
-                <a href="#">Terms</a>
-                <a href="#contact">Contact</a>
-            </div>
             <p>&copy; 2026 Aware<em>Net</em>. All rights reserved.</p>
         </div>
     </footer>
@@ -694,27 +836,13 @@
     <div id="modal1" class="modal-overlay">
         <div class="modal-content">
             <button class="modal-close">&times;</button>
-            <h2 class="modal-title">Alert Monitoring</h2>
+            <h2 class="modal-title">Deploy Security Cameras</h2>
+            <div class="modal-inner">
             <div class="modal-body">
-                <p><strong>Alert monitoring</strong> is the foundation of our crime disruption system. This phase involves the continuous surveillance and immediate detection of suspicious and criminal activity through your existing security camera network.</p>
-                
-                <h3>How It Works</h3>
-                <ul>
-                    <li><strong>Motion Detection:</strong> Your cameras automatically detect person and vehicle movement during monitored hours (10pm-6am)</li>
-                    <li><strong>Email Alerts:</strong> When motion is detected, cameras send email alerts with video clips to our monitoring system</li>
-                    <li><strong>Real-time Processing:</strong> Our trained security professionals receive and review these alerts within seconds</li>
-                    <li><strong>Immediate Assessment:</strong> Each alert is quickly evaluated for threat level and appropriate response</li>
-                </ul>
-                
-                <h3>Key Benefits</h3>
-                <ul>
-                    <li>24/7 vigilance during peak crime hours</li>
-                    <li>No false positive fatigue - professional human review</li>
-                    <li>Works with your existing camera investment</li>
-                    <li>Comprehensive neighborhood coverage</li>
-                </ul>
-                
-                <p>This critical first phase ensures that no suspicious activity goes unnoticed, forming the eyes and ears of your neighborhood's defense system.</p>
+                <p style="margin-bottom: 1rem; font-size: 1.2rem;">A traditional neighborhood watch puts residents outside at night, <strong>risking their own safety</strong>, to observe activity. A traditional security patrol is limited to line-of-sight, often <strong>missing important activity</strong>.</p>
+                <p style="font-size: 1.2rem;">Security cameras <strong>change the equation</strong>. Mounted on houses, garages, and business buildings, they monitor streets, alleys, and parking lots - <strong>all at the same time</strong>, with <strong>no risk to volunteers</strong>.</p>
+                <p style="margin-top: 1rem; font-size: 1.2rem;">Each participating camera is <strong>configured once</strong> to automatically send alerts at night (typically <strong>10pm - 6am</strong>), including a short video clip, to AwareNet whenever <strong>person or vehicle motion</strong> is detected by the camera. After configuration, the camera operates <strong>every night</strong>, <strong>without any action by the camera owner</strong>.</p>
+            </div>
             </div>
         </div>
     </div>
@@ -722,30 +850,18 @@
     <div id="modal2" class="modal-overlay">
         <div class="modal-content">
             <button class="modal-close">&times;</button>
-            <h2 class="modal-title">Professional Response</h2>
-            <div class="modal-body">
-                <p><strong>Professional response</strong> is where detection transforms into action. Our trained security professionals don't just watch - they actively intervene to disrupt criminal activity as it unfolds.</p>
+            <h2 class="modal-title">Monitor Automated Alerts</h2>
+            <div class="modal-inner">
+            <div class="modal-body" style="font-size: 1.2rem;">
+                <p>With a neighborhood network of security cameras established, the next key step is to monitor the automated alerts arriving at AwareNet.</p>
                 
-                <h3>Immediate Intervention</h3>
+                <h3 style="font-size: 1.4rem;">How It Works</h3>
                 <ul>
-                    <li><strong>Real-time Decision Making:</strong> Within seconds of alert review, professionals determine appropriate response level</li>
-                    <li><strong>Direct Communication:</strong> Contact with authorities, property owners, or security services as needed</li>
-                    <li><strong>Coordinated Response:</strong> Multiple response options including police dispatch, security patrol, or resident notification</li>
-                    <li><strong>Documentation:</strong> Complete incident logging for follow-up and pattern analysis</li>
+                    <li><strong>Motion Alerts:</strong> Neighborhood cameras automatically detect <em>person</em> and <em>vehicle</em> motion during monitored hours (10pm-6am) and send real-time alerts, including a video clip, to AwareNet</li>
+                    <li><strong>Real-Time Reviews:</strong> Your designated security professionals, or trusted volunteers, use the AwareNet web app on a tablet or laptop to review incoming alerts in real-time to <em>identify suspicious or criminal activity</em></li>
+                    <li><strong>Progress Tracking</strong> — Reviewers categorize alerts as they go, so it's always clear what has been seen and what still needs attention</li>
                 </ul>
-                
-                <h3>Response Options</h3>
-                <ul>
-                    <li>Emergency services dispatch for active crimes</li>
-                    <li>Property owner/resident immediate notification</li>
-                    <li>Security patrol deployment to area</li>
-                    <li>Coordinated neighbor watch activation</li>
-                </ul>
-                
-                <h3>Why Professional Response Matters</h3>
-                <p>The difference between a security system and crime disruption is immediate, professional human intervention. Our trained responders know how to assess threats, escalate appropriately, and coordinate the most effective response to stop crimes in progress.</p>
-                
-                <p>This active intervention is what turns your neighborhood from a target into a hardened, responsive community that criminals quickly learn to avoid.</p>
+            </div>
             </div>
         </div>
     </div>
@@ -753,32 +869,14 @@
     <div id="modal3" class="modal-overlay">
         <div class="modal-content">
             <button class="modal-close">&times;</button>
-            <h2 class="modal-title">Consistent Intervention</h2>
+            <h2 class="modal-title">Activate Professional Response</h2>
+            <div class="modal-inner">
             <div class="modal-body">
-                <p><strong>Consistent intervention</strong> is the long-term strategy that transforms your neighborhood's reputation and creates lasting crime deterrence through proven, reliable response.</p>
+                <p style="font-size: 1.2rem; margin-bottom: 1rem;">Using real-time detection to trigger real-time action elevates your neighborhood to the gold standard for protection.</p>
+                <p style="font-size: 1.2rem; margin-bottom: 1rem;">An on-location security officer responding directly or a volunteer reviewer calling 911 — either way, a professional response to suspicious and criminal activity is transformative. Your neighborhood is no longer an easy target for criminals.</p>
+                <p style="font-size: 1.2rem;">The long-term strategy is to create a lasting crime deterrence through consistent, professional response.</p>
                 
-                <h3>Building Deterrent Reputation</h3>
-                <ul>
-                    <li><strong>Pattern Recognition:</strong> Criminals quickly learn which neighborhoods actively respond to incidents</li>
-                    <li><strong>Word-of-Mouth Effect:</strong> Consistent intervention creates reputation among criminal networks</li>
-                    <li><strong>Behavioral Change:</strong> Criminals choose easier targets, avoiding neighborhoods with active response</li>
-                    <li><strong>Community Confidence:</strong> Residents feel safer knowing their neighborhood actively fights crime</li>
-                </ul>
-                
-                <h3>The Compounding Effect</h3>
-                <ul>
-                    <li>Each successful intervention reinforces the deterrent effect</li>
-                    <li>Criminals share information about "hard targets" to avoid</li>
-                    <li>Property values benefit from reduced crime reputation</li>
-                    <li>Community cohesion strengthens through shared security</li>
-                </ul>
-                
-                <h3>Proven Results</h3>
-                <p>Our data from existing neighborhoods shows that consistent intervention doesn't just stop individual crimes - it fundamentally changes criminal behavior patterns in your area.</p>
-                
-                <p>When criminals know that your neighborhood will respond professionally and immediately to any suspicious activity, they simply move on to easier targets. This is the power of building a reputation for active crime disruption.</p>
-                
-                <p><em>See our published results from St. Louis Hills showing significant crime reduction after implementing consistent intervention protocols.</em></p>
+            </div>
             </div>
         </div>
     </div>
@@ -821,6 +919,133 @@
                 });
             });
             
+            // Contact method toggle
+            const contactSelect = document.getElementById('f-contact-method');
+            const fieldEmail = document.getElementById('field-email');
+            const fieldPhone = document.getElementById('field-phone');
+            const inputEmail = document.getElementById('input-email');
+            const inputPhone = document.getElementById('input-phone');
+            if (contactSelect) {
+                contactSelect.addEventListener('change', function() {
+                    if (this.value === 'phone') {
+                        fieldEmail.style.display = 'none';
+                        fieldPhone.style.display = 'block';
+                        inputEmail.removeAttribute('required');
+                        inputPhone.setAttribute('required', 'required');
+                    } else if (this.value === 'email') {
+                        fieldEmail.style.display = 'block';
+                        fieldPhone.style.display = 'none';
+                        inputEmail.setAttribute('required', 'required');
+                        inputPhone.removeAttribute('required');
+                    } else {
+                        fieldEmail.style.display = 'none';
+                        fieldPhone.style.display = 'none';
+                        inputEmail.removeAttribute('required');
+                        inputPhone.removeAttribute('required');
+                    }
+                });
+            }
+
+            // Assessment form submission
+            const assessmentForm = document.querySelector('#modal-contact form');
+            if (assessmentForm) {
+                assessmentForm.addEventListener('submit', async function(e) {
+                    e.preventDefault();
+                    const btn = document.getElementById('form-submit');
+                    const msg = document.getElementById('form-message');
+                    const contactMethod = document.getElementById('f-contact-method').value;
+                    const contactValue = contactMethod === 'phone'
+                        ? document.getElementById('input-phone').value
+                        : document.getElementById('input-email').value;
+
+                    btn.disabled = true;
+                    btn.textContent = 'Sending…';
+                    msg.style.display = 'none';
+
+                    try {
+                        // TODO: Replace with your deployed Cloud Function URL
+                        const FUNCTION_URL = 'https://REGION-PROJECT_ID.cloudfunctions.net/assessment-form';
+
+                        const res = await fetch(FUNCTION_URL, {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({
+                                neighborhood_name: document.getElementById('f-neighborhood').value,
+                                zipcode:           document.getElementById('f-zipcode').value,
+                                num_homes:         document.getElementById('f-homes').value,
+                                num_businesses:    document.getElementById('f-businesses').value,
+                                contact_method:    contactMethod,
+                                contact_value:     contactValue,
+                            }),
+                        });
+
+                        const data = await res.json();
+                        if (res.ok) {
+                            msg.style.background = '#d1fae5';
+                            msg.style.color = '#065f46';
+                            msg.textContent = 'Thank you! We\'ll be in touch shortly.';
+                            assessmentForm.reset();
+                            document.getElementById('field-email').style.display = 'none';
+                            document.getElementById('field-phone').style.display = 'none';
+                        } else {
+                            throw new Error(data.error || 'Unknown error');
+                        }
+                    } catch (err) {
+                        msg.style.background = '#fee2e2';
+                        msg.style.color = '#991b1b';
+                        msg.textContent = err.message || 'Something went wrong. Please email info@awarenet.us directly.';
+                    }
+
+                    msg.style.display = 'block';
+                    btn.disabled = false;
+                    btn.textContent = 'Schedule Free Assessment';
+                });
+            }
+
+            // Collapsible drawer groups
+            document.querySelectorAll('.drawer-toggle').forEach(toggle => {
+                toggle.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const subItems = this.nextElementSibling;
+                    const isOpen = subItems.classList.contains('open');
+                    // Close all others
+                    document.querySelectorAll('.drawer-sub-items.open').forEach(el => el.classList.remove('open'));
+                    document.querySelectorAll('.drawer-toggle.open').forEach(el => el.classList.remove('open'));
+                    // Toggle this one
+                    if (!isOpen) {
+                        subItems.classList.add('open');
+                        this.classList.add('open');
+                    }
+                });
+            });
+
+            // Slide-out drawer
+            const hamburger = document.getElementById('hamburger');
+            const drawer = document.getElementById('drawer');
+            const drawerOverlay = document.getElementById('drawer-overlay');
+            const drawerClose = document.getElementById('drawer-close');
+
+            function openDrawer() {
+                drawer.classList.add('open');
+                drawerOverlay.style.display = 'block';
+                document.body.style.overflow = 'hidden';
+            }
+
+            function closeDrawer() {
+                drawer.classList.remove('open');
+                drawerOverlay.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+
+            if (hamburger) {
+                hamburger.addEventListener('click', openDrawer);
+                drawerClose.addEventListener('click', closeDrawer);
+                drawerOverlay.addEventListener('click', closeDrawer);
+                drawer.querySelectorAll('nav a').forEach(link => {
+                    link.addEventListener('click', closeDrawer);
+                });
+            }
+
             // Close modal with Escape key
             document.addEventListener('keydown', function(e) {
                 if (e.key === 'Escape') {
