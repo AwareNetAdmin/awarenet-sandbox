@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="version" content="0.1.17">
+    <meta name="version" content="0.1.18">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Our Team - AwareNet</title>
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&display=swap" rel="stylesheet">
@@ -242,6 +242,32 @@
             margin-bottom: 1rem;
             padding-bottom: 0.75rem;
             border-bottom: 2px solid #e2e8f0;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .team-photo {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            flex-shrink: 0;
+            border: 3px solid #e2e8f0;
+        }
+
+        .team-photo-placeholder {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: #1e40af;
+            color: white;
+            font-size: 1.8rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
         }
 
         .team-name {
@@ -409,8 +435,11 @@
 
                 <div class="team-card">
                     <div class="team-card-header">
-                        <div class="team-name">Tom Scheifler</div>
-                        <div class="team-title">Founder &amp; President</div>
+                        <img src="team-tom.jpg" alt="Tom Scheifler" class="team-photo">
+                        <div>
+                            <div class="team-name">Tom Scheifler</div>
+                            <div class="team-title">Founder &amp; President</div>
+                        </div>
                     </div>
                     <div class="team-bio">
                         <p>Tom Scheifler enjoyed a long and successful career as an independent software contractor. Tom designed, built, and deployed many enterprise-level, bespoke software solutions for industry leading corporations including Monsanto, HP, Boeing, Maritz, Pfizer, and FleishmanHillard.</p>
@@ -421,8 +450,11 @@
 
                 <div class="team-card">
                     <div class="team-card-header">
-                        <div class="team-name">Glenn Weikert</div>
-                        <div class="team-title">Director of Operations</div>
+                        <div class="team-photo-placeholder">GW</div>
+                        <div>
+                            <div class="team-name">Glenn Weikert</div>
+                            <div class="team-title">Director of Operations</div>
+                        </div>
                     </div>
                     <div class="team-bio">
                         <p>Since 2001, Glenn Weikert has owned and operated a company that builds full-stack and mobile software. His clients include the New York Knicks, the New York Rangers, Home Depot, Lucent Solar, who is a partner with Tesla and one of the top installers of only 26 certified companies to install Tesla Solar Roof, and IVI-RMA Global, the world's leading reproductive medicine group.</p>
@@ -433,8 +465,11 @@
 
                 <div class="team-card">
                     <div class="team-card-header">
-                        <div class="team-name">Charles Betts</div>
-                        <div class="team-title">Product Advisor</div>
+                        <div class="team-photo-placeholder">CB</div>
+                        <div>
+                            <div class="team-name">Charles Betts</div>
+                            <div class="team-title">Product Advisor</div>
+                        </div>
                     </div>
                     <div class="team-bio">
                         <p>Charles Betts served his community for 11 years until he retired from the St. Louis Metropolitan Police Department. In 2007, Charles established <a href="https://tcf-llc.com/" target="_blank">The City's Finest</a>, a premier security services company for communities and businesses.</p>
@@ -444,8 +479,11 @@
 
                 <div class="team-card">
                     <div class="team-card-header">
-                        <div class="team-name">Jim Whyte</div>
-                        <div class="team-title">Product Advisor</div>
+                        <div class="team-photo-placeholder">JW</div>
+                        <div>
+                            <div class="team-name">Jim Whyte</div>
+                            <div class="team-title">Product Advisor</div>
+                        </div>
                     </div>
                     <div class="team-bio">
                         <p>Jim Whyte served his community for 20+ years during his career with the St. Louis Metropolitan Police Department. In 2012, Jim transitioned to a new community-based role as Executive Director of the <a href="https://www.cwensi.com/" target="_blank">Central West End Neighborhood Security Initiative</a> where he has collaborated with residents and businesses to create the safest possible environment. Jim's leadership in combining technology and human resources to benefit the area has been recognized on a regional and national level.</p>

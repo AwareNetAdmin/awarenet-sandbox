@@ -26,7 +26,7 @@ done
 
 # Upload supporting assets
 echo "📁 Uploading assets..."
-for f in logo.svg; do
+for f in logo.svg *.jpg *.png; do
     [ -f "$f" ] || continue
     echo "  → $f"
     $GSUTIL -q cp "$f" "$BUCKET/$f"
