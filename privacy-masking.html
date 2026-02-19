@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="version" content="0.1.39">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Customers - AwareNet</title>
+    <title>Privacy Masking - AwareNet</title>
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -53,7 +53,6 @@
 
         .nav-links a:hover { color: #1e40af; }
 
-        /* Hamburger */
         .hamburger {
             display: none;
             flex-direction: column;
@@ -72,7 +71,6 @@
             border-radius: 2px;
         }
 
-        /* Drawer */
         .drawer-overlay {
             display: none;
             position: fixed;
@@ -197,71 +195,55 @@
             opacity: 0.9;
         }
 
-        /* Customers section */
-        .customers-section {
+        /* Content */
+        .content-section {
             padding: 3rem 0 4rem 0;
             background: #f8fafc;
         }
 
-        .customers-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 1.5rem;
-            max-width: 860px;
+        .content-wrapper {
+            max-width: 760px;
             margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
         }
 
-        .customer-card {
+        .content-card {
             background: white;
             border-radius: 10px;
-            padding: 1.75rem 1.5rem;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-            display: flex;
-            align-items: flex-start;
-            gap: 1rem;
-            transition: transform 0.2s, box-shadow 0.2s;
+            padding: 2rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.07);
         }
 
-        .customer-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.12);
-        }
-
-        .customer-icon {
-            flex-shrink: 0;
-            width: 2.5rem;
-            height: 2.5rem;
-            background: #1e40af;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-top: 0.1rem;
-        }
-
-        .customer-icon::after {
-            content: '';
-            display: block;
-            width: 0.7rem;
-            height: 0.7rem;
-            background: white;
-            border-radius: 50%;
-        }
-
-        .customer-info {
-            flex: 1;
-        }
-
-        .customer-name {
-            font-size: 1.5rem;
+        .content-card h2 {
+            font-size: 1.68rem;
             font-weight: 700;
             color: #1e40af;
-            margin-bottom: 0.2rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 2px solid #e2e8f0;
         }
 
-        .customer-location {
-            font-size: 1.2rem;
-            color: #64748b;
+        .screenshot {
+            text-align: center;
+        }
+
+        .screenshot img {
+            max-width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+            border: 1px solid #e2e8f0;
+        }
+
+        .placeholder {
+            background: #f1f5f9;
+            border: 2px dashed #cbd5e1;
+            border-radius: 8px;
+            padding: 3rem;
+            text-align: center;
+            color: #94a3b8;
+            font-size: 1.1rem;
         }
 
         /* Footer */
@@ -272,7 +254,6 @@
             text-align: center;
         }
 
-        /* Responsive */
         @media (max-width: 768px) {
             .page-hero h1 { font-size: 2rem; }
             .nav-links { display: none; }
@@ -378,46 +359,24 @@
     <!-- Page Hero -->
     <section class="page-hero">
         <div class="container">
-            <h1>Customers</h1>
-            <p>Neighborhoods protected by AwareNet.</p>
+            <h1>Privacy Masking</h1>
+            <p>How to protect privacy using your camera's masking feature.</p>
         </div>
     </section>
 
-    <!-- Customers -->
-    <section class="customers-section">
+    <!-- Content -->
+    <section class="content-section">
         <div class="container">
-            <div class="customers-grid">
+            <div class="content-wrapper">
 
-                <div class="customer-card">
-                    <div class="customer-icon"></div>
-                    <div class="customer-info">
-                        <div class="customer-name">Flora Place</div>
-                        <div class="customer-location">St. Louis, MO</div>
-                    </div>
+                <div class="content-card">
+                    <h2>Without Privacy Masking</h2>
+                    <div class="placeholder">Image coming soon.</div>
                 </div>
 
-                <div class="customer-card">
-                    <div class="customer-icon"></div>
-                    <div class="customer-info">
-                        <div class="customer-name">Cathedral Square</div>
-                        <div class="customer-location">St. Louis, MO</div>
-                    </div>
-                </div>
-
-                <div class="customer-card">
-                    <div class="customer-icon"></div>
-                    <div class="customer-info">
-                        <div class="customer-name">Saint Louis Hills</div>
-                        <div class="customer-location">St. Louis, MO</div>
-                    </div>
-                </div>
-
-                <div class="customer-card">
-                    <div class="customer-icon"></div>
-                    <div class="customer-info">
-                        <div class="customer-name">Washington Pl &amp; Westminster - Lake</div>
-                        <div class="customer-location">St. Louis, MO</div>
-                    </div>
+                <div class="content-card">
+                    <h2>With Privacy Masking <span style="font-size: 1rem; font-weight: 400; color: #64748b;">(set by camera owner)</span></h2>
+                    <div class="placeholder">Image coming soon.</div>
                 </div>
 
             </div>
