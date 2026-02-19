@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="version" content="0.1.16">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Introduction Slide Deck - AwareNet</title>
+    <title>Our Team - AwareNet</title>
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&display=swap" rel="stylesheet">
     <style>
         * {
@@ -105,9 +105,7 @@
             box-shadow: 4px 0 15px rgba(0,0,0,0.3);
         }
 
-        .drawer.open {
-            left: 0;
-        }
+        .drawer.open { left: 0; }
 
         .drawer-header {
             padding: 1.5rem;
@@ -157,9 +155,7 @@
             box-sizing: border-box;
         }
 
-        .drawer nav a:hover {
-            background: rgba(255,255,255,0.15);
-        }
+        .drawer nav a:hover { background: rgba(255,255,255,0.15); }
 
         .drawer nav a.drawer-sub-item {
             font-size: 1.2rem;
@@ -188,12 +184,9 @@
             flex-direction: column;
         }
 
-        .drawer-sub-items.open {
-            display: flex;
-        }
+        .drawer-sub-items.open { display: flex; }
 
         .drawer-chevron {
-            float: right;
             transition: transform 0.3s;
             display: inline-block;
             margin-left: 0.75rem;
@@ -202,9 +195,7 @@
             line-height: 1;
         }
 
-        .drawer-toggle.open .drawer-chevron {
-            transform: rotate(90deg);
-        }
+        .drawer-toggle.open .drawer-chevron { transform: rotate(90deg); }
 
         /* Page hero */
         .page-hero {
@@ -226,71 +217,70 @@
             opacity: 0.9;
         }
 
-        /* Slide deck section */
-        .slides-section {
-            padding: 2.5rem 0 4rem 0;
+        /* Team section */
+        .team-section {
+            padding: 3rem 0 4rem 0;
             background: #f8fafc;
         }
 
-        .slides-wrapper {
-            max-width: 600px;
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(480px, 1fr));
+            gap: 2rem;
+            max-width: 1060px;
             margin: 0 auto;
         }
 
-        .slides-card {
+        .team-card {
             background: white;
-            border-radius: 12px;
-            box-shadow: 0 6px 20px rgba(0,0,0,0.1);
-            overflow: hidden;
-            text-align: center;
-        }
-
-        .slides-card-header {
-            background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
-            padding: 3rem 2rem;
-        }
-
-        .slides-icon {
-            font-size: 5rem;
-            display: block;
-            margin-bottom: 1rem;
-            filter: drop-shadow(0 2px 6px rgba(0,0,0,0.2));
-        }
-
-        .slides-card-header h2 {
-            color: white;
-            font-size: 1.5rem;
-            font-weight: 700;
-        }
-
-        .slides-card-body {
+            border-radius: 10px;
             padding: 2rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
         }
 
-        .slides-card-body p {
-            font-size: 1.15rem;
-            color: #555;
-            margin-bottom: 1.75rem;
-            line-height: 1.6;
+        .team-card-header {
+            margin-bottom: 1rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 2px solid #e2e8f0;
         }
 
-        .btn-open {
-            display: inline-block;
-            background: #1e40af;
-            color: white;
-            text-decoration: none;
-            font-size: 1.2rem;
+        .team-name {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #1e40af;
+            margin-bottom: 0.2rem;
+        }
+
+        .team-title {
+            font-size: 1rem;
             font-weight: 600;
-            padding: 1rem 2.5rem;
-            border-radius: 6px;
-            transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
-            box-shadow: 0 4px 12px rgba(30,64,175,0.3);
+            color: #64748b;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
         }
 
-        .btn-open:hover {
-            background: #1d3a9e;
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(30,64,175,0.4);
+        .team-bio {
+            font-size: 1rem;
+            color: #444;
+            line-height: 1.7;
+        }
+
+        .team-bio p {
+            margin-bottom: 0.85rem;
+        }
+
+        .team-bio p:last-child {
+            margin-bottom: 0;
+        }
+
+        .team-bio a {
+            color: #1e40af;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .team-bio a:hover {
+            text-decoration: underline;
         }
 
         /* Footer */
@@ -303,17 +293,10 @@
 
         /* Responsive */
         @media (max-width: 768px) {
-            .page-hero h1 {
-                font-size: 2rem;
-            }
-
-            .nav-links {
-                display: none;
-            }
-
-            .hamburger {
-                display: flex;
-            }
+            .page-hero h1 { font-size: 2rem; }
+            .nav-links { display: none; }
+            .hamburger { display: flex; }
+            .team-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -324,9 +307,7 @@
         <div class="container">
             <nav>
                 <button class="hamburger" id="hamburger" aria-label="Open menu">
-                    <span></span>
-                    <span></span>
-                    <span></span>
+                    <span></span><span></span><span></span>
                 </button>
                 <div class="logo" style="height: 48px; display: flex; align-items: center; gap: 0.5rem;">
                     <span style="background: rgba(255,255,255,0.45); border-radius: 50px; padding: 2px 6px; display: flex; align-items: center;">
@@ -416,21 +397,62 @@
     <!-- Page Hero -->
     <section class="page-hero">
         <div class="container">
-            <h1>Introduction Slide Deck</h1>
-            <p>An overview of AwareNet for group presentation and discussion.</p>
+            <h1>Our Team</h1>
+            <p>The people behind AwareNet.</p>
         </div>
     </section>
 
-    <!-- Slide Deck -->
-    <section class="slides-section">
+    <!-- Team -->
+    <section class="team-section">
         <div class="container">
-            <div class="slides-wrapper">
-                <div class="slides-card">
-                    <div class="slides-card-body">
+            <div class="team-grid">
 
-                        <a href="https://docs.google.com/presentation/d/17SJjeRaIduMrnlFHqhroR6LUCBol2yyeB7pFDB55Ey0/edit?usp=sharing" target="_blank" class="btn-open">View Slide Deck ↗</a>
+                <div class="team-card">
+                    <div class="team-card-header">
+                        <div class="team-name">Tom Scheifler</div>
+                        <div class="team-title">Founder &amp; President</div>
+                    </div>
+                    <div class="team-bio">
+                        <p>Tom Scheifler enjoyed a long and successful career as an independent software contractor. Tom designed, built, and deployed many enterprise-level, bespoke software solutions for industry leading corporations including Monsanto, HP, Boeing, Maritz, Pfizer, and FleishmanHillard.</p>
+                        <p>In 2021, after three years of increased property crime incidents in his home town, St. Louis, MO, coupled with significant decreases in police department staff, Tom created the initial version of AwareNet for use by his neighborhood. After successful testing and implementation for his neighborhood, Tom made AwareNet available to all St. Louis City neighborhoods, at no-profit, and volunteered his time to assist residents with neighborhood security initiatives.</p>
+                        <p>With AwareNet now in use by five different areas in St. Louis, Tom is inspired to expand the benefits of AwareNet throughout St. Louis and beyond.</p>
                     </div>
                 </div>
+
+                <div class="team-card">
+                    <div class="team-card-header">
+                        <div class="team-name">Glenn Weikert</div>
+                        <div class="team-title">Director of Operations</div>
+                    </div>
+                    <div class="team-bio">
+                        <p>Since 2001, Glenn Weikert has owned and operated a company that builds full-stack and mobile software. His clients include the New York Knicks, the New York Rangers, Home Depot, Lucent Solar, who is a partner with Tesla and one of the top installers of only 26 certified companies to install Tesla Solar Roof, and IVI-RMA Global, the world's leading reproductive medicine group.</p>
+                        <p>Glenn was born and raised in Mechanicsburg, PA. He lived in Philadelphia for 10 years, Los Angeles for 13 years and has been in St Louis raising his daughter since 2022. He worked with dually diagnosed homeless men at the RHD Men's Homeless Shelter in Philadelphia. He visits children at the St Louis Children's Hospital every Thursday and volunteers at a Missouri Department of Corrections prison once a month. His step father is a retired police officer from Pennsylvania who served his community for 35 years. All of these experiences give Glenn a unique, compassionate perspective on the sometimes complicated relationship between citizens and police.</p>
+                        <p>Like Tom, Glenn saw a spike in crime in his St Louis neighborhood. There was an attempted abduction, two murders, one car jacking, two car thefts and numerous home and car break ins near his home in beautiful, popular Central West End of St Louis. He applied and was appointed to the seven member, Alderman and Mayor selected Washington Place Special District Board. While trying to develop his own camera system for Washington Place, he was introduced to Tom Scheifler and joined the team. He has dedicated himself to AwareNet because it's an inspiring, powerful tool that helps communities unite and keep our children and neighborhoods safe.</p>
+                    </div>
+                </div>
+
+                <div class="team-card">
+                    <div class="team-card-header">
+                        <div class="team-name">Charles Betts</div>
+                        <div class="team-title">Product Advisor</div>
+                    </div>
+                    <div class="team-bio">
+                        <p>Charles Betts served his community for 11 years until he retired from the St. Louis Metropolitan Police Department. In 2007, Charles established <a href="https://tcf-llc.com/" target="_blank">The City's Finest</a>, a premier security services company for communities and businesses.</p>
+                        <p>Charles volunteered important guidance during the early development of AwareNet and his ongoing advice helps ensure AwareNet will continue to evolve and improve for our customers.</p>
+                    </div>
+                </div>
+
+                <div class="team-card">
+                    <div class="team-card-header">
+                        <div class="team-name">Jim Whyte</div>
+                        <div class="team-title">Product Advisor</div>
+                    </div>
+                    <div class="team-bio">
+                        <p>Jim Whyte served his community for 20+ years during his career with the St. Louis Metropolitan Police Department. In 2012, Jim transitioned to a new community-based role as Executive Director of the <a href="https://www.cwensi.com/" target="_blank">Central West End Neighborhood Security Initiative</a> where he has collaborated with residents and businesses to create the safest possible environment. Jim's leadership in combining technology and human resources to benefit the area has been recognized on a regional and national level.</p>
+                        <p>Jim volunteered important guidance during the early development of AwareNet and his ongoing advice helps ensure AwareNet will continue to evolve and improve for our customers.</p>
+                    </div>
+                </div>
+
             </div>
         </div>
     </section>
