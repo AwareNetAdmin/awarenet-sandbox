@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="version" content="0.1.8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact Us - AwareNet</title>
+    <title>Feature Summary - AwareNet</title>
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&display=swap" rel="stylesheet">
     <style>
         * {
@@ -40,15 +40,6 @@
             justify-content: space-between;
             align-items: center;
             padding: 1rem 0;
-        }
-
-        .logo {
-            height: 40px;
-        }
-
-        .logo img {
-            height: 100%;
-            width: auto;
         }
 
         .nav-links {
@@ -235,67 +226,64 @@
             opacity: 0.9;
         }
 
-        /* Contact section */
-        .contact-section {
-            padding: 0.5rem 0 4rem 0;
+        /* Features section */
+        .features-section {
+            padding: 3rem 0 4rem 0;
             background: #f8fafc;
         }
 
-        .contact-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-            max-width: 900px;
-            margin-left: auto;
-            margin-right: auto;
+        .features-list {
+            max-width: 860px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
         }
 
-        .contact-card {
+        .feature-item {
             background: white;
-            border-radius: 10px;
-            padding: 2rem;
-            text-align: center;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            border-radius: 8px;
+            padding: 1.25rem 1.5rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
             transition: transform 0.2s, box-shadow 0.2s;
         }
 
-        .contact-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+        .feature-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.1);
         }
 
-        .contact-icon {
-            font-size: 3rem;
-            margin-bottom: 1rem;
+        .feature-check {
+            color: #16a34a;
+            font-size: 1.4rem;
+            flex-shrink: 0;
+            margin-top: 0.1rem;
         }
 
-        .contact-card h3 {
-            font-size: 1.44rem;
-            font-weight: 700;
-            color: #1e40af;
-            margin-bottom: 0.5rem;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
+        .feature-text {
+            font-size: 1.15rem;
+            color: #333;
+            line-height: 1.5;
         }
 
-        .contact-card p {
-            color: #666;
-            font-size: 1.14rem;
-            margin-bottom: 0.75rem;
+        .faq-note {
+            max-width: 860px;
+            margin: 2rem auto 0 auto;
+            text-align: center;
+            font-size: 1.1rem;
+            color: #555;
         }
 
-        .contact-card a {
-            display: inline-block;
+        .faq-note a {
             color: #1e40af;
             text-decoration: none;
-            font-size: 1.32rem;
             font-weight: 600;
-            transition: color 0.2s;
         }
 
-        .contact-card a:hover {
-            color: #3b82f6;
+        .faq-note a:hover {
             text-decoration: underline;
         }
 
@@ -305,14 +293,6 @@
             color: #9ca3af;
             padding: 2rem 0;
             text-align: center;
-        }
-
-        .footer-links {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            margin-bottom: 1rem;
-            flex-wrap: wrap;
         }
 
         .footer-links a {
@@ -336,10 +316,6 @@
 
             .hamburger {
                 display: flex;
-            }
-
-            .logo {
-                height: 35px;
             }
         }
     </style>
@@ -443,38 +419,79 @@
     <!-- Page Hero -->
     <section class="page-hero">
         <div class="container">
-            <h1>Contact Us</h1>
-            <p>We're here to help. Reach out anytime.</p>
+            <h1>Feature Summary</h1>
+            <p>What AwareNet brings to your neighborhood.</p>
         </div>
     </section>
 
-    <!-- Contact Cards -->
-    <section class="contact-section">
+    <!-- Features -->
+    <section class="features-section">
         <div class="container">
-            <div class="contact-grid">
+            <div class="features-list">
 
-                <div class="contact-card">
-                    <div class="contact-icon">📈</div>
-                    <h3>Sales</h3>
-                    <p>Questions about getting AwareNet for your neighborhood?</p>
-                    <a href="mailto:sales@awarenet.us">sales@awarenet.us</a>
+                <div class="feature-item">
+                    <span class="feature-check">✔</span>
+                    <span class="feature-text">Consolidation and federation of automated alerts sent by otherwise standalone security cameras.</span>
                 </div>
 
-                <div class="contact-card">
-                    <div class="contact-icon">🛠️</div>
-                    <h3>Support</h3>
-                    <p>Need help with your existing AwareNet setup?</p>
-                    <a href="mailto:support@awarenet.us">support@awarenet.us</a>
+                <div class="feature-item">
+                    <span class="feature-check">✔</span>
+                    <span class="feature-text">Capacity to support hundreds of cameras working together to help keep your neighborhood safe.</span>
                 </div>
 
-                <div class="contact-card">
-                    <div class="contact-icon">📞</div>
-                    <h3>Phone</h3>
-                    <p>Prefer to talk? Give us a call.</p>
-                    <a href="tel:+13144061166">(314) 406-1166</a>
+                <div class="feature-item">
+                    <span class="feature-check">✔</span>
+                    <span class="feature-text">Compatible with dozens of security cameras costing less than $200 each, available on Amazon or directly from the camera manufacturer.</span>
+                </div>
+
+                <div class="feature-item">
+                    <span class="feature-check">✔</span>
+                    <span class="feature-text">Each camera owner maintains control of the privacy and security features for their camera.</span>
+                </div>
+
+                <div class="feature-item">
+                    <span class="feature-check">✔</span>
+                    <span class="feature-text">Easy-to-use software application for review and categorization of real-time alerts. Securely accessible via the internet and ideal for use on a tablet.</span>
+                </div>
+
+                <div class="feature-item">
+                    <span class="feature-check">✔</span>
+                    <span class="feature-text">Designated reviewer (e.g. security guard or officer) can assess real-time alerts and take immediate action when appropriate to disrupt and deter criminal activity.</span>
+                </div>
+
+                <div class="feature-item">
+                    <span class="feature-check">✔</span>
+                    <span class="feature-text">Important time stamps to help ensure the reviewer is processing alerts in a timely manner.</span>
+                </div>
+
+                <div class="feature-item">
+                    <span class="feature-check">✔</span>
+                    <span class="feature-text">GPS mapping to help ensure the patrol person is covering the full service area.</span>
+                </div>
+
+                <div class="feature-item">
+                    <span class="feature-check">✔</span>
+                    <span class="feature-text">False alerts are minimized with camera AI that identifies motion as activity by a person, a vehicle, or something else.</span>
+                </div>
+
+                <div class="feature-item">
+                    <span class="feature-check">✔</span>
+                    <span class="feature-text">Ability to disable alerts for a camera when it is sending too many alerts (e.g. block party, configuration issue, etc.).</span>
+                </div>
+
+                <div class="feature-item">
+                    <span class="feature-check">✔</span>
+                    <span class="feature-text">Map of all camera locations with status information for each camera and ability to re-enable alerts.</span>
+                </div>
+
+                <div class="feature-item">
+                    <span class="feature-check">✔</span>
+                    <span class="feature-text">Easy export of data for analysis and reporting using any spreadsheet app.</span>
                 </div>
 
             </div>
+
+            <p class="faq-note">See the <a href="#">FAQ page</a> for answers to many common questions.</p>
         </div>
     </section>
 
