@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="version" content="0.1.12">
+    <meta name="version" content="0.1.13">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Introduction Slide Deck - AwareNet</title>
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&display=swap" rel="stylesheet">
@@ -233,38 +233,45 @@
         }
 
         .slides-wrapper {
-            max-width: 900px;
+            max-width: 600px;
             margin: 0 auto;
         }
 
-        .slides-description {
+        .slides-card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .slides-card-header {
+            background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+            padding: 3rem 2rem;
+        }
+
+        .slides-icon {
+            font-size: 5rem;
+            display: block;
+            margin-bottom: 1rem;
+            filter: drop-shadow(0 2px 6px rgba(0,0,0,0.2));
+        }
+
+        .slides-card-header h2 {
+            color: white;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .slides-card-body {
+            padding: 2rem;
+        }
+
+        .slides-card-body p {
             font-size: 1.15rem;
             color: #555;
-            margin-bottom: 1.5rem;
-            text-align: center;
-        }
-
-        .slides-embed {
-            position: relative;
-            width: 100%;
-            padding-top: 56.25%; /* 16:9 */
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 8px 24px rgba(0,0,0,0.15);
-        }
-
-        .slides-embed iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
-
-        .slides-actions {
-            margin-top: 1.5rem;
-            text-align: center;
+            margin-bottom: 1.75rem;
+            line-height: 1.6;
         }
 
         .btn-open {
@@ -272,16 +279,18 @@
             background: #1e40af;
             color: white;
             text-decoration: none;
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             font-weight: 600;
-            padding: 0.85rem 2rem;
+            padding: 1rem 2.5rem;
             border-radius: 6px;
-            transition: background 0.2s, transform 0.2s;
+            transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 12px rgba(30,64,175,0.3);
         }
 
         .btn-open:hover {
             background: #1d3a9e;
             transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(30,64,175,0.4);
         }
 
         /* Footer */
@@ -416,11 +425,15 @@
     <section class="slides-section">
         <div class="container">
             <div class="slides-wrapper">
-                <div class="slides-embed">
-                    <iframe src="https://docs.google.com/presentation/d/17SJjeRaIduMrnlFHqhroR6LUCBol2yyeB7pFDB55Ey0/embed?start=false&loop=false&delayms=3000" allowfullscreen></iframe>
-                </div>
-                <div class="slides-actions">
-                    <a href="https://docs.google.com/presentation/d/17SJjeRaIduMrnlFHqhroR6LUCBol2yyeB7pFDB55Ey0/edit?usp=sharing" target="_blank" class="btn-open">Open in Google Slides ↗</a>
+                <div class="slides-card">
+                    <div class="slides-card-header">
+                        <span class="slides-icon">📊</span>
+                        <h2>AwareNet Introduction</h2>
+                    </div>
+                    <div class="slides-card-body">
+                        <p>This slide deck provides an introduction to AwareNet for group presentation and discussion.</p>
+                        <a href="https://docs.google.com/presentation/d/17SJjeRaIduMrnlFHqhroR6LUCBol2yyeB7pFDB55Ey0/edit?usp=sharing" target="_blank" class="btn-open">View Slide Deck ↗</a>
+                    </div>
                 </div>
             </div>
         </div>
