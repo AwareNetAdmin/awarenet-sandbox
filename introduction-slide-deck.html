@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="version" content="0.1.12">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact Us - AwareNet</title>
+    <title>Introduction Slide Deck - AwareNet</title>
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&display=swap" rel="stylesheet">
     <style>
         * {
@@ -40,15 +40,6 @@
             justify-content: space-between;
             align-items: center;
             padding: 1rem 0;
-        }
-
-        .logo {
-            height: 40px;
-        }
-
-        .logo img {
-            height: 100%;
-            width: auto;
         }
 
         .nav-links {
@@ -235,68 +226,62 @@
             opacity: 0.9;
         }
 
-        /* Contact section */
-        .contact-section {
-            padding: 0.5rem 0 4rem 0;
+        /* Slide deck section */
+        .slides-section {
+            padding: 2.5rem 0 4rem 0;
             background: #f8fafc;
         }
 
-        .contact-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
+        .slides-wrapper {
             max-width: 900px;
-            margin-left: auto;
-            margin-right: auto;
+            margin: 0 auto;
         }
 
-        .contact-card {
-            background: white;
-            border-radius: 10px;
-            padding: 2rem;
+        .slides-description {
+            font-size: 1.15rem;
+            color: #555;
+            margin-bottom: 1.5rem;
             text-align: center;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-            transition: transform 0.2s, box-shadow 0.2s;
         }
 
-        .contact-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+        .slides-embed {
+            position: relative;
+            width: 100%;
+            padding-top: 56.25%; /* 16:9 */
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.15);
         }
 
-        .contact-icon {
-            font-size: 3rem;
-            margin-bottom: 1rem;
+        .slides-embed iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
         }
 
-        .contact-card h3 {
-            font-size: 1.44rem;
-            font-weight: 700;
-            color: #1e40af;
-            margin-bottom: 0.5rem;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
+        .slides-actions {
+            margin-top: 1.5rem;
+            text-align: center;
         }
 
-        .contact-card p {
-            color: #666;
-            font-size: 1.14rem;
-            margin-bottom: 0.75rem;
-        }
-
-        .contact-card a {
+        .btn-open {
             display: inline-block;
-            color: #1e40af;
+            background: #1e40af;
+            color: white;
             text-decoration: none;
-            font-size: 1.32rem;
+            font-size: 1.1rem;
             font-weight: 600;
-            transition: color 0.2s;
+            padding: 0.85rem 2rem;
+            border-radius: 6px;
+            transition: background 0.2s, transform 0.2s;
         }
 
-        .contact-card a:hover {
-            color: #3b82f6;
-            text-decoration: underline;
+        .btn-open:hover {
+            background: #1d3a9e;
+            transform: translateY(-2px);
         }
 
         /* Footer */
@@ -305,23 +290,6 @@
             color: #9ca3af;
             padding: 2rem 0;
             text-align: center;
-        }
-
-        .footer-links {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            margin-bottom: 1rem;
-            flex-wrap: wrap;
-        }
-
-        .footer-links a {
-            color: #9ca3af;
-            text-decoration: none;
-        }
-
-        .footer-links a:hover {
-            color: white;
         }
 
         /* Responsive */
@@ -336,10 +304,6 @@
 
             .hamburger {
                 display: flex;
-            }
-
-            .logo {
-                height: 35px;
             }
         }
     </style>
@@ -443,37 +407,21 @@
     <!-- Page Hero -->
     <section class="page-hero">
         <div class="container">
-            <h1>Contact Us</h1>
-            <p>We're here to help. Reach out anytime.</p>
+            <h1>Introduction Slide Deck</h1>
+            <p>An overview of AwareNet for group presentation and discussion.</p>
         </div>
     </section>
 
-    <!-- Contact Cards -->
-    <section class="contact-section">
+    <!-- Slide Deck -->
+    <section class="slides-section">
         <div class="container">
-            <div class="contact-grid">
-
-                <div class="contact-card">
-                    <div class="contact-icon">📈</div>
-                    <h3>Sales</h3>
-                    <p>Questions about getting AwareNet for your neighborhood?</p>
-                    <a href="mailto:sales@awarenet.us">sales@awarenet.us</a>
+            <div class="slides-wrapper">
+                <div class="slides-embed">
+                    <iframe src="https://docs.google.com/presentation/d/17SJjeRaIduMrnlFHqhroR6LUCBol2yyeB7pFDB55Ey0/embed?start=false&loop=false&delayms=3000" allowfullscreen></iframe>
                 </div>
-
-                <div class="contact-card">
-                    <div class="contact-icon">🛠️</div>
-                    <h3>Support</h3>
-                    <p>Need help with your existing AwareNet setup?</p>
-                    <a href="mailto:support@awarenet.us">support@awarenet.us</a>
+                <div class="slides-actions">
+                    <a href="https://docs.google.com/presentation/d/17SJjeRaIduMrnlFHqhroR6LUCBol2yyeB7pFDB55Ey0/edit?usp=sharing" target="_blank" class="btn-open">Open in Google Slides ↗</a>
                 </div>
-
-                <div class="contact-card">
-                    <div class="contact-icon">📞</div>
-                    <h3>Phone</h3>
-                    <p>Prefer to talk? Give us a call.</p>
-                    <a href="tel:+13144061166">(314) 406-1166</a>
-                </div>
-
             </div>
         </div>
     </section>
@@ -487,7 +435,6 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Collapsible drawer groups
             document.querySelectorAll('.drawer-toggle').forEach(toggle => {
                 toggle.addEventListener('click', function(e) {
                     e.preventDefault();
@@ -502,7 +449,6 @@
                 });
             });
 
-            // Slide-out drawer
             const hamburger = document.getElementById('hamburger');
             const drawer = document.getElementById('drawer');
             const drawerOverlay = document.getElementById('drawer-overlay');
