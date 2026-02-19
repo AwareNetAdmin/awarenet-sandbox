@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="version" content="0.1.20">
+    <meta name="version" content="0.1.21">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Our Team - AwareNet</title>
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&display=swap" rel="stylesheet">
@@ -254,6 +254,57 @@
             object-fit: cover;
             flex-shrink: 0;
             border: 3px solid #e2e8f0;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .team-photo:hover {
+            transform: scale(1.07);
+            box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+        }
+
+        /* Photo lightbox */
+        .photo-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.85);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .photo-modal.open {
+            display: flex;
+        }
+
+        .photo-modal img {
+            max-width: 90vw;
+            max-height: 85vh;
+            border-radius: 8px;
+            box-shadow: 0 8px 40px rgba(0,0,0,0.6);
+            object-fit: contain;
+        }
+
+        .photo-modal-close {
+            position: fixed;
+            top: 1.25rem;
+            right: 1.5rem;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 2.5rem;
+            cursor: pointer;
+            line-height: 1;
+            opacity: 0.8;
+            transition: opacity 0.2s;
+        }
+
+        .photo-modal-close:hover {
+            opacity: 1;
         }
 
         .team-photo-placeholder {
@@ -495,6 +546,12 @@
         </div>
     </section>
 
+    <!-- Photo lightbox modal -->
+    <div class="photo-modal" id="photo-modal">
+        <button class="photo-modal-close" id="photo-modal-close">&times;</button>
+        <img id="photo-modal-img" src="" alt="">
+    </div>
+
     <!-- Footer -->
     <footer>
         <div class="container">
@@ -534,6 +591,33 @@
                 drawerOverlay.style.display = 'none';
                 document.body.style.overflow = 'auto';
             }
+
+            // Photo lightbox
+            const photoModal = document.getElementById('photo-modal');
+            const photoModalImg = document.getElementById('photo-modal-img');
+            const photoModalClose = document.getElementById('photo-modal-close');
+
+            document.querySelectorAll('.team-photo').forEach(photo => {
+                photo.addEventListener('click', function() {
+                    photoModalImg.src = this.src;
+                    photoModalImg.alt = this.alt;
+                    photoModal.classList.add('open');
+                    document.body.style.overflow = 'hidden';
+                });
+            });
+
+            function closePhotoModal() {
+                photoModal.classList.remove('open');
+                document.body.style.overflow = 'auto';
+            }
+
+            photoModalClose.addEventListener('click', closePhotoModal);
+            photoModal.addEventListener('click', function(e) {
+                if (e.target === this) closePhotoModal();
+            });
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') closePhotoModal();
+            });
 
             if (hamburger) {
                 hamburger.addEventListener('click', openDrawer);
