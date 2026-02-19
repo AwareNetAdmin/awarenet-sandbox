@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="version" content="0.1.8">
+    <meta name="version" content="0.1.9">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Feature Summary - AwareNet</title>
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&display=swap" rel="stylesheet">
@@ -269,6 +269,55 @@
             line-height: 1.5;
         }
 
+        .feature-item-parent {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .feature-item-parent > .feature-check {
+            margin-bottom: 0;
+        }
+
+        .feature-item-parent > .feature-check,
+        .feature-item-parent > .feature-text-group {
+            display: inline;
+        }
+
+        .feature-item-parent {
+            flex-direction: row;
+            align-items: flex-start;
+        }
+
+        .feature-text-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+            flex: 1;
+        }
+
+        .feature-sub-list {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid #e2e8f0;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .feature-sub-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            padding-left: 1rem;
+        }
+
+        .feature-sub-check {
+            color: #1e40af;
+            font-size: 1.1rem;
+            flex-shrink: 0;
+            margin-top: 0.1rem;
+        }
+
         .faq-note {
             max-width: 860px;
             margin: 2rem auto 0 auto;
@@ -449,44 +498,41 @@
                     <span class="feature-text">Each camera owner maintains control of the privacy and security features for their camera.</span>
                 </div>
 
-                <div class="feature-item">
+                <div class="feature-item feature-item-parent">
                     <span class="feature-check">✔</span>
-                    <span class="feature-text">Easy-to-use software application for review and categorization of real-time alerts. Securely accessible via the internet and ideal for use on a tablet.</span>
-                </div>
-
-                <div class="feature-item">
-                    <span class="feature-check">✔</span>
-                    <span class="feature-text">Designated reviewer (e.g. security guard or officer) can assess real-time alerts and take immediate action when appropriate to disrupt and deter criminal activity.</span>
-                </div>
-
-                <div class="feature-item">
-                    <span class="feature-check">✔</span>
-                    <span class="feature-text">Important time stamps to help ensure the reviewer is processing alerts in a timely manner.</span>
-                </div>
-
-                <div class="feature-item">
-                    <span class="feature-check">✔</span>
-                    <span class="feature-text">GPS mapping to help ensure the patrol person is covering the full service area.</span>
-                </div>
-
-                <div class="feature-item">
-                    <span class="feature-check">✔</span>
-                    <span class="feature-text">False alerts are minimized with camera AI that identifies motion as activity by a person, a vehicle, or something else.</span>
-                </div>
-
-                <div class="feature-item">
-                    <span class="feature-check">✔</span>
-                    <span class="feature-text">Ability to disable alerts for a camera when it is sending too many alerts (e.g. block party, configuration issue, etc.).</span>
-                </div>
-
-                <div class="feature-item">
-                    <span class="feature-check">✔</span>
-                    <span class="feature-text">Map of all camera locations with status information for each camera and ability to re-enable alerts.</span>
-                </div>
-
-                <div class="feature-item">
-                    <span class="feature-check">✔</span>
-                    <span class="feature-text">Easy export of data for analysis and reporting using any spreadsheet app.</span>
+                    <div class="feature-text-group">
+                        <span class="feature-text">Easy-to-use software application for review and categorization of real-time alerts. Securely accessible via the internet and ideal for use on a tablet.</span>
+                        <div class="feature-sub-list">
+                            <div class="feature-sub-item">
+                                <span class="feature-sub-check">✔</span>
+                                <span class="feature-text">Designated reviewer (e.g. security guard or officer) can assess real-time alerts and take immediate action when appropriate to disrupt and deter criminal activity.</span>
+                            </div>
+                            <div class="feature-sub-item">
+                                <span class="feature-sub-check">✔</span>
+                                <span class="feature-text">Important time stamps to help ensure the reviewer is processing alerts in a timely manner.</span>
+                            </div>
+                            <div class="feature-sub-item">
+                                <span class="feature-sub-check">✔</span>
+                                <span class="feature-text">GPS mapping to help ensure the patrol person is covering the full service area.</span>
+                            </div>
+                            <div class="feature-sub-item">
+                                <span class="feature-sub-check">✔</span>
+                                <span class="feature-text">False alerts are minimized with camera AI that identifies motion as activity by a person, a vehicle, or something else.</span>
+                            </div>
+                            <div class="feature-sub-item">
+                                <span class="feature-sub-check">✔</span>
+                                <span class="feature-text">Ability to disable alerts for a camera when it is sending too many alerts (e.g. block party, configuration issue, etc.).</span>
+                            </div>
+                            <div class="feature-sub-item">
+                                <span class="feature-sub-check">✔</span>
+                                <span class="feature-text">Map of all camera locations with status information for each camera and ability to re-enable alerts.</span>
+                            </div>
+                            <div class="feature-sub-item">
+                                <span class="feature-sub-check">✔</span>
+                                <span class="feature-text">Easy export of data for analysis and reporting using any spreadsheet app.</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
             </div>
