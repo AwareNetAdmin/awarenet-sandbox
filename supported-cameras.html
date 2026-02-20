@@ -198,6 +198,54 @@
             }
         }
         
+        /* Ratings Table */
+        .ratings-table {
+            width: 100%;
+            max-width: 100%;
+            border-collapse: collapse;
+            font-size: 0.95rem;
+            margin: 2rem 0;
+        }
+        
+        .ratings-table th,
+        .ratings-table td {
+            border: 2px solid #333;
+            padding: 0.6rem 0.4rem;
+            text-align: center;
+        }
+        
+        .ratings-table th {
+            background-color: #f0f0f0;
+            font-weight: bold;
+            font-size: 0.95rem;
+        }
+        
+        .ratings-table .category-cell {
+            background-color: #f0f0f0;
+            font-weight: bold;
+            text-align: left;
+            vertical-align: middle;
+        }
+        
+        .ratings-table .option-cell {
+            background-color: #f0f0f0;
+            font-weight: bold;
+            text-align: left;
+        }
+        
+        @media (max-width: 768px) {
+            .ratings-table {
+                font-size: 0.8rem;
+            }
+            .ratings-table th {
+                font-size: 0.85rem;
+                padding: 0.4rem 0.2rem;
+            }
+            .ratings-table td {
+                padding: 0.4rem 0.2rem;
+            }
+        }
+        
         /* Footer */
         footer {
             background: #1f2937;
@@ -514,6 +562,77 @@
                 </div>
 
                 <p>The next table below shows the relative rating for each power and connection option.</p>
+
+                <div class="table-wrapper">
+                    <table class="ratings-table">
+                        <thead>
+                            <tr>
+                                <th>CATEGORY</th>
+                                <th>OPTION</th>
+                                <th>ACQUISITION $</th>
+                                <th>OPERATING $</th>
+                                <th>RELIABILITY</th>
+                                <th>PERFORMANCE</th>
+                                <th>DEPLOYMENT</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td rowspan="3" class="category-cell">Power</td>
+                                <td class="option-cell">Battery + Solar</td>
+                                <td>High</td>
+                                <td>High</td>
+                                <td>Low</td>
+                                <td>Low</td>
+                                <td>Fast</td>
+                            </tr>
+                            <tr>
+                                <td class="option-cell">Plug In</td>
+                                <td>Med</td>
+                                <td>Low</td>
+                                <td>Med</td>
+                                <td>High</td>
+                                <td>Varies</td>
+                            </tr>
+                            <tr>
+                                <td class="option-cell">Ethernet</td>
+                                <td>Low</td>
+                                <td>Low</td>
+                                <td>High</td>
+                                <td>High</td>
+                                <td>Varies</td>
+                            </tr>
+                            <tr>
+                                <td colspan="7" style="border: none; padding: 0.3rem;"></td>
+                            </tr>
+                            <tr>
+                                <td rowspan="3" class="category-cell">Connection</td>
+                                <td class="option-cell">Cellular</td>
+                                <td>High</td>
+                                <td>High</td>
+                                <td>Low</td>
+                                <td>Low</td>
+                                <td>Fast</td>
+                            </tr>
+                            <tr>
+                                <td class="option-cell">WiFi</td>
+                                <td>Med</td>
+                                <td>Low</td>
+                                <td>Med</td>
+                                <td>Med</td>
+                                <td>Varies</td>
+                            </tr>
+                            <tr>
+                                <td class="option-cell">Ethernet</td>
+                                <td>Low</td>
+                                <td>Low</td>
+                                <td>High</td>
+                                <td>High</td>
+                                <td>Varies</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
 
                 <p>Below is the current list of cameras that do meet the requirements to work with AwareNet. We do our best to keep this information reliable but it is not guaranteed. Other camera brands/models will be added to the list as soon as we can test them. To request support for a camera not listed below, <a href="mailto:support@awarenet.us">tell us the make and model</a> of the camera.</p>
 
