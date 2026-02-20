@@ -2,25 +2,29 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="version" content="0.1.39">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Privacy Masking - AwareNet</title>
+    <title>Pricing - AwareNet</title>
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&display=swap" rel="stylesheet">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             line-height: 1.6;
             color: #333;
+            font-size: 1.2rem;
         }
-
+        
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
         }
-
+        
         /* Header */
         header {
             background: linear-gradient(rgba(255,255,255,0.20), rgba(255,255,255,0.20)), url('street.jpg') center center / cover no-repeat;
@@ -30,29 +34,91 @@
             top: 0;
             z-index: 100;
         }
-
+        
         nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 1rem 0;
         }
-
+        
+        .logo {
+            height: 40px;
+        }
+        
+        .logo img {
+            height: 100%;
+            width: auto;
+        }
+        
         .nav-links {
             display: flex;
             list-style: none;
             gap: 2rem;
         }
-
+        
         .nav-links a {
             text-decoration: none;
             color: #333;
             font-weight: 500;
             transition: color 0.3s;
         }
-
-        .nav-links a:hover { color: #1e40af; }
-
+        
+        .nav-links a:hover {
+            color: #1e40af;
+        }
+        
+        /* Main Content */
+        .main-content {
+            padding: 4rem 0;
+        }
+        
+        .page-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #1e40af;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        
+        .content-wrapper {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.07);
+        }
+        
+        .content-wrapper h3 {
+            color: #1e40af;
+            margin-top: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .content-wrapper h3:first-child {
+            margin-top: 0;
+        }
+        
+        .content-wrapper p {
+            margin-bottom: 1rem;
+        }
+        
+        .content-wrapper a {
+            color: #1e40af;
+            text-decoration: underline;
+            font-weight: 500;
+        }
+        
+        /* Footer */
+        footer {
+            background: #1f2937;
+            color: #9ca3af;
+            padding: 2rem 0;
+            text-align: center;
+        }
+        
+        /* Hamburger */
         .hamburger {
             display: none;
             flex-direction: column;
@@ -69,13 +135,17 @@
             height: 3px;
             background: white;
             border-radius: 2px;
+            transition: all 0.3s;
         }
 
+        /* Slide-out drawer */
         .drawer-overlay {
             display: none;
             position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             background: rgba(0,0,0,0.4);
             z-index: 999;
         }
@@ -94,7 +164,9 @@
             box-shadow: 4px 0 15px rgba(0,0,0,0.3);
         }
 
-        .drawer.open { left: 0; }
+        .drawer.open {
+            left: 0;
+        }
 
         .drawer-header {
             padding: 1.5rem;
@@ -112,8 +184,10 @@
 
         .drawer-close {
             position: absolute;
-            top: 1rem; right: 1rem;
-            background: none; border: none;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
             color: white;
             font-size: 1.6rem;
             cursor: pointer;
@@ -136,12 +210,15 @@
             padding: 0.75rem 1.5rem;
             border-bottom: 1px solid rgba(255,255,255,0.15);
             transition: background 0.2s;
+            text-align: left;
             display: block;
             width: 100%;
             box-sizing: border-box;
         }
 
-        .drawer nav a:hover { background: rgba(255,255,255,0.15); }
+        .drawer nav a:hover {
+            background: rgba(255,255,255,0.15);
+        }
 
         .drawer nav a.drawer-sub-item {
             font-size: 1.2rem;
@@ -151,7 +228,11 @@
             border-bottom: 1px solid rgba(255,255,255,0.08);
         }
 
-        .drawer-group { display: flex; flex-direction: column; width: 100%; }
+        .drawer-group {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+        }
 
         .drawer-toggle {
             display: flex !important;
@@ -161,10 +242,17 @@
             box-sizing: border-box;
         }
 
-        .drawer-sub-items { display: none; flex-direction: column; }
-        .drawer-sub-items.open { display: flex; }
+        .drawer-sub-items {
+            display: none;
+            flex-direction: column;
+        }
+
+        .drawer-sub-items.open {
+            display: flex;
+        }
 
         .drawer-chevron {
+            float: right;
             transition: transform 0.3s;
             display: inline-block;
             margin-left: 0.75rem;
@@ -173,102 +261,39 @@
             line-height: 1;
         }
 
-        .drawer-toggle.open .drawer-chevron { transform: rotate(90deg); }
-
-        /* Page hero */
-        .page-hero {
-            background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
-            color: white;
-            padding: 3rem 0;
-            text-align: center;
+        .drawer-toggle.open .drawer-chevron {
+            transform: rotate(90deg);
         }
 
-        .page-hero h1 {
-            font-family: 'Oswald', sans-serif;
-            font-size: 2.5rem;
-            letter-spacing: 0.02em;
-            margin-bottom: 0.5rem;
-        }
-
-        .page-hero p {
-            font-size: 1.5rem;
-            opacity: 0.9;
-        }
-
-        /* Content */
-        .content-section {
-            padding: 3rem 0 4rem 0;
-            background: #f8fafc;
-        }
-
-        .content-wrapper {
-            max-width: 760px;
-            margin: 0 auto;
-            display: flex;
-            flex-direction: column;
-            gap: 2rem;
-        }
-
-        .content-card {
-            background: white;
-            border-radius: 10px;
-            padding: 2rem;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.07);
-        }
-
-        .content-card h2 {
-            font-size: 1.68rem;
-            font-weight: 700;
-            color: #1e40af;
-            margin-bottom: 1rem;
-            padding-bottom: 0.75rem;
-            border-bottom: 2px solid #e2e8f0;
-        }
-
-        .screenshot {
-            text-align: center;
-        }
-
-        .screenshot img {
-            max-width: 100%;
-            border-radius: 8px;
-            box-shadow: 0 4px 16px rgba(0,0,0,0.15);
-            border: 1px solid #e2e8f0;
-        }
-
-        .placeholder {
-            background: #f1f5f9;
-            border: 2px dashed #cbd5e1;
-            border-radius: 8px;
-            padding: 3rem;
-            text-align: center;
-            color: #94a3b8;
-            font-size: 1.1rem;
-        }
-
-        /* Footer */
-        footer {
-            background: #1f2937;
-            color: #9ca3af;
-            padding: 2rem 0;
-            text-align: center;
-        }
-
+        /* Responsive */
         @media (max-width: 768px) {
-            .page-hero h1 { font-size: 2rem; }
-            .nav-links { display: none; }
-            .hamburger { display: flex; }
+            .nav-links {
+                display: none;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .logo {
+                height: 35px;
+            }
+            
+            .page-title {
+                font-size: 2rem;
+            }
         }
     </style>
 </head>
 <body>
-
     <!-- Header -->
     <header>
         <div class="container">
             <nav>
                 <button class="hamburger" id="hamburger" aria-label="Open menu">
-                    <span></span><span></span><span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
                 </button>
                 <div class="logo" style="height: 48px; display: flex; align-items: center; gap: 0.5rem;">
                     <span style="background: rgba(255,255,255,0.45); border-radius: 50px; padding: 2px 6px; display: flex; align-items: center;">
@@ -277,10 +302,9 @@
                     <span style="font-size: 3rem; font-weight: bold; color: #1e40af; text-shadow: -1px -1px 0 white, 1px -1px 0 white, -1px 1px 0 white, 1px 1px 0 white;">Aware<em>Net</em></span>
                 </div>
                 <ul class="nav-links">
-                    <li><a href="index.html#how-it-works">How It Works</a></li>
-                    <li><a href="index.html#pricing">Pricing</a></li>
-                    <li><a href="index.html#results">Results</a></li>
-                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="getting-started.html">Getting Started</a></li>
+                    <li><a href="#contact">Contact</a></li>
                 </ul>
             </nav>
         </div>
@@ -310,7 +334,7 @@
                 </div>
             </div>
 
-            <a href="#" class="drawer-item">Getting Started</a>
+            <a href="getting-started.html" class="drawer-item">Getting Started</a>
 
             <div class="drawer-group">
                 <a href="#" class="drawer-item drawer-toggle">FAQ <span class="drawer-chevron">›</span></a>
@@ -356,29 +380,19 @@
         </nav>
     </div>
 
-    <!-- Page Hero -->
-    <section class="page-hero">
+    <!-- Main Content -->
+    <section class="main-content">
         <div class="container">
-            <h1>Privacy Masking</h1>
-            <p>How to protect privacy using your camera's masking feature.</p>
-        </div>
-    </section>
-
-    <!-- Content -->
-    <section class="content-section">
-        <div class="container">
+            <h1 class="page-title">Pricing</h1>
             <div class="content-wrapper">
+                <h3>Standard Pricing</h3>
+                <p>Standard pricing is $129 per month plus a minimum of $4.50 per camera per month (10pm to 6am, 7 days per week).</p>
 
-                <div class="content-card">
-                    <h2>Without Privacy Masking</h2>
-                    <div class="placeholder">Image coming soon.</div>
-                </div>
+                <h3>St. Louis City Pricing</h3>
+                <p>For neighborhoods in St. Louis City, Missouri, we continue to provide AwareNet at a "no-profit" price.</p>
 
-                <div class="content-card">
-                    <h2>With Privacy Masking <span style="font-size: 1rem; font-weight: 400; color: #64748b;">(set by camera owner)</span></h2>
-                    <div class="placeholder">Image coming soon.</div>
-                </div>
-
+                <h3>More Information</h3>
+                <p>For more information, please contact us at <a href="mailto:sales@awarenet.us">sales@awarenet.us</a> or 314-406-1166.</p>
             </div>
         </div>
     </section>
@@ -392,13 +406,16 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            // Collapsible drawer groups
             document.querySelectorAll('.drawer-toggle').forEach(toggle => {
                 toggle.addEventListener('click', function(e) {
                     e.preventDefault();
                     const subItems = this.nextElementSibling;
                     const isOpen = subItems.classList.contains('open');
+                    // Close all others
                     document.querySelectorAll('.drawer-sub-items.open').forEach(el => el.classList.remove('open'));
                     document.querySelectorAll('.drawer-toggle.open').forEach(el => el.classList.remove('open'));
+                    // Toggle this one
                     if (!isOpen) {
                         subItems.classList.add('open');
                         this.classList.add('open');
@@ -406,6 +423,7 @@
                 });
             });
 
+            // Slide-out drawer
             const hamburger = document.getElementById('hamburger');
             const drawer = document.getElementById('drawer');
             const drawerOverlay = document.getElementById('drawer-overlay');
@@ -433,6 +451,5 @@
             }
         });
     </script>
-
 </body>
 </html>
