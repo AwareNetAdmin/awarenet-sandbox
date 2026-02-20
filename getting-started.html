@@ -490,7 +490,7 @@
                 hamburger.addEventListener('click', openDrawer);
                 drawerClose.addEventListener('click', closeDrawer);
                 drawerOverlay.addEventListener('click', closeDrawer);
-                drawer.querySelectorAll('nav a').forEach(link => {
+                drawer.querySelectorAll('nav a:not(.drawer-toggle)').forEach(link => {
                     link.addEventListener('click', closeDrawer);
                 });
             }
