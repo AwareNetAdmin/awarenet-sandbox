@@ -107,36 +107,57 @@
         }
         
         /* Camera Table */
+        .table-wrapper {
+            overflow-x: auto;
+            margin: 2rem 0;
+        }
+        
         .camera-table {
             width: 100%;
             border-collapse: collapse;
-            margin: 2rem 0;
             font-size: 1.1rem;
+            min-width: 400px;
         }
         
         .camera-table th,
         .camera-table td {
             border: 2px solid #333;
-            padding: 1rem;
+            padding: 0.75rem;
             text-align: center;
         }
         
         .camera-table th {
             background-color: #f0f0f0;
             font-weight: bold;
-            font-size: 1.3rem;
+            font-size: 1.2rem;
         }
         
         .camera-table .row-header {
             background-color: #f0f0f0;
             font-weight: bold;
             text-align: left;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
         }
         
         .camera-table .checkmark {
-            font-size: 2rem;
+            font-size: 1.8rem;
             font-weight: bold;
+        }
+        
+        @media (max-width: 768px) {
+            .camera-table {
+                font-size: 0.95rem;
+            }
+            .camera-table th {
+                font-size: 1rem;
+            }
+            .camera-table .row-header {
+                font-size: 0.95rem;
+            }
+            .camera-table th,
+            .camera-table td {
+                padding: 0.5rem;
+            }
         }
         
         /* Footer */
@@ -418,39 +439,41 @@
                 
                 <p>The first table below shows the available combinations of power and connection.</p>
 
-                <table class="camera-table">
-                    <thead>
-                        <tr>
-                            <th rowspan="2" class="row-header">POWER</th>
-                            <th colspan="3">CONNECTION</th>
-                        </tr>
-                        <tr>
-                            <th>Cellular</th>
-                            <th>WiFi</th>
-                            <th>Ethernet</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td class="row-header">Battery + Solar</td>
-                            <td class="checkmark">✓</td>
-                            <td class="checkmark">✓</td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td class="row-header">Plug In</td>
-                            <td></td>
-                            <td class="checkmark">✓</td>
-                            <td class="checkmark">✓</td>
-                        </tr>
-                        <tr>
-                            <td class="row-header">Ethernet</td>
-                            <td></td>
-                            <td></td>
-                            <td class="checkmark">✓</td>
-                        </tr>
-                    </tbody>
-                </table>
+                <div class="table-wrapper">
+                    <table class="camera-table">
+                        <thead>
+                            <tr>
+                                <th rowspan="2" class="row-header">POWER</th>
+                                <th colspan="3">CONNECTION</th>
+                            </tr>
+                            <tr>
+                                <th>Cellular</th>
+                                <th>WiFi</th>
+                                <th>Ethernet</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="row-header">Battery + Solar</td>
+                                <td class="checkmark">✓</td>
+                                <td class="checkmark">✓</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td class="row-header">Plug In</td>
+                                <td></td>
+                                <td class="checkmark">✓</td>
+                                <td class="checkmark">✓</td>
+                            </tr>
+                            <tr>
+                                <td class="row-header">Ethernet</td>
+                                <td></td>
+                                <td></td>
+                                <td class="checkmark">✓</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
 
                 <p>Below is the current list of cameras that do meet the requirements to work with AwareNet. We do our best to keep this information reliable but it is not guaranteed. Other camera brands/models will be added to the list as soon as we can test them. To request support for a camera not listed below, <a href="mailto:support@awarenet.us">tell us the make and model</a> of the camera.</p>
 
@@ -465,6 +488,35 @@
 
                 <h3>Reolink</h3>
                 <p>Available at <a href="http://www.reolink.com" target="_blank">www.reolink.com</a> and <a href="http://www.amazon.com" target="_blank">www.amazon.com</a>. All current models for sale by Reolink should be compatible with AwareNet. Typical price is $100 - $200 per camera.</p>
+                
+                <p>If you have a standard outlet available to power a camera, the Reolink Duo 2 WiFi is most often the best option. It is suitable for locating on a house or garage up to 35 feet from the street or alley. You will also need a 256GB class 10 data card. The Duo Floodlight is a good option if you need/want to really light up a dark area.</p>
+                
+                <p>If you can do Power over Ethernet (PoE), the Reolink 3 PoE is an excellent option.</p>
+                
+                <p>If you must have a battery-powered camera, the Argus 4 Pro camera with matching solar panel is a good option. It is suitable for locating adjacent to the street or alley. It is not a good choice for installing at a location that is more than 10 feet from the sidewalk/street or areas with continuous people/vehicle traffic. You will also need a 256GB class 10 data card.</p>
+                
+                <p>Many other models are available for specific situations. Feel free to <a href="mailto:help@awarenet.us">contact us</a> with your questions.</p>
+
+                <h3 style="margin-top: 2rem;">Unsupported Cameras</h3>
+                <p>Below is the current list of commonly available cameras that do not meet the requirements to work with AwareNet. We do our best to keep this information reliable but it is not guaranteed.</p>
+
+                <h3>Amcrest</h3>
+                <p>The Amcrest cameras with AI person & vehicle detection have the ability to send email alerts (but not webhook alerts). However, there is no option to include the video clip with the email. So the cameras do not meet the minimum requirements to work with AwareNet.</p>
+
+                <h3>Blink</h3>
+                <p>Unfortunately, Blink cameras do not meet the minimum requirements to work with AwareNet because they cannot send an email or webhook to AwareNet when the camera senses motion.</p>
+
+                <h3>Nest</h3>
+                <p>The Nest Outdoor camera can send an email (but not a webhook) when the camera senses motion. However, the only option is to send the email to the email account the camera is registered to. Depending on what email account the camera is registered to, it might be possible to configure that account to automatically forward the alerts to AwareNet. If you have a Nest Outdoor camera and would like to try this, please contact us.</p>
+
+                <h3>Ring</h3>
+                <p>Unfortunately, Ring cameras do not meet the minimum requirements to work with AwareNet because they cannot send an email or webhook to AwareNet when the camera senses motion.</p>
+
+                <h3>SimpliSafe</h3>
+                <p>The SimpliSafe camera with person detection has the ability to send email alerts. However, there is no option to include the video clip with the email. And it cannot send a webhook. So the camera does not meet the minimum requirements to work with AwareNet.</p>
+
+                <h3>Wyze</h3>
+                <p>Unfortunately, Wyze cameras do not meet the minimum requirements to work with AwareNet because they cannot send an email or webhook to AwareNet when the camera senses motion.</p>
             </div>
         </div>
     </section>
