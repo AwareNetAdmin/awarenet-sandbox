@@ -141,53 +141,60 @@
         .table-wrapper {
             overflow-x: auto;
             margin: 2rem 0;
+            max-width: 100%;
         }
         
         .camera-table {
             width: 100%;
+            max-width: 100%;
             border-collapse: collapse;
-            font-size: 1.1rem;
-            min-width: 400px;
+            font-size: 1rem;
+            table-layout: fixed;
         }
         
         .camera-table th,
         .camera-table td {
             border: 2px solid #333;
-            padding: 0.75rem;
+            padding: 0.6rem;
             text-align: center;
         }
         
         .camera-table th {
             background-color: #f0f0f0;
             font-weight: bold;
-            font-size: 1.2rem;
+            font-size: 1.05rem;
         }
         
         .camera-table .row-header {
             background-color: #f0f0f0;
             font-weight: bold;
             text-align: left;
-            font-size: 1.1rem;
+            font-size: 1rem;
+            width: 40%;
         }
         
         .camera-table .checkmark {
-            font-size: 1.8rem;
+            font-size: 1.6rem;
             font-weight: bold;
         }
         
         @media (max-width: 768px) {
             .camera-table {
-                font-size: 0.95rem;
+                font-size: 0.9rem;
+                table-layout: auto;
             }
             .camera-table th {
-                font-size: 1rem;
+                font-size: 0.95rem;
             }
             .camera-table .row-header {
-                font-size: 0.95rem;
+                font-size: 0.9rem;
             }
             .camera-table th,
             .camera-table td {
-                padding: 0.5rem;
+                padding: 0.5rem 0.3rem;
+            }
+            .camera-table .checkmark {
+                font-size: 1.4rem;
             }
         }
         
