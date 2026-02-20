@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="version" content="0.1.39">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AwareNet - Neighborhood Crime Disruption Network</title>
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&display=swap" rel="stylesheet">
@@ -690,11 +691,11 @@
             <div class="drawer-group">
                 <a href="#" class="drawer-item drawer-toggle">About <span class="drawer-chevron">›</span></a>
                 <div class="drawer-sub-items">
-                    <a href="#" class="drawer-sub-item">Contact Us</a>
-                    <a href="#" class="drawer-sub-item">Feature Summary</a>
-                    <a href="#" class="drawer-sub-item">Introduction Slide Deck</a>
-                    <a href="#" class="drawer-sub-item">Our Team</a>
-                    <a href="#" class="drawer-sub-item">Customers</a>
+                    <a href="contact.html" class="drawer-sub-item">Contact Us</a>
+                    <a href="feature-summary.html" class="drawer-sub-item">Feature Summary</a>
+                    <a href="introduction-slide-deck.html" class="drawer-sub-item">Introduction Slide Deck</a>
+                    <a href="our-team.html" class="drawer-sub-item">Our Team</a>
+                    <a href="customers.html" class="drawer-sub-item">Customers</a>
                 </div>
             </div>
 
@@ -703,9 +704,10 @@
             <div class="drawer-group">
                 <a href="#" class="drawer-item drawer-toggle">FAQ <span class="drawer-chevron">›</span></a>
                 <div class="drawer-sub-items">
-                    <a href="#" class="drawer-sub-item">Alert Process</a>
-                    <a href="#" class="drawer-sub-item">Review Alert</a>
-                    <a href="#" class="drawer-sub-item">Privacy Masking</a>
+                    <a href="qa.html" class="drawer-sub-item">Q&amp;A</a>
+                    <a href="alert-process.html" class="drawer-sub-item">Alert Process</a>
+                    <a href="review-alert.html" class="drawer-sub-item">Review Alert</a>
+                    <a href="privacy-masking.html" class="drawer-sub-item">Privacy Masking</a>
                 </div>
             </div>
 
@@ -1041,7 +1043,7 @@
                 hamburger.addEventListener('click', openDrawer);
                 drawerClose.addEventListener('click', closeDrawer);
                 drawerOverlay.addEventListener('click', closeDrawer);
-                drawer.querySelectorAll('nav a').forEach(link => {
+                drawer.querySelectorAll('nav a:not(.drawer-toggle)').forEach(link => {
                     link.addEventListener('click', closeDrawer);
                 });
             }

@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="version" content="0.1.39">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Q&amp;A - AwareNet</title>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(rgba(255,255,255,0.20), rgba(255,255,255,0.20)), url('street.jpg') center center / cover no-repeat;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border-bottom: 4px solid #1e40af;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover { color: #1e40af; }
+
+        /* Hamburger */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 6px 4px;
+            background: none;
+            border: none;
+        }
+
+        .hamburger span {
+            display: block;
+            width: 26px;
+            height: 3px;
+            background: white;
+            border-radius: 2px;
+        }
+
+        /* Drawer */
+        .drawer-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0,0,0,0.4);
+            z-index: 999;
+        }
+
+        .drawer {
+            position: fixed;
+            top: 0;
+            left: -280px;
+            width: 280px;
+            height: 100%;
+            background: #1e40af;
+            z-index: 1000;
+            transition: left 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 4px 0 15px rgba(0,0,0,0.3);
+        }
+
+        .drawer.open { left: 0; }
+
+        .drawer-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .drawer-logo-text {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #fff;
+        }
+
+        .drawer-close {
+            position: absolute;
+            top: 1rem; right: 1rem;
+            background: none; border: none;
+            color: white;
+            font-size: 1.6rem;
+            cursor: pointer;
+            line-height: 1;
+        }
+
+        .drawer nav {
+            display: flex;
+            flex-direction: column;
+            padding: 1rem 0;
+            overflow-y: auto;
+            flex: 1;
+        }
+
+        .drawer nav a {
+            text-decoration: none;
+            color: white;
+            font-size: 1.35rem;
+            font-weight: 500;
+            padding: 0.75rem 1.5rem;
+            border-bottom: 1px solid rgba(255,255,255,0.15);
+            transition: background 0.2s;
+            display: block;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .drawer nav a:hover { background: rgba(255,255,255,0.15); }
+
+        .drawer nav a.drawer-sub-item {
+            font-size: 1.2rem;
+            font-weight: 400;
+            padding: 0.5rem 1.5rem 0.5rem 2.5rem;
+            opacity: 0.85;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .drawer-group { display: flex; flex-direction: column; width: 100%; }
+
+        .drawer-toggle {
+            display: flex !important;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .drawer-sub-items { display: none; flex-direction: column; }
+        .drawer-sub-items.open { display: flex; }
+
+        .drawer-chevron {
+            transition: transform 0.3s;
+            display: inline-block;
+            margin-left: 0.75rem;
+            font-size: 1.4rem;
+            font-weight: bold;
+            line-height: 1;
+        }
+
+        .drawer-toggle.open .drawer-chevron { transform: rotate(90deg); }
+
+        /* Page hero */
+        .page-hero {
+            background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+        }
+
+        .page-hero h1 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 2.5rem;
+            letter-spacing: 0.02em;
+            margin-bottom: 0.5rem;
+        }
+
+        .page-hero p {
+            font-size: 1.5rem;
+            opacity: 0.9;
+        }
+
+        /* FAQ section */
+        .faq-section {
+            padding: 3rem 0 4rem 0;
+            background: #f8fafc;
+        }
+
+        .faq-list {
+            max-width: 860px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .faq-item {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+            overflow: hidden;
+        }
+
+        .faq-question {
+            width: 100%;
+            background: none;
+            border: none;
+            text-align: left;
+            padding: 1.1rem 1.5rem;
+            font-size: 1.375rem;
+            font-weight: 600;
+            color: #1e40af;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+            transition: background 0.2s;
+            line-height: 1.4;
+        }
+
+        .faq-question:hover {
+            background: #f0f5ff;
+        }
+
+        .faq-question.open {
+            background: #1e40af;
+            color: white;
+        }
+
+        .faq-chevron {
+            flex-shrink: 0;
+            font-size: 2.5rem;
+            font-weight: bold;
+            transition: transform 0.3s;
+            line-height: 1;
+        }
+
+        .faq-question.open .faq-chevron {
+            transform: rotate(90deg);
+        }
+
+        .faq-answer {
+            display: none;
+            padding: 1.1rem 1.5rem;
+            font-size: 1.3125rem;
+            color: #444;
+            line-height: 1.7;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .faq-answer.open {
+            display: block;
+        }
+
+        .faq-answer a {
+            color: #1e40af;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .faq-answer a:hover {
+            text-decoration: underline;
+        }
+
+        .faq-answer ul {
+            margin: 0.5rem 0 0.5rem 1.5rem;
+        }
+
+        .faq-answer li {
+            margin-bottom: 0.3rem;
+        }
+
+        .coming-soon {
+            color: #94a3b8;
+            font-style: italic;
+        }
+
+        /* Footer */
+        footer {
+            background: #1f2937;
+            color: #9ca3af;
+            padding: 2rem 0;
+            text-align: center;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .page-hero h1 { font-size: 2rem; }
+            .nav-links { display: none; }
+            .hamburger { display: flex; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav>
+                <button class="hamburger" id="hamburger" aria-label="Open menu">
+                    <span></span><span></span><span></span>
+                </button>
+                <div class="logo" style="height: 48px; display: flex; align-items: center; gap: 0.5rem;">
+                    <span style="background: rgba(255,255,255,0.45); border-radius: 50px; padding: 2px 6px; display: flex; align-items: center;">
+                        <img src="logo.svg" alt="AwareNet" style="height: 48px; width: auto;" />
+                    </span>
+                    <span style="font-size: 3rem; font-weight: bold; color: #1e40af; text-shadow: -1px -1px 0 white, 1px -1px 0 white, -1px 1px 0 white, 1px 1px 0 white;">Aware<em>Net</em></span>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="index.html#how-it-works">How It Works</a></li>
+                    <li><a href="index.html#pricing">Pricing</a></li>
+                    <li><a href="index.html#results">Results</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Slide-out drawer -->
+    <div class="drawer-overlay" id="drawer-overlay"></div>
+    <div class="drawer" id="drawer">
+        <button class="drawer-close" id="drawer-close">&times;</button>
+        <div class="drawer-header">
+            <span style="background: rgba(255,255,255,0.45); border-radius: 50px; padding: 2px 6px; display: flex; align-items: center;">
+                <img src="logo.svg" alt="AwareNet" style="height: 40px; width: auto;" />
+            </span>
+            <span class="drawer-logo-text">Aware<em>Net</em></span>
+        </div>
+        <nav>
+            <a href="index.html" class="drawer-item">Home</a>
+
+            <div class="drawer-group">
+                <a href="#" class="drawer-item drawer-toggle">About <span class="drawer-chevron">›</span></a>
+                <div class="drawer-sub-items">
+                    <a href="contact.html" class="drawer-sub-item">Contact Us</a>
+                    <a href="feature-summary.html" class="drawer-sub-item">Feature Summary</a>
+                    <a href="introduction-slide-deck.html" class="drawer-sub-item">Introduction Slide Deck</a>
+                    <a href="our-team.html" class="drawer-sub-item">Our Team</a>
+                    <a href="customers.html" class="drawer-sub-item">Customers</a>
+                </div>
+            </div>
+
+            <a href="#" class="drawer-item">Getting Started</a>
+
+            <div class="drawer-group">
+                <a href="#" class="drawer-item drawer-toggle">FAQ <span class="drawer-chevron">›</span></a>
+                <div class="drawer-sub-items">
+                    <a href="qa.html" class="drawer-sub-item">Q&amp;A</a>
+                    <a href="alert-process.html" class="drawer-sub-item">Alert Process</a>
+                    <a href="review-alert.html" class="drawer-sub-item">Review Alert</a>
+                    <a href="privacy-masking.html" class="drawer-sub-item">Privacy Masking</a>
+                </div>
+            </div>
+
+            <a href="#" class="drawer-item">Supported Cameras</a>
+
+            <div class="drawer-group">
+                <a href="#" class="drawer-item drawer-toggle">Reolink Email Setup <span class="drawer-chevron">›</span></a>
+                <div class="drawer-sub-items">
+                    <a href="#" class="drawer-sub-item">Gmail App Password</a>
+                    <a href="#" class="drawer-sub-item">Email Sent Folder</a>
+                </div>
+            </div>
+
+            <a href="#" class="drawer-item">Enroll a Camera</a>
+            <a href="#" class="drawer-item">Camera Location</a>
+
+            <div class="drawer-group">
+                <a href="#" class="drawer-item drawer-toggle">Configuration Notes <span class="drawer-chevron">›</span></a>
+                <div class="drawer-sub-items">
+                    <a href="#" class="drawer-sub-item">Duo, Duo 2, Duo 3</a>
+                    <a href="#" class="drawer-sub-item">False Alerts</a>
+                </div>
+            </div>
+
+            <a href="#" class="drawer-item">Pricing</a>
+
+            <div class="drawer-group">
+                <a href="#" class="drawer-item drawer-toggle">Legal <span class="drawer-chevron">›</span></a>
+                <div class="drawer-sub-items">
+                    <a href="#" class="drawer-sub-item">Member TOS</a>
+                    <a href="#" class="drawer-sub-item">Customer TOS</a>
+                    <a href="#" class="drawer-sub-item">Customer Order Form</a>
+                </div>
+            </div>
+        </nav>
+    </div>
+
+    <!-- Page Hero -->
+    <section class="page-hero">
+        <div class="container">
+            <h1>Q&amp;A</h1>
+            <p>Tap a question to see the answer.</p>
+        </div>
+    </section>
+
+    <!-- FAQ Accordion -->
+    <section class="faq-section">
+        <div class="container">
+            <div class="faq-list">
+
+                <div class="faq-item">
+                    <button class="faq-question">Do cameras deter crime? <span class="faq-chevron">›</span></button>
+                    <div class="faq-answer">Generally, criminals are no longer deterred by security cameras and bright lights. They assume, based on their experience, that residential security cameras are not monitored for activity at night so no one will respond to disrupt their criminal activity.<br><br>The AwareNet approach involves many cameras (i.e. at least one per block) with real-time monitoring and real-time response to disrupt criminal activity while it is occurring. Although success is not guaranteed and nothing deters all crime, <a href="https://stlhills.com/wp-content/uploads/2023/06/2023-YTD.pdf" target="_blank">we have proven</a> the AwareNet approach can be successful.</div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">Is AwareNet a business? <span class="faq-chevron">›</span></button>
+                    <div class="faq-answer">Yes. AwareNet is available for any neighborhood in the United States. But the founder, Tom Scheifler, is committed to provide AwareNet at no profit to all 79 neighborhoods in the city of St. Louis (his hometown).</div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">Who pays for the service? <span class="faq-chevron">›</span></button>
+                    <div class="faq-answer">A neighborhood organization pays for the service by signing up as an AwareNet customer.<br><br>After a neighborhood becomes a customer, a neighborhood resident becomes an AwareNet "member" (not a customer) when they enroll a camera with AwareNet. There is no cost to the resident to enroll a camera.<br><br>Please contact us if you know of a business or organization that would like to sponsor the AwareNet service for your neighborhood!</div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">Who pays for the cameras? <span class="faq-chevron">›</span></button>
+                    <div class="faq-answer">Typically, residents of each block purchase their own cameras. However, we are always looking for ways to reduce or eliminate the cost of the camera for residents.<br><br>Please contact us if you know of a business or organization that would like to sponsor cameras for your neighborhood!</div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">Are there terms of use available? <span class="faq-chevron">›</span></button>
+                    <div class="faq-answer">Yes. The terms are available on the Legal page.</div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">Which cameras are supported by AwareNet? <span class="faq-chevron">›</span></button>
+                    <div class="faq-answer">See the Supported Cameras information page. Please request support for other brands/models of cameras that meet the minimum requirements. We will work to support as many different cameras as possible.</div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">I already have home security cameras. Do I have to replace them to enroll a camera with AwareNet? <span class="faq-chevron">›</span></button>
+                    <div class="faq-answer">No. You can keep your existing home security cameras and simply buy a camera that is compatible with AwareNet.</div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">Who owns and operates the cameras? <span class="faq-chevron">›</span></button>
+                    <div class="faq-answer">Each resident or business owns and operates their camera(s). Residents can also work as a group to purchase and install cameras for their block.</div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">Is there a monthly "subscription" fee? <span class="faq-chevron">›</span></button>
+                    <div class="faq-answer">There is no cost to the camera owner to operate the camera (other than the nominal cost of the electric and internet usage). Many camera manufacturers offer "premium" services for a monthly subscription fee that may be of interest to residents, but are not required for use with AwareNet.<br><br>The neighborhood association, HOA, etc. is the AwareNet customer and pays the monthly cost for the AwareNet service.</div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">Where can residents buy the cameras? <span class="faq-chevron">›</span></button>
+                    <div class="faq-answer">AwareNet does not sell cameras. The cameras are available for purchase at <a href="http://www.reolink.com" target="_blank">Reolink</a> and <a href="http://www.amazon.com" target="_blank">Amazon</a>.</div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">Does AwareNet configure and install cameras? <span class="faq-chevron">›</span></button>
+                    <div class="faq-answer">We can recommend a professional to do your installation and configuration instructions are available.<br><br>Hopefully, each block has a "block buddy" who has some experience with DIY home security cameras and can be the person to install a camera or help someone else on the block. But please, do contact us if you have issues with configuration or installation and we'll try to help (<a href="mailto:help@awarenet.us">help@awarenet.us</a>).</div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">Do I need a computer to setup or operate the camera? <span class="faq-chevron">›</span></button>
+                    <div class="faq-answer">No. You do not need a traditional laptop or desktop computer. But you do need an Android or Apple smartphone or tablet (and of course, you need home internet service too).</div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">How do I get started? Is there a cost? <span class="faq-chevron">›</span></button>
+                    <div class="faq-answer">Follow the steps outlined on the Getting Started page. You need to supply your own camera but the AwareNet service is paid for by your neighborhood organization.</div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">What is a data card? What size should I buy? <span class="faq-chevron">›</span></button>
+                    <div class="faq-answer">The data card stores the video clips so that you do not need to pay a monthly subscription to store video clips "in the cloud". You need one data card per camera. They are not very expensive so get a 256GB, class 10 data card like the SanDisk Extreme PRO.</div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">Can I enroll more than one camera with AwareNet? <span class="faq-chevron">›</span></button>
+                    <div class="faq-answer">Yes! Please do.</div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">Should I enroll my indoor security cameras with AwareNet? <span class="faq-chevron">›</span></button>
+                    <div class="faq-answer">No! Please enroll only OUTDOOR cameras with AwareNet.</div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">There is already someone on my block with a camera enrolled. Would it help to have another? <span class="faq-chevron">›</span></button>
+                    <div class="faq-answer">Yes! The technology is good but not flawless. A second camera, especially one located on the opposite side of the street, can be very beneficial — if the first camera misses something, the second one may catch it.</div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">How do I configure my camera to automatically send alert event information to AwareNet? <span class="faq-chevron">›</span></button>
+                    <div class="faq-answer"><span class="coming-soon">Coming soon.</span></div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">How much of my internet data is this going to use? <span class="faq-chevron">›</span></button>
+                    <div class="faq-answer">We have designed the AwareNet system to use very little of your internet data but it depends on your specific camera and its configuration. The Reolink cameras will store the video clips locally on the card in the camera. If you follow our camera configuration guide, clips sent to AwareNet will be about 1MB in size and it will send videos only when it has detected a person between the hours of 10pm and 6am. Most nights, that will happen only once or twice.<br><br>Note: Some cameras offer additional features which will increase use of your internet data.</div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">What information is AwareNet collecting about each alert event? <span class="faq-chevron">›</span></button>
+                    <div class="faq-answer">AwareNet is collecting the information sent to it via email from the cameras owned and operated by neighborhood residents. For each alert event, it typically includes the name of the camera, the date/time of the event, the type of event (i.e. person or vehicle), and the event video recording.</div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">What does AwareNet do with the information collected? <span class="faq-chevron">›</span></button>
+                    <div class="faq-answer">The information for each event is stored in the AwareNet system for later reference and reporting. The information may be shared with the public, law enforcement, city officials and neighborhood organizations as appropriate to support neighborhood safety and security. Camera owners still have complete control of the video copy stored on their camera.<br><br>In addition, AwareNet has the ability to send real-time notifications to appropriate persons (e.g. safety committee volunteers or a professional security guard) to review the event information and take action as appropriate.</div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">How long does AwareNet keep the information collected? <span class="faq-chevron">›</span></button>
+                    <div class="faq-answer">Typically, video clips are deleted after 15 days unless the event is categorized as unusual, suspicious, or criminal. Other than the video, data about an event is kept indefinitely for analysis and reporting.</div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">Who decides where the cameras are located? <span class="faq-chevron">›</span></button>
+                    <div class="faq-answer">Each camera owner decides where to place their camera. See the Camera Location page for some tips to consider.</div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">Should I contact AwareNet if I move my camera or change where it is pointed? <span class="faq-chevron">›</span></button>
+                    <div class="faq-answer">Yes. Please <a href="mailto:support@awarenet.us">tell us</a> if the camera has been:
+                        <ul>
+                            <li>Relocated from the street to the alley or vice versa.</li>
+                            <li>Pointed in a different direction (N, NE, E, SE, S, SW, W, NW).</li>
+                            <li>Relocated to a different street address.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">Should I contact AwareNet if I change the setup or configuration of my camera? <span class="faq-chevron">›</span></button>
+                    <div class="faq-answer">Yes. Please <a href="mailto:support@awarenet.us">tell us</a> if you change any of the following:
+                        <ul>
+                            <li>Camera Name</li>
+                            <li>Email address you use to automatically send alerts to AwareNet.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">Who has access to the live video for each camera? <span class="faq-chevron">›</span></button>
+                    <div class="faq-answer">Access to live video for each camera is controlled by the owner (typically using the smartphone app for their camera). Live video is not made available to AwareNet and is not available using AwareNet.</div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">Will I be notified if my camera recorded criminal activity? <span class="faq-chevron">›</span></button>
+                    <div class="faq-answer">Currently, camera owners are not automatically notified of criminal activity recorded by their camera.</div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">Can I get real-time alerts from other AwareNet cameras in my neighborhood? <span class="faq-chevron">›</span></button>
+                    <div class="faq-answer">No. The AwareNet system is not designed or intended to send residents real-time alerts. It is designed to send real-time alerts to a designated set of contacts (e.g. safety committee volunteers or a professional security guard) responsible for reviewing the alert and taking the appropriate action.</div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">What about privacy? <span class="faq-chevron">›</span></button>
+                    <div class="faq-answer">Like any home security camera, it is the responsibility of the camera owner to ensure the camera is not recording something private. We ask that you point your cameras at public settings such as the street in front of your house or the alley behind your house.<br><br>Many cameras have a "privacy masking" feature that allows you to "black out" areas in the field of view that should not be seen or recorded. Please discuss your camera location with your neighbors and show them a sample of what will and will not be visible to the camera. It is best to be open and collaborative with your neighbors.<br><br>The camera owner controls the audio recording. Audio can be very helpful to the people monitoring the alerts sent to AwareNet but audio is not required.</div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">Can these cameras "read" a license plate? <span class="faq-chevron">›</span></button>
+                    <div class="faq-answer">No. The cameras do not have automatic license plate capture capability. If a vehicle stops in the field of view, it may be possible to determine the license plate by reviewing the video clip.</div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">Do these cameras have "facial recognition" technology? <span class="faq-chevron">›</span></button>
+                    <div class="faq-answer">No. Not at this time. But facial recognition technology is starting to appear in residential cameras such as these. The AwareNet system is not designed to use facial recognition technology even if cameras enrolled with AwareNet start using it — and it is the camera owner who would decide whether it is used on their camera.</div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">How does the alert process actually work? <span class="faq-chevron">›</span></button>
+                    <div class="faq-answer">See the <a href="alert-process.html">Alert Process</a> page for a full explanation.</div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">Can I stop participating with AwareNet? <span class="faq-chevron">›</span></button>
+                    <div class="faq-answer">Yes. Participation is completely voluntary. At any time, the camera owner can turn off the notifications sent to AwareNet or simply turn off the camera.</div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">What does a designated reviewer see when they get an alert? <span class="faq-chevron">›</span></button>
+                    <div class="faq-answer"><span class="coming-soon">Coming soon.</span></div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">Where is AwareNet available? <span class="faq-chevron">›</span></button>
+                    <div class="faq-answer">AwareNet is available for use anywhere in the United States.</div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">On a Reolink Duo (version 1) camera, how do I watch or download the high resolution version of a recorded video clip? <span class="faq-chevron">›</span></button>
+                    <div class="faq-answer">As indicated by the name, there are two separate cameras in the Reolink Duo. Currently, the app does not allow you to watch the high resolution version of live or recorded video when you are in "dual camera" mode. You must first switch to "single camera" mode.</div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">I still have more questions. How can I contact AwareNet? <span class="faq-chevron">›</span></button>
+                    <div class="faq-answer">Send us an email at <a href="mailto:help@awarenet.us">help@awarenet.us</a>. Be sure to tell us who you are, where you live, what information you would like and how you would like to be contacted (email or phone).</div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Aware<em>Net</em>. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+
+            // FAQ accordion
+            document.querySelectorAll('.faq-question').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const answer = this.nextElementSibling;
+                    const isOpen = this.classList.contains('open');
+                    // Close all
+                    document.querySelectorAll('.faq-question.open').forEach(q => q.classList.remove('open'));
+                    document.querySelectorAll('.faq-answer.open').forEach(a => a.classList.remove('open'));
+                    // Open this one if it wasn't open
+                    if (!isOpen) {
+                        this.classList.add('open');
+                        answer.classList.add('open');
+                    }
+                });
+            });
+
+            // Drawer
+            document.querySelectorAll('.drawer-toggle').forEach(toggle => {
+                toggle.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const subItems = this.nextElementSibling;
+                    const isOpen = subItems.classList.contains('open');
+                    document.querySelectorAll('.drawer-sub-items.open').forEach(el => el.classList.remove('open'));
+                    document.querySelectorAll('.drawer-toggle.open').forEach(el => el.classList.remove('open'));
+                    if (!isOpen) {
+                        subItems.classList.add('open');
+                        this.classList.add('open');
+                    }
+                });
+            });
+
+            const hamburger = document.getElementById('hamburger');
+            const drawer = document.getElementById('drawer');
+            const drawerOverlay = document.getElementById('drawer-overlay');
+            const drawerClose = document.getElementById('drawer-close');
+
+            function openDrawer() {
+                drawer.classList.add('open');
+                drawerOverlay.style.display = 'block';
+                document.body.style.overflow = 'hidden';
+            }
+
+            function closeDrawer() {
+                drawer.classList.remove('open');
+                drawerOverlay.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+
+            if (hamburger) {
+                hamburger.addEventListener('click', openDrawer);
+                drawerClose.addEventListener('click', closeDrawer);
+                drawerOverlay.addEventListener('click', closeDrawer);
+                drawer.querySelectorAll('nav a:not(.drawer-toggle)').forEach(link => {
+                    link.addEventListener('click', closeDrawer);
+                });
+            }
+        });
+    </script>
+
+</body>
+</html>

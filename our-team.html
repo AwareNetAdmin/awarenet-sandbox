@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="version" content="0.1.39">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Team - AwareNet</title>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(rgba(255,255,255,0.20), rgba(255,255,255,0.20)), url('street.jpg') center center / cover no-repeat;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border-bottom: 4px solid #1e40af;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #1e40af;
+        }
+
+        /* Hamburger */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 6px 4px;
+            background: none;
+            border: none;
+        }
+
+        .hamburger span {
+            display: block;
+            width: 26px;
+            height: 3px;
+            background: white;
+            border-radius: 2px;
+            transition: all 0.3s;
+        }
+
+        /* Slide-out drawer */
+        .drawer-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.4);
+            z-index: 999;
+        }
+
+        .drawer {
+            position: fixed;
+            top: 0;
+            left: -280px;
+            width: 280px;
+            height: 100%;
+            background: #1e40af;
+            z-index: 1000;
+            transition: left 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 4px 0 15px rgba(0,0,0,0.3);
+        }
+
+        .drawer.open { left: 0; }
+
+        .drawer-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .drawer-logo-text {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #fff;
+        }
+
+        .drawer-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.6rem;
+            cursor: pointer;
+            line-height: 1;
+        }
+
+        .drawer nav {
+            display: flex;
+            flex-direction: column;
+            padding: 1rem 0;
+            overflow-y: auto;
+            flex: 1;
+        }
+
+        .drawer nav a {
+            text-decoration: none;
+            color: white;
+            font-size: 1.35rem;
+            font-weight: 500;
+            padding: 0.75rem 1.5rem;
+            border-bottom: 1px solid rgba(255,255,255,0.15);
+            transition: background 0.2s;
+            text-align: left;
+            display: block;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .drawer nav a:hover { background: rgba(255,255,255,0.15); }
+
+        .drawer nav a.drawer-sub-item {
+            font-size: 1.2rem;
+            font-weight: 400;
+            padding: 0.5rem 1.5rem 0.5rem 2.5rem;
+            opacity: 0.85;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .drawer-group {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+        }
+
+        .drawer-toggle {
+            display: flex !important;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .drawer-sub-items {
+            display: none;
+            flex-direction: column;
+        }
+
+        .drawer-sub-items.open { display: flex; }
+
+        .drawer-chevron {
+            transition: transform 0.3s;
+            display: inline-block;
+            margin-left: 0.75rem;
+            font-size: 1.4rem;
+            font-weight: bold;
+            line-height: 1;
+        }
+
+        .drawer-toggle.open .drawer-chevron { transform: rotate(90deg); }
+
+        /* Page hero */
+        .page-hero {
+            background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+        }
+
+        .page-hero h1 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 2.5rem;
+            letter-spacing: 0.02em;
+            margin-bottom: 0.5rem;
+        }
+
+        .page-hero p {
+            font-size: 1.5rem;
+            opacity: 0.9;
+        }
+
+        /* Team section */
+        .team-section {
+            padding: 3rem 0 4rem 0;
+            background: #f8fafc;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(480px, 1fr));
+            gap: 2rem;
+            max-width: 1060px;
+            margin: 0 auto;
+        }
+
+        .team-card {
+            background: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+
+        .team-card-header {
+            margin-bottom: 1rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 2px solid #e2e8f0;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .team-photo {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            flex-shrink: 0;
+            border: 3px solid #e2e8f0;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .team-photo:hover {
+            transform: scale(1.07);
+            box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+        }
+
+        /* Photo lightbox */
+        .photo-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.85);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .photo-modal.open {
+            display: flex;
+        }
+
+        .photo-modal img {
+            width: min(80vw, 70vh);
+            height: min(80vw, 70vh);
+            border-radius: 50%;
+            box-shadow: 0 8px 40px rgba(0,0,0,0.6);
+            object-fit: cover;
+        }
+
+        .photo-modal-close {
+            position: fixed;
+            top: 1.25rem;
+            right: 1.5rem;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 2.5rem;
+            cursor: pointer;
+            line-height: 1;
+            opacity: 0.8;
+            transition: opacity 0.2s;
+        }
+
+        .photo-modal-close:hover {
+            opacity: 1;
+        }
+
+        .team-photo-placeholder {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: #1e40af;
+            color: white;
+            font-size: 1.8rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .team-name {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #1e40af;
+            margin-bottom: 0.2rem;
+        }
+
+        .team-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #64748b;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .team-bio {
+            font-size: 1.2rem;
+            color: #444;
+            line-height: 1.7;
+        }
+
+        .team-bio p {
+            margin-bottom: 0.85rem;
+        }
+
+        .team-bio p:last-child {
+            margin-bottom: 0;
+        }
+
+        .team-bio a {
+            color: #1e40af;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .team-bio a:hover {
+            text-decoration: underline;
+        }
+
+        /* Footer */
+        footer {
+            background: #1f2937;
+            color: #9ca3af;
+            padding: 2rem 0;
+            text-align: center;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .page-hero h1 { font-size: 2rem; }
+            .nav-links { display: none; }
+            .hamburger { display: flex; }
+            .team-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav>
+                <button class="hamburger" id="hamburger" aria-label="Open menu">
+                    <span></span><span></span><span></span>
+                </button>
+                <div class="logo" style="height: 48px; display: flex; align-items: center; gap: 0.5rem;">
+                    <span style="background: rgba(255,255,255,0.45); border-radius: 50px; padding: 2px 6px; display: flex; align-items: center;">
+                        <img src="logo.svg" alt="AwareNet" style="height: 48px; width: auto;" />
+                    </span>
+                    <span style="font-size: 3rem; font-weight: bold; color: #1e40af; text-shadow: -1px -1px 0 white, 1px -1px 0 white, -1px 1px 0 white, 1px 1px 0 white;">Aware<em>Net</em></span>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="index.html#how-it-works">How It Works</a></li>
+                    <li><a href="index.html#pricing">Pricing</a></li>
+                    <li><a href="index.html#results">Results</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Slide-out drawer -->
+    <div class="drawer-overlay" id="drawer-overlay"></div>
+    <div class="drawer" id="drawer">
+        <button class="drawer-close" id="drawer-close">&times;</button>
+        <div class="drawer-header">
+            <span style="background: rgba(255,255,255,0.45); border-radius: 50px; padding: 2px 6px; display: flex; align-items: center;">
+                <img src="logo.svg" alt="AwareNet" style="height: 40px; width: auto;" />
+            </span>
+            <span class="drawer-logo-text">Aware<em>Net</em></span>
+        </div>
+        <nav>
+            <a href="index.html" class="drawer-item">Home</a>
+
+            <div class="drawer-group">
+                <a href="#" class="drawer-item drawer-toggle">About <span class="drawer-chevron">›</span></a>
+                <div class="drawer-sub-items">
+                    <a href="contact.html" class="drawer-sub-item">Contact Us</a>
+                    <a href="feature-summary.html" class="drawer-sub-item">Feature Summary</a>
+                    <a href="introduction-slide-deck.html" class="drawer-sub-item">Introduction Slide Deck</a>
+                    <a href="our-team.html" class="drawer-sub-item">Our Team</a>
+                    <a href="customers.html" class="drawer-sub-item">Customers</a>
+                </div>
+            </div>
+
+            <a href="#" class="drawer-item">Getting Started</a>
+
+            <div class="drawer-group">
+                <a href="#" class="drawer-item drawer-toggle">FAQ <span class="drawer-chevron">›</span></a>
+                <div class="drawer-sub-items">
+                    <a href="qa.html" class="drawer-sub-item">Q&amp;A</a>
+                    <a href="alert-process.html" class="drawer-sub-item">Alert Process</a>
+                    <a href="review-alert.html" class="drawer-sub-item">Review Alert</a>
+                    <a href="privacy-masking.html" class="drawer-sub-item">Privacy Masking</a>
+                </div>
+            </div>
+
+            <a href="#" class="drawer-item">Supported Cameras</a>
+
+            <div class="drawer-group">
+                <a href="#" class="drawer-item drawer-toggle">Reolink Email Setup <span class="drawer-chevron">›</span></a>
+                <div class="drawer-sub-items">
+                    <a href="#" class="drawer-sub-item">Gmail App Password</a>
+                    <a href="#" class="drawer-sub-item">Email Sent Folder</a>
+                </div>
+            </div>
+
+            <a href="#" class="drawer-item">Enroll a Camera</a>
+            <a href="#" class="drawer-item">Camera Location</a>
+
+            <div class="drawer-group">
+                <a href="#" class="drawer-item drawer-toggle">Configuration Notes <span class="drawer-chevron">›</span></a>
+                <div class="drawer-sub-items">
+                    <a href="#" class="drawer-sub-item">Duo, Duo 2, Duo 3</a>
+                    <a href="#" class="drawer-sub-item">False Alerts</a>
+                </div>
+            </div>
+
+            <a href="#" class="drawer-item">Pricing</a>
+
+            <div class="drawer-group">
+                <a href="#" class="drawer-item drawer-toggle">Legal <span class="drawer-chevron">›</span></a>
+                <div class="drawer-sub-items">
+                    <a href="#" class="drawer-sub-item">Member TOS</a>
+                    <a href="#" class="drawer-sub-item">Customer TOS</a>
+                    <a href="#" class="drawer-sub-item">Customer Order Form</a>
+                </div>
+            </div>
+        </nav>
+    </div>
+
+    <!-- Page Hero -->
+    <section class="page-hero">
+        <div class="container">
+            <h1>Our Team</h1>
+            <p>The people behind AwareNet.</p>
+        </div>
+    </section>
+
+    <!-- Team -->
+    <section class="team-section">
+        <div class="container">
+            <div class="team-grid">
+
+                <div class="team-card">
+                    <div class="team-card-header">
+                        <img src="team-tom.jpg" alt="Tom Scheifler" class="team-photo">
+                        <div>
+                            <div class="team-name">Tom Scheifler</div>
+                            <div class="team-title">Founder &amp; President</div>
+                        </div>
+                    </div>
+                    <div class="team-bio">
+                        <p>Tom Scheifler enjoyed a long and successful career as an independent software contractor. Tom designed, built, and deployed many enterprise-level, bespoke software solutions for industry leading corporations including Monsanto, HP, Boeing, Maritz, Pfizer, and FleishmanHillard.</p>
+                        <p>In 2021, after three years of increased property crime incidents in his home town, St. Louis, MO, coupled with significant decreases in police department staff, Tom created the initial version of AwareNet for use by his neighborhood. After successful testing and implementation for his neighborhood, Tom made AwareNet available to all St. Louis City neighborhoods, at no-profit, and volunteered his time to assist residents with neighborhood security initiatives.</p>
+                        <p>With AwareNet now in use by five different areas in St. Louis, Tom is inspired to expand the benefits of AwareNet throughout St. Louis and beyond.</p>
+                    </div>
+                </div>
+
+                <div class="team-card">
+                    <div class="team-card-header">
+                        <img src="team-glenn.jpg" alt="Glenn Weikert" class="team-photo">
+                        <div>
+                            <div class="team-name">Glenn Weikert</div>
+                            <div class="team-title">Director of Operations</div>
+                        </div>
+                    </div>
+                    <div class="team-bio">
+                        <p>Since 2001, Glenn Weikert has owned and operated a company that builds full-stack and mobile software. His clients include the New York Knicks, the New York Rangers, Home Depot, Lucent Solar, who is a partner with Tesla and one of the top installers of only 26 certified companies to install Tesla Solar Roof, and IVI-RMA Global, the world's leading reproductive medicine group.</p>
+                        <p>Glenn was born and raised in Mechanicsburg, PA. He lived in Philadelphia for 10 years, Los Angeles for 13 years and has been in St Louis raising his daughter since 2022. He worked with dually diagnosed homeless men at the RHD Men's Homeless Shelter in Philadelphia. He visits children at the St Louis Children's Hospital every Thursday and volunteers at a Missouri Department of Corrections prison once a month. His step father is a retired police officer from Pennsylvania who served his community for 35 years. All of these experiences give Glenn a unique, compassionate perspective on the sometimes complicated relationship between citizens and police.</p>
+                        <p>Like Tom, Glenn saw a spike in crime in his St Louis neighborhood. There was an attempted abduction, two murders, one car jacking, two car thefts and numerous home and car break ins near his home in beautiful, popular Central West End of St Louis. He applied and was appointed to the seven member, Alderman and Mayor selected Washington Place Special District Board. While trying to develop his own camera system for Washington Place, he was introduced to Tom Scheifler and joined the team. He has dedicated himself to AwareNet because it's an inspiring, powerful tool that helps communities unite and keep our children and neighborhoods safe.</p>
+                    </div>
+                </div>
+
+                <div class="team-card">
+                    <div class="team-card-header">
+                        <div class="team-photo-placeholder">CB</div>
+                        <div>
+                            <div class="team-name">Charles Betts</div>
+                            <div class="team-title">Product Advisor</div>
+                        </div>
+                    </div>
+                    <div class="team-bio">
+                        <p>Charles Betts served his community for 11 years until he retired from the St. Louis Metropolitan Police Department. In 2007, Charles established <a href="https://tcf-llc.com/" target="_blank">The City's Finest</a>, a premier security services company for communities and businesses.</p>
+                        <p>Charles volunteered important guidance during the early development of AwareNet and his ongoing advice helps ensure AwareNet will continue to evolve and improve for our customers.</p>
+                    </div>
+                </div>
+
+                <div class="team-card">
+                    <div class="team-card-header">
+                        <img src="team-jim.jpg" alt="Jim Whyte" class="team-photo">
+                        <div>
+                            <div class="team-name">Jim Whyte</div>
+                            <div class="team-title">Product Advisor</div>
+                        </div>
+                    </div>
+                    <div class="team-bio">
+                        <p>Jim Whyte served his community for 20+ years during his career with the St. Louis Metropolitan Police Department. In 2012, Jim transitioned to a new community-based role as Executive Director of the <a href="https://www.cwensi.com/" target="_blank">Central West End Neighborhood Security Initiative</a> where he has collaborated with residents and businesses to create the safest possible environment. Jim's leadership in combining technology and human resources to benefit the area has been recognized on a regional and national level.</p>
+                        <p>Jim volunteered important guidance during the early development of AwareNet and his ongoing advice helps ensure AwareNet will continue to evolve and improve for our customers.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Photo lightbox modal -->
+    <div class="photo-modal" id="photo-modal">
+        <button class="photo-modal-close" id="photo-modal-close">&times;</button>
+        <img id="photo-modal-img" src="" alt="">
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Aware<em>Net</em>. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('.drawer-toggle').forEach(toggle => {
+                toggle.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const subItems = this.nextElementSibling;
+                    const isOpen = subItems.classList.contains('open');
+                    document.querySelectorAll('.drawer-sub-items.open').forEach(el => el.classList.remove('open'));
+                    document.querySelectorAll('.drawer-toggle.open').forEach(el => el.classList.remove('open'));
+                    if (!isOpen) {
+                        subItems.classList.add('open');
+                        this.classList.add('open');
+                    }
+                });
+            });
+
+            const hamburger = document.getElementById('hamburger');
+            const drawer = document.getElementById('drawer');
+            const drawerOverlay = document.getElementById('drawer-overlay');
+            const drawerClose = document.getElementById('drawer-close');
+
+            function openDrawer() {
+                drawer.classList.add('open');
+                drawerOverlay.style.display = 'block';
+                document.body.style.overflow = 'hidden';
+            }
+
+            function closeDrawer() {
+                drawer.classList.remove('open');
+                drawerOverlay.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+
+            // Photo lightbox
+            const photoModal = document.getElementById('photo-modal');
+            const photoModalImg = document.getElementById('photo-modal-img');
+            const photoModalClose = document.getElementById('photo-modal-close');
+
+            document.querySelectorAll('.team-photo').forEach(photo => {
+                photo.addEventListener('click', function() {
+                    photoModalImg.src = this.src;
+                    photoModalImg.alt = this.alt;
+                    photoModal.classList.add('open');
+                    document.body.style.overflow = 'hidden';
+                });
+            });
+
+            function closePhotoModal() {
+                photoModal.classList.remove('open');
+                document.body.style.overflow = 'auto';
+            }
+
+            photoModalClose.addEventListener('click', closePhotoModal);
+            photoModal.addEventListener('click', function(e) {
+                if (e.target === this) closePhotoModal();
+            });
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') closePhotoModal();
+            });
+
+            if (hamburger) {
+                hamburger.addEventListener('click', openDrawer);
+                drawerClose.addEventListener('click', closeDrawer);
+                drawerOverlay.addEventListener('click', closeDrawer);
+                drawer.querySelectorAll('nav a:not(.drawer-toggle)').forEach(link => {
+                    link.addEventListener('click', closeDrawer);
+                });
+            }
+        });
+    </script>
+
+</body>
+</html>
