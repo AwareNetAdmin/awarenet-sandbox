@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AwareNet - Neighborhood Crime Disruption Network</title>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -25,8 +26,9 @@
         
         /* Header */
         header {
-            background: #fff;
+            background: linear-gradient(rgba(255,255,255,0.20), rgba(255,255,255,0.20)), url('street.jpg') center center / cover no-repeat;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border-bottom: 4px solid #1e40af;
             position: sticky;
             top: 0;
             z-index: 100;
@@ -155,6 +157,17 @@
             z-index: 1000;
         }
         
+        @keyframes slideFromRight {
+            from {
+                transform: translateX(300px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
         .modal-content {
             background: white;
             border-radius: 12px;
@@ -166,6 +179,7 @@
             display: flex;
             flex-direction: column;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            animation: slideFromRight 1.4s ease-out;
         }
 
         .modal-inner {
@@ -447,21 +461,172 @@
             color: white;
         }
         
+        /* Hamburger */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 6px 4px;
+            background: none;
+            border: none;
+        }
+
+        .hamburger span {
+            display: block;
+            width: 26px;
+            height: 3px;
+            background: white;
+            border-radius: 2px;
+            transition: all 0.3s;
+        }
+
+        /* Slide-out drawer */
+        .drawer-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.4);
+            z-index: 999;
+        }
+
+        .drawer {
+            position: fixed;
+            top: 0;
+            left: -280px;
+            width: 280px;
+            height: 100%;
+            background: #1e40af;
+            z-index: 1000;
+            transition: left 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 4px 0 15px rgba(0,0,0,0.3);
+        }
+
+        .drawer.open {
+            left: 0;
+        }
+
+        .drawer-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .drawer-logo-text {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #fff;
+        }
+
+        .drawer-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.6rem;
+            cursor: pointer;
+            line-height: 1;
+        }
+
+        .drawer nav {
+            display: flex;
+            flex-direction: column;
+            padding: 1rem 0;
+            overflow-y: auto;
+            flex: 1;
+        }
+
+        .drawer nav a {
+            text-decoration: none;
+            color: white;
+            font-size: 1.35rem;
+            font-weight: 500;
+            padding: 0.75rem 1.5rem;
+            border-bottom: 1px solid rgba(255,255,255,0.15);
+            transition: background 0.2s;
+            text-align: left;
+            display: block;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .drawer nav a:hover {
+            background: rgba(255,255,255,0.15);
+        }
+
+        .drawer nav a.drawer-sub-item {
+            font-size: 1.2rem;
+            font-weight: 400;
+            padding: 0.5rem 1.5rem 0.5rem 2.5rem;
+            opacity: 0.85;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .drawer-group {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+        }
+
+        .drawer-toggle {
+            display: flex !important;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .drawer-sub-items {
+            display: none;
+            flex-direction: column;
+        }
+
+        .drawer-sub-items.open {
+            display: flex;
+        }
+
+        .drawer-chevron {
+            float: right;
+            transition: transform 0.3s;
+            display: inline-block;
+            margin-left: 0.75rem;
+            font-size: 1.4rem;
+            font-weight: bold;
+            line-height: 1;
+        }
+
+        .drawer-toggle.open .drawer-chevron {
+            transform: rotate(90deg);
+        }
+
         /* Responsive */
         @media (max-width: 768px) {
             .hero h1 {
                 font-size: 2rem;
             }
-            
+
             .nav-links {
                 display: none;
             }
-            
+
+            .hamburger {
+                display: flex;
+            }
+
             .cta-buttons {
                 flex-direction: column;
                 align-items: center;
             }
-            
+
             .logo {
                 height: 35px;
             }
@@ -488,9 +653,16 @@
     <header>
         <div class="container">
             <nav>
+                <button class="hamburger" id="hamburger" aria-label="Open menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
                 <div class="logo" style="height: 48px; display: flex; align-items: center; gap: 0.5rem;">
-                    <img src="logo.svg" alt="AwareNet" style="height: 48px; width: auto;" />
-                    <span style="font-size: 3rem; font-weight: bold; color: #1e40af;">Aware<em>Net</em></span>
+                    <span style="background: rgba(255,255,255,0.45); border-radius: 50px; padding: 2px 6px; display: flex; align-items: center;">
+                        <img src="logo.svg" alt="AwareNet" style="height: 48px; width: auto;" />
+                    </span>
+                    <span style="font-size: 3rem; font-weight: bold; color: #1e40af; text-shadow: -1px -1px 0 white, 1px -1px 0 white, -1px 1px 0 white, 1px 1px 0 white;">Aware<em>Net</em></span>
                 </div>
                 <ul class="nav-links">
                     <li><a href="#how-it-works">How It Works</a></li>
@@ -502,24 +674,93 @@
         </div>
     </header>
 
+    <!-- Slide-out drawer -->
+    <div class="drawer-overlay" id="drawer-overlay"></div>
+    <div class="drawer" id="drawer">
+        <button class="drawer-close" id="drawer-close">&times;</button>
+        <div class="drawer-header">
+            <span style="background: rgba(255,255,255,0.45); border-radius: 50px; padding: 2px 6px; display: flex; align-items: center;">
+                <img src="logo.svg" alt="AwareNet" style="height: 40px; width: auto;" />
+            </span>
+            <span class="drawer-logo-text">Aware<em>Net</em></span>
+        </div>
+        <nav>
+            <a href="#" class="drawer-item">Home</a>
+
+            <div class="drawer-group">
+                <a href="#" class="drawer-item drawer-toggle">About <span class="drawer-chevron">›</span></a>
+                <div class="drawer-sub-items">
+                    <a href="#" class="drawer-sub-item">Contact Us</a>
+                    <a href="#" class="drawer-sub-item">Feature Summary</a>
+                    <a href="#" class="drawer-sub-item">Introduction Slide Deck</a>
+                    <a href="#" class="drawer-sub-item">Our Team</a>
+                    <a href="#" class="drawer-sub-item">Customers</a>
+                </div>
+            </div>
+
+            <a href="getting-started.html" class="drawer-item">Getting Started</a>
+
+            <div class="drawer-group">
+                <a href="#" class="drawer-item drawer-toggle">FAQ <span class="drawer-chevron">›</span></a>
+                <div class="drawer-sub-items">
+                    <a href="#" class="drawer-sub-item">Alert Process</a>
+                    <a href="#" class="drawer-sub-item">Review Alert</a>
+                    <a href="#" class="drawer-sub-item">Privacy Masking</a>
+                </div>
+            </div>
+
+            <a href="#" class="drawer-item">Supported Cameras</a>
+
+            <div class="drawer-group">
+                <a href="#" class="drawer-item drawer-toggle">Reolink Email Setup <span class="drawer-chevron">›</span></a>
+                <div class="drawer-sub-items">
+                    <a href="#" class="drawer-sub-item">Gmail App Password</a>
+                    <a href="#" class="drawer-sub-item">Email Sent Folder</a>
+                </div>
+            </div>
+
+            <a href="#" class="drawer-item">Enroll a Camera</a>
+            <a href="#" class="drawer-item">Camera Location</a>
+
+            <div class="drawer-group">
+                <a href="#" class="drawer-item drawer-toggle">Configuration Notes <span class="drawer-chevron">›</span></a>
+                <div class="drawer-sub-items">
+                    <a href="#" class="drawer-sub-item">Duo, Duo 2, Duo 3</a>
+                    <a href="#" class="drawer-sub-item">False Alerts</a>
+                </div>
+            </div>
+
+            <a href="#" class="drawer-item">Pricing</a>
+
+            <div class="drawer-group">
+                <a href="#" class="drawer-item drawer-toggle">Legal <span class="drawer-chevron">›</span></a>
+                <div class="drawer-sub-items">
+                    <a href="#" class="drawer-sub-item">Member TOS</a>
+                    <a href="#" class="drawer-sub-item">Customer TOS</a>
+                    <a href="#" class="drawer-sub-item">Customer Order Form</a>
+                </div>
+            </div>
+        </nav>
+    </div>
+
     <!-- Hero Section -->
     <section class="hero">
         <div class="container">
-            <h1>Neighborhood Crime Disruption</h1>
+            <h1 style="font-family: 'Oswald', sans-serif; letter-spacing: 0.02em; font-size: 2.5rem;">Neighborhood Crime Disruption</h1>
             <div style="display: flex; flex-direction: column; gap: 1rem; margin-top: 1rem;">
-                <div class="process-card" data-modal="modal1" style="background: rgba(219, 234, 254, 0.9); color: #1e40af; padding: 1rem; border-radius: 8px; display: flex; align-items: center; gap: 0.75rem; cursor: pointer; transition: all 0.3s ease;">
-                    <span style="background: #1e40af; color: white; width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; flex-shrink: 0;">1</span>
-                    <span style="font-size: 1.6rem; line-height: 1.1;"><strong style="color: #ef4444;">Reviewing alerts</strong> identifies suspicious and criminal activity.</span>
+                <div class="process-card" data-modal="modal1" style="background: rgba(219, 234, 254, 0.9); color: #1e40af; padding: 1rem; border-radius: 8px; display: flex; align-items: center; gap: 0.75rem; cursor: pointer; transition: all 0.3s ease; border-left: 5px solid #16a34a;">
+                    <span style="background: #1e40af; color: white; width: 2rem; height: 2rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.5rem; flex-shrink: 0;">1</span>
+                    <span style="font-size: 1.6rem; line-height: 1.1;"><strong style="color: #1e40af;">Deploy Security Cameras</strong></span>
                     <span style="margin-left: auto; opacity: 0.6; font-size: 0.9rem;">Learn more →</span>
                 </div>
-                <div class="process-card" data-modal="modal2" style="background: rgba(219, 234, 254, 0.9); color: #1e40af; padding: 1rem; border-radius: 8px; display: flex; align-items: center; gap: 0.75rem; cursor: pointer; transition: all 0.3s ease;">
-                    <span style="background: #1e40af; color: white; width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; flex-shrink: 0;">2</span>
-                    <span style="font-size: 1.6rem; line-height: 1.1;"><strong style="color: #ef4444;">Professional response</strong> disrupts crimes in progress.</span>
+                <div class="process-card" data-modal="modal2" style="background: rgba(219, 234, 254, 0.9); color: #1e40af; padding: 1rem; border-radius: 8px; display: flex; align-items: center; gap: 0.75rem; cursor: pointer; transition: all 0.3s ease; border-left: 5px solid #f97316;">
+                    <span style="background: #1e40af; color: white; width: 2rem; height: 2rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.5rem; flex-shrink: 0;">2</span>
+                    <span style="font-size: 1.6rem; line-height: 1.1;"><strong style="color: #1e40af;">Monitor Automated Alerts</strong></span>
                     <span style="margin-left: auto; opacity: 0.6; font-size: 0.9rem;">Learn more →</span>
                 </div>
-                <div class="process-card" data-modal="modal3" style="background: rgba(219, 234, 254, 0.9); color: #1e40af; padding: 1rem; border-radius: 8px; display: flex; align-items: center; gap: 0.75rem; cursor: pointer; transition: all 0.3s ease;">
-                    <span style="background: #1e40af; color: white; width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; flex-shrink: 0;">3</span>
-                    <span style="font-size: 1.6rem; line-height: 1.1;"><strong style="color: #ef4444;">Consistent intervention</strong> creates future deterrence.</span>
+                <div class="process-card" data-modal="modal3" style="background: rgba(219, 234, 254, 0.9); color: #1e40af; padding: 1rem; border-radius: 8px; display: flex; align-items: center; gap: 0.75rem; cursor: pointer; transition: all 0.3s ease; border-left: 5px solid #ef4444;">
+                    <span style="background: #1e40af; color: white; width: 2rem; height: 2rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.5rem; flex-shrink: 0;">3</span>
+                    <span style="font-size: 1.6rem; line-height: 1.1;"><strong style="color: #1e40af;">Activate Professional Response</strong></span>
                     <span style="margin-left: auto; opacity: 0.6; font-size: 0.9rem;">Learn more →</span>
                 </div>
             </div>
@@ -587,12 +828,6 @@
     <!-- Footer -->
     <footer>
         <div class="container">
-            <div class="footer-links">
-                <a href="#">About</a>
-                <a href="#">Privacy Policy</a>
-                <a href="#">Terms</a>
-                <a href="#contact">Contact</a>
-            </div>
             <p>&copy; 2026 Aware<em>Net</em>. All rights reserved.</p>
         </div>
     </footer>
@@ -601,23 +836,12 @@
     <div id="modal1" class="modal-overlay">
         <div class="modal-content">
             <button class="modal-close">&times;</button>
-            <h2 class="modal-title">Reviewing Alerts</h2>
+            <h2 class="modal-title">Deploy Security Cameras</h2>
             <div class="modal-inner">
             <div class="modal-body">
-                <p><strong>Alert monitoring</strong> is the foundation of our crime disruption system.</p>
-                
-                <h3>How It Works</h3>
-                <ul>
-                    <li><strong>Motion Alerts:</strong> Neighborhood cameras automatically detect <em>person</em> and <em>vehicle</em> movement during monitored hours (10pm-6am) and send real-time alerts, including a video clip, to AwareNet</li>
-                    <li><strong>Real-Time Reviews:</strong> Your designated security professionals, or trusted volunteers, use the AwareNet web app to review incoming alerts in real-time to identify any suspicious or criminal activity</li>
-                    <li><strong>Progress Tracking</strong> — Reviewers categorize alerts as they go, so it's always clear what has been seen and what still needs attention</li>
-                </ul>
-                
-                <h3>Key Benefits</h3>
-                <ul>
-                    <li>All blocks in your neighborhood can be monitored at the same time</li>
-                    <li>Neighborhood watch volunteers no longer need to risk their safety patrolling at night</li>
-                </ul>
+                <p style="margin-bottom: 1rem; font-size: 1.2rem;">A traditional neighborhood watch puts residents outside at night, <strong>risking their own safety</strong>, to observe activity. A traditional security patrol is limited to line-of-sight, often <strong>missing important activity</strong>.</p>
+                <p style="font-size: 1.2rem;">Security cameras <strong>change the equation</strong>. Mounted on houses, garages, and business buildings, they monitor streets, alleys, and parking lots - <strong>all at the same time</strong>, with <strong>no risk to volunteers</strong>.</p>
+                <p style="margin-top: 1rem; font-size: 1.2rem;">Each participating camera is <strong>configured once</strong> to automatically send alerts at night (typically <strong>10pm - 6am</strong>), including a short video clip, to AwareNet whenever <strong>person or vehicle motion</strong> is detected by the camera. After configuration, the camera operates <strong>every night</strong>, <strong>without any action by the camera owner</strong>.</p>
             </div>
             </div>
         </div>
@@ -626,11 +850,17 @@
     <div id="modal2" class="modal-overlay">
         <div class="modal-content">
             <button class="modal-close">&times;</button>
-            <h2 class="modal-title">Professional Response</h2>
+            <h2 class="modal-title">Monitor Automated Alerts</h2>
             <div class="modal-inner">
-            <div class="modal-body">
-                <p>Using real-time detection to trigger real-time action elevates your neighborhood to top-tier protection.<br><br>An on location security officer responding directly or a volunteer reviewer calling 911 - either way, a professional response to suspicious and criminal activity transforms your neighborhood from an easy target into an area criminals learn to avoid.</p>
+            <div class="modal-body" style="font-size: 1.2rem;">
+                <p>With a neighborhood network of security cameras established, the next key step is to monitor the automated alerts arriving at AwareNet.</p>
                 
+                <h3 style="font-size: 1.4rem;">How It Works</h3>
+                <ul>
+                    <li><strong>Motion Alerts:</strong> Neighborhood cameras automatically detect <em>person</em> and <em>vehicle</em> motion during monitored hours (10pm-6am) and send real-time alerts, including a video clip, to AwareNet</li>
+                    <li><strong>Real-Time Reviews:</strong> Your designated security professionals, or trusted volunteers, use the AwareNet web app on a tablet or laptop to review incoming alerts in real-time to <em>identify suspicious or criminal activity</em></li>
+                    <li><strong>Progress Tracking</strong> — Reviewers categorize alerts as they go, so it's always clear what has been seen and what still needs attention</li>
+                </ul>
             </div>
             </div>
         </div>
@@ -639,24 +869,12 @@
     <div id="modal3" class="modal-overlay">
         <div class="modal-content">
             <button class="modal-close">&times;</button>
-            <h2 class="modal-title">Consistent Intervention</h2>
+            <h2 class="modal-title">Activate Professional Response</h2>
             <div class="modal-inner">
             <div class="modal-body">
-                <p>The long-term strategy is to create a lasting crime deterrence through proven, reliable response.</p>
-                
-                <h3>Building Deterrent Reputation</h3>
-                <ul>
-                    <li><strong>Pattern Recognition:</strong> Criminals quickly learn which neighborhoods actively respond to incidents</li>
-                    <li><strong>Word-of-Mouth Effect:</strong> Consistent intervention creates reputation among criminal networks</li>
-                    <li><strong>Behavioral Change:</strong> Criminals choose easier targets, avoiding neighborhoods with active response</li>
-                </ul>
-                
-                <h3>Key Benefits</h3>
-                <ul>
-                    <li>Residents feel safer</li>
-                    <li>Community cohesion strengthens</li>
-                    <li>Property values stabilize or improve</li>
-                </ul>
+                <p style="font-size: 1.2rem; margin-bottom: 1rem;">Using real-time detection to trigger real-time action elevates your neighborhood to the gold standard for protection.</p>
+                <p style="font-size: 1.2rem; margin-bottom: 1rem;">An on-location security officer responding directly or a volunteer reviewer calling 911 — either way, a professional response to suspicious and criminal activity is transformative. Your neighborhood is no longer an easy target for criminals.</p>
+                <p style="font-size: 1.2rem;">The long-term strategy is to create a lasting crime deterrence through consistent, professional response.</p>
                 
             </div>
             </div>
@@ -781,6 +999,50 @@
                     msg.style.display = 'block';
                     btn.disabled = false;
                     btn.textContent = 'Schedule Free Assessment';
+                });
+            }
+
+            // Collapsible drawer groups
+            document.querySelectorAll('.drawer-toggle').forEach(toggle => {
+                toggle.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const subItems = this.nextElementSibling;
+                    const isOpen = subItems.classList.contains('open');
+                    // Close all others
+                    document.querySelectorAll('.drawer-sub-items.open').forEach(el => el.classList.remove('open'));
+                    document.querySelectorAll('.drawer-toggle.open').forEach(el => el.classList.remove('open'));
+                    // Toggle this one
+                    if (!isOpen) {
+                        subItems.classList.add('open');
+                        this.classList.add('open');
+                    }
+                });
+            });
+
+            // Slide-out drawer
+            const hamburger = document.getElementById('hamburger');
+            const drawer = document.getElementById('drawer');
+            const drawerOverlay = document.getElementById('drawer-overlay');
+            const drawerClose = document.getElementById('drawer-close');
+
+            function openDrawer() {
+                drawer.classList.add('open');
+                drawerOverlay.style.display = 'block';
+                document.body.style.overflow = 'hidden';
+            }
+
+            function closeDrawer() {
+                drawer.classList.remove('open');
+                drawerOverlay.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+
+            if (hamburger) {
+                hamburger.addEventListener('click', openDrawer);
+                drawerClose.addEventListener('click', closeDrawer);
+                drawerOverlay.addEventListener('click', closeDrawer);
+                drawer.querySelectorAll('nav a').forEach(link => {
+                    link.addEventListener('click', closeDrawer);
                 });
             }
 
