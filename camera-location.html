@@ -2,9 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="version" content="0.1.39">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Introduction Slide Deck - AwareNet</title>
+    <title>Camera Location - AwareNet</title>
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&display=swap" rel="stylesheet">
     <style>
         * {
@@ -12,19 +11,20 @@
             padding: 0;
             box-sizing: border-box;
         }
-
+        
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             line-height: 1.6;
             color: #333;
+            font-size: 1.2rem;
         }
-
+        
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
         }
-
+        
         /* Header */
         header {
             background: linear-gradient(rgba(255,255,255,0.20), rgba(255,255,255,0.20)), url('street.jpg') center center / cover no-repeat;
@@ -34,31 +34,89 @@
             top: 0;
             z-index: 100;
         }
-
+        
         nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 1rem 0;
         }
-
+        
+        .logo {
+            height: 40px;
+        }
+        
+        .logo img {
+            height: 100%;
+            width: auto;
+        }
+        
         .nav-links {
             display: flex;
             list-style: none;
             gap: 2rem;
         }
-
+        
         .nav-links a {
             text-decoration: none;
             color: #333;
             font-weight: 500;
             transition: color 0.3s;
         }
-
+        
         .nav-links a:hover {
             color: #1e40af;
         }
-
+        
+        /* Main Content */
+        .main-content {
+            padding: 4rem 0;
+        }
+        
+        .page-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #1e40af;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        
+        .content-wrapper {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.07);
+        }
+        
+        .content-wrapper p {
+            margin-bottom: 1rem;
+        }
+        
+        .content-wrapper ul {
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .content-wrapper li {
+            margin-bottom: 1rem;
+        }
+        
+        .content-wrapper a {
+            color: #1e40af;
+            text-decoration: underline;
+            font-weight: 500;
+        }
+        
+        /* Footer */
+        footer {
+            background: #1f2937;
+            color: #9ca3af;
+            padding: 2rem 0;
+            text-align: center;
+        }
+        
         /* Hamburger */
         .hamburger {
             display: none;
@@ -206,107 +264,8 @@
             transform: rotate(90deg);
         }
 
-        /* Page hero */
-        .page-hero {
-            background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
-            color: white;
-            padding: 3rem 0;
-            text-align: center;
-        }
-
-        .page-hero h1 {
-            font-family: 'Oswald', sans-serif;
-            font-size: 2.5rem;
-            letter-spacing: 0.02em;
-            margin-bottom: 0.5rem;
-        }
-
-        .page-hero p {
-            font-size: 1.5rem;
-            opacity: 0.9;
-        }
-
-        /* Slide deck section */
-        .slides-section {
-            padding: 2.5rem 0 4rem 0;
-            background: #f8fafc;
-        }
-
-        .slides-wrapper {
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .slides-card {
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 6px 20px rgba(0,0,0,0.1);
-            overflow: hidden;
-            text-align: center;
-        }
-
-        .slides-card-header {
-            background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
-            padding: 3rem 2rem;
-        }
-
-        .slides-icon {
-            font-size: 5rem;
-            display: block;
-            margin-bottom: 1rem;
-            filter: drop-shadow(0 2px 6px rgba(0,0,0,0.2));
-        }
-
-        .slides-card-header h2 {
-            color: white;
-            font-size: 1.5rem;
-            font-weight: 700;
-        }
-
-        .slides-card-body {
-            padding: 2rem;
-        }
-
-        .slides-card-body p {
-            font-size: 1.15rem;
-            color: #555;
-            margin-bottom: 1.75rem;
-            line-height: 1.6;
-        }
-
-        .btn-open {
-            display: inline-block;
-            background: #1e40af;
-            color: white;
-            text-decoration: none;
-            font-size: 1.2rem;
-            font-weight: 600;
-            padding: 1rem 2.5rem;
-            border-radius: 6px;
-            transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
-            box-shadow: 0 4px 12px rgba(30,64,175,0.3);
-        }
-
-        .btn-open:hover {
-            background: #1d3a9e;
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(30,64,175,0.4);
-        }
-
-        /* Footer */
-        footer {
-            background: #1f2937;
-            color: #9ca3af;
-            padding: 2rem 0;
-            text-align: center;
-        }
-
         /* Responsive */
         @media (max-width: 768px) {
-            .page-hero h1 {
-                font-size: 2rem;
-            }
-
             .nav-links {
                 display: none;
             }
@@ -314,11 +273,18 @@
             .hamburger {
                 display: flex;
             }
+
+            .logo {
+                height: 35px;
+            }
+            
+            .page-title {
+                font-size: 2rem;
+            }
         }
     </style>
 </head>
 <body>
-
     <!-- Header -->
     <header>
         <div class="container">
@@ -335,10 +301,9 @@
                     <span style="font-size: 3rem; font-weight: bold; color: #1e40af; text-shadow: -1px -1px 0 white, 1px -1px 0 white, -1px 1px 0 white, 1px 1px 0 white;">Aware<em>Net</em></span>
                 </div>
                 <ul class="nav-links">
-                    <li><a href="index.html#how-it-works">How It Works</a></li>
-                    <li><a href="index.html#pricing">Pricing</a></li>
-                    <li><a href="index.html#results">Results</a></li>
-                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="getting-started.html">Getting Started</a></li>
+                    <li><a href="#contact">Contact</a></li>
                 </ul>
             </nav>
         </div>
@@ -368,7 +333,7 @@
                 </div>
             </div>
 
-            <a href="#" class="drawer-item">Getting Started</a>
+            <a href="getting-started.html" class="drawer-item">Getting Started</a>
 
             <div class="drawer-group">
                 <a href="#" class="drawer-item drawer-toggle">FAQ <span class="drawer-chevron">›</span></a>
@@ -414,24 +379,32 @@
         </nav>
     </div>
 
-    <!-- Page Hero -->
-    <section class="page-hero">
+    <!-- Main Content -->
+    <section class="main-content">
         <div class="container">
-            <h1>Introduction Slide Deck</h1>
-            <p>An overview of AwareNet for group presentation and discussion.</p>
-        </div>
-    </section>
+            <h1 class="page-title">Camera Location</h1>
+            <div class="content-wrapper">
+                <p>After you have completed the <a href="getting-started.html">Getting Started</a> steps, you are ready to physically install/mount your camera in the desired location. Here are some tips:</p>
 
-    <!-- Slide Deck -->
-    <section class="slides-section">
-        <div class="container">
-            <div class="slides-wrapper">
-                <div class="slides-card">
-                    <div class="slides-card-body">
-
-                        <a href="https://docs.google.com/presentation/d/17SJjeRaIduMrnlFHqhroR6LUCBol2yyeB7pFDB55Ey0/edit?usp=sharing" target="_blank" class="btn-open">View Slide Deck ↗</a>
-                    </div>
-                </div>
+                <ul>
+                    <li>Battery-powered cameras (like the Reolink Argus 3 Pro) typically have a maximum range of 25-30 feet for sensing motion (they use "passive infrared" sensors). So we recommend placing this type of camera as close as possible to the street or alley (an adjacent pole, tree or garage).</li>
+                    
+                    <li>Outlet-powered cameras and power-over-ethernet cameras typically have a longer maximum range (30-60 feet, or more) for sensing motion (they use software to "see" changes in the picture). So we recommend placing this type of camera on an exterior wall of your house or garage.</li>
+                    
+                    <li>Generally, cameras sense objects moving side-to-side in the field of view better than objects moving straight towards or away from the camera. So for all cameras, we recommend pointing the camera roughly perpendicular to the street or alley (straight across to the other side).</li>
+                    
+                    <li>For all cameras, we recommend placing them 8-15 feet above the street or alley. Each situation is unique, but generally, higher than 15 feet will likely reduce the capability of the camera.</li>
+                    
+                    <li>If you are using a camera that relies on light coming from the camera (regular or infra-red), be sure the leading edge of the camera extends a bit beyond any nearby wall or object so the light is not reflected back into the camera lens.</li>
+                    
+                    <li>Landscape lighting pointed at the camera will typically cause the camera picture to be darker than normal.</li>
+                    
+                    <li>Wall lighting that is level with the camera can also cause the camera picture to be darker than normal. Generally, it is best to position the camera above or below the wall light so the light fixture is not in the camera's field of view. Either way, a night time test is recommend before permanent installation.</li>
+                    
+                    <li>NOTE: For Reolink cameras, the mounting screws they include are adequate for drywall or other light-weight material, but you will snap off the screw heads if you use them for wood without drilling a proper pilot hole.</li>
+                    
+                    <li>Having at least one street camera per block is the goal. Depending on the distance of the camera from the street, or for wide streets, it may be best to have one camera on each side of the street. Having at least one alley camera per block would complete the coverage.</li>
+                </ul>
             </div>
         </div>
     </section>
@@ -445,13 +418,16 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            // Collapsible drawer groups
             document.querySelectorAll('.drawer-toggle').forEach(toggle => {
                 toggle.addEventListener('click', function(e) {
                     e.preventDefault();
                     const subItems = this.nextElementSibling;
                     const isOpen = subItems.classList.contains('open');
+                    // Close all others
                     document.querySelectorAll('.drawer-sub-items.open').forEach(el => el.classList.remove('open'));
                     document.querySelectorAll('.drawer-toggle.open').forEach(el => el.classList.remove('open'));
+                    // Toggle this one
                     if (!isOpen) {
                         subItems.classList.add('open');
                         this.classList.add('open');
@@ -459,6 +435,7 @@
                 });
             });
 
+            // Slide-out drawer
             const hamburger = document.getElementById('hamburger');
             const drawer = document.getElementById('drawer');
             const drawerOverlay = document.getElementById('drawer-overlay');
@@ -486,6 +463,5 @@
             }
         });
     </script>
-
 </body>
 </html>
