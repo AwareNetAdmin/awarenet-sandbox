@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Terms of Service - AwareNet</title>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            font-size: 1.2rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(rgba(255,255,255,0.20), rgba(255,255,255,0.20)), url('street.jpg') center center / cover no-repeat;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border-bottom: 4px solid #1e40af;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            height: 40px;
+        }
+
+        .logo img {
+            height: 100%;
+            width: auto;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #1e40af;
+        }
+
+        /* Hamburger */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 6px 4px;
+            background: none;
+            border: none;
+        }
+
+        .hamburger span {
+            display: block;
+            width: 26px;
+            height: 3px;
+            background: white;
+            border-radius: 2px;
+            transition: all 0.3s;
+        }
+
+        /* Slide-out drawer */
+        .drawer-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.4);
+            z-index: 999;
+        }
+
+        .drawer {
+            position: fixed;
+            top: 0;
+            left: -280px;
+            width: 280px;
+            height: 100%;
+            background: #1e40af;
+            z-index: 1000;
+            transition: left 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 4px 0 15px rgba(0,0,0,0.3);
+        }
+
+        .drawer.open {
+            left: 0;
+        }
+
+        .drawer-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .drawer-logo-text {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #fff;
+        }
+
+        .drawer-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.6rem;
+            cursor: pointer;
+            line-height: 1;
+        }
+
+        .drawer nav {
+            display: flex;
+            flex-direction: column;
+            padding: 1rem 0;
+            overflow-y: auto;
+            flex: 1;
+        }
+
+        .drawer nav a {
+            text-decoration: none;
+            color: white;
+            font-size: 1.35rem;
+            font-weight: 500;
+            padding: 0.75rem 1.5rem;
+            border-bottom: 1px solid rgba(255,255,255,0.15);
+            transition: background 0.2s;
+            text-align: left;
+            display: block;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .drawer nav a:hover {
+            background: rgba(255,255,255,0.15);
+        }
+
+        .drawer nav a.drawer-sub-item {
+            font-size: 1.2rem;
+            font-weight: 400;
+            padding: 0.5rem 1.5rem 0.5rem 2.5rem;
+            opacity: 0.85;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .drawer-group {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+        }
+
+        .drawer-toggle {
+            display: flex !important;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .drawer-sub-items {
+            display: none;
+            flex-direction: column;
+        }
+
+        .drawer-sub-items.open {
+            display: flex;
+        }
+
+        .drawer-chevron {
+            float: right;
+            transition: transform 0.3s;
+            display: inline-block;
+            margin-left: 0.75rem;
+            font-size: 1.4rem;
+            font-weight: bold;
+            line-height: 1;
+        }
+
+        .drawer-toggle.open .drawer-chevron {
+            transform: rotate(90deg);
+        }
+
+        /* Page hero */
+        .page-hero {
+            background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+        }
+
+        .page-hero h1 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 2.5rem;
+            letter-spacing: 0.02em;
+            margin-bottom: 0.5rem;
+        }
+
+        .page-hero p {
+            font-size: 1.5rem;
+            opacity: 0.9;
+        }
+
+        /* Main Content */
+        .main-content {
+            padding: 4rem 0;
+            background: #f8fafc;
+        }
+
+        .content-wrapper {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.07);
+        }
+
+        .content-wrapper h2 {
+            color: #1e40af;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .content-wrapper h2:first-child {
+            margin-top: 0;
+        }
+
+        .content-wrapper h3 {
+            color: #1e40af;
+            margin-top: 1.5rem;
+            margin-bottom: 0.5rem;
+            font-size: 1.3rem;
+        }
+
+        .content-wrapper p {
+            margin-bottom: 1rem;
+        }
+
+        .content-wrapper ul {
+            margin-left: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .content-wrapper li {
+            margin-bottom: 0.5rem;
+        }
+
+        .content-wrapper a {
+            color: #1e40af;
+            text-decoration: underline;
+            font-weight: 500;
+        }
+
+        .content-wrapper strong {
+            font-weight: 600;
+        }
+
+        /* Footer */
+        footer {
+            background: #1f2937;
+            color: #9ca3af;
+            padding: 2rem 0;
+            text-align: center;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .page-hero h1 {
+                font-size: 2rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .logo {
+                height: 35px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav>
+                <button class="hamburger" id="hamburger" aria-label="Open menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <div class="logo" style="height: 48px; display: flex; align-items: center; gap: 0.5rem;">
+                    <span style="background: rgba(255,255,255,0.45); border-radius: 50px; padding: 2px 6px; display: flex; align-items: center;">
+                        <img src="logo.svg" alt="AwareNet" style="height: 48px; width: auto;" />
+                    </span>
+                    <span style="font-size: 3rem; font-weight: bold; color: #1e40af; text-shadow: -1px -1px 0 white, 1px -1px 0 white, -1px 1px 0 white, 1px 1px 0 white;">Aware<em>Net</em></span>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="getting-started.html">Getting Started</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Slide-out drawer -->
+    <div class="drawer-overlay" id="drawer-overlay"></div>
+    <div class="drawer" id="drawer">
+        <button class="drawer-close" id="drawer-close">&times;</button>
+        <div class="drawer-header">
+            <span style="background: rgba(255,255,255,0.45); border-radius: 50px; padding: 2px 6px; display: flex; align-items: center;">
+                <img src="logo.svg" alt="AwareNet" style="height: 40px; width: auto;" />
+            </span>
+            <span class="drawer-logo-text">Aware<em>Net</em></span>
+        </div>
+        <nav>
+            <a href="index.html" class="drawer-item">Home</a>
+
+            <div class="drawer-group">
+                <a href="#" class="drawer-item drawer-toggle">About <span class="drawer-chevron">›</span></a>
+                <div class="drawer-sub-items">
+                    <a href="contact.html" class="drawer-sub-item">Contact Us</a>
+                    <a href="feature-summary.html" class="drawer-sub-item">Feature Summary</a>
+                    <a href="introduction-slide-deck.html" class="drawer-sub-item">Introduction Slide Deck</a>
+                    <a href="our-team.html" class="drawer-sub-item">Our Team</a>
+                    <a href="customers.html" class="drawer-sub-item">Customers</a>
+                </div>
+            </div>
+
+            <a href="getting-started.html" class="drawer-item">Getting Started</a>
+
+            <div class="drawer-group">
+                <a href="#" class="drawer-item drawer-toggle">FAQ <span class="drawer-chevron">›</span></a>
+                <div class="drawer-sub-items">
+                    <a href="qa.html" class="drawer-sub-item">Q&amp;A</a>
+                    <a href="alert-process.html" class="drawer-sub-item">Alert Process</a>
+                    <a href="review-alert.html" class="drawer-sub-item">Review Alert</a>
+                    <a href="privacy-masking.html" class="drawer-sub-item">Privacy Masking</a>
+                </div>
+            </div>
+
+            <a href="supported-cameras.html" class="drawer-item">Supported Cameras</a>
+
+            <div class="drawer-group">
+                <a href="#" class="drawer-item drawer-toggle">Reolink Email Setup <span class="drawer-chevron">›</span></a>
+                <div class="drawer-sub-items">
+                    <a href="#" class="drawer-sub-item">Gmail App Password</a>
+                    <a href="#" class="drawer-sub-item">Email Sent Folder</a>
+                </div>
+            </div>
+
+            <a href="#" class="drawer-item">Enroll a Camera</a>
+            <a href="camera-location.html" class="drawer-item">Camera Location</a>
+
+            <div class="drawer-group">
+                <a href="#" class="drawer-item drawer-toggle">Configuration Notes <span class="drawer-chevron">›</span></a>
+                <div class="drawer-sub-items">
+                    <a href="#" class="drawer-sub-item">Duo, Duo 2, Duo 3</a>
+                    <a href="#" class="drawer-sub-item">False Alerts</a>
+                </div>
+            </div>
+
+            <a href="pricing.html" class="drawer-item">Pricing</a>
+
+            <div class="drawer-group">
+                <a href="#" class="drawer-item drawer-toggle">Legal <span class="drawer-chevron">›</span></a>
+                <div class="drawer-sub-items">
+                    <a href="member-tos.html" class="drawer-sub-item">Member TOS</a>
+                    <a href="customer-tos.html" class="drawer-sub-item">Customer TOS</a>
+                    <a href="#" class="drawer-sub-item">Customer Order Form</a>
+                </div>
+            </div>
+        </nav>
+    </div>
+
+    <!-- Page Hero -->
+    <section class="page-hero">
+        <div class="container">
+            <h1>Customer Terms of Service</h1>
+            <p>Customer Agreement</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <section class="main-content">
+        <div class="container">
+            <div class="content-wrapper">
+                
+                <p><strong>PLEASE REVIEW THESE TERMS CAREFULLY. ONCE ACCEPTED, THESE TERMS BECOME A BINDING LEGAL COMMITMENT BETWEEN YOU AND AWARENET. IF YOU DO NOT AGREE TO BE BOUND BY THESE TERMS, YOU SHOULD NOT ACCEPT THESE TERMS, CREATE AN ACCOUNT, AND/OR USE THE SERVICES.</strong></p>
+                
+                <p><strong>THE SERVICES ARE INTENDED FOR NEIGHBORHOOD USE ONLY FOR NEIGHBORHOODS LOCATED IN THE UNITED STATES.</strong></p>
+                
+                <p>If you have any questions, you can reach Customer Support by email at <a href="mailto:support@awarenet.us">support@awarenet.us</a>.</p>
+                
+                <p>When we refer to the "Services" in these Terms, we mean all products and services provided by us or our Affiliates (as defined herein), as applicable, that are (a) used by you, including, without limitation, products and services that are on a trial basis or otherwise free of charge or (b) ordered by you under an Order Form.</p>
+                
+                <p>When we refer to an "Affiliate" in these Terms, we mean any entity that directly or indirectly controls or is controlled by, or is under common control with, the party specified. For purposes of this definition, "control" means direct or indirect ownership of more than fifty percent (50%) of the voting interests of the subject entity.</p>
+
+                <h2>1. Changes to These Terms</h2>
+                <p>We may update these Terms from time to time. We will provide you with prior written notice of any material updates at least ten (10) days in advance of the effective date of such material updates; provided, however, we may not be able to provide at least ten (10) days prior written notice of material updates to these Terms that result from changes in laws, regulations, or requirements from telecommunications providers. The updated version of these Terms will be available at <a href="https://www.awarenet.us/legal/customer-tos">https://www.awarenet.us/legal/customer-tos</a>.</p>
+                
+                <p>Notices for material updates to these Terms will be given in accordance with Section 13.5 (Notices). Except as otherwise specified by us and to the extent allowed by applicable law, rule, or regulation, updates will be effective and binding upon the date indicated at the top of these Terms. To the extent allowed by applicable law, rule, or regulation, the updated version of these Terms will supersede all prior versions.</p>
+                
+                <p>Following such notice, your continued use of the Services on or after the date the updated version of these Terms is effective and binding constitutes your acceptance of such updated Terms to the extent allowed by applicable law, rule, or regulation. If you do not agree to the updated version of these Terms, you must stop using the Services immediately.</p>
+
+                <h2>2. Account Creation and Information</h2>
+                <p>To use the Services, you will be asked to create an account. As part of the account creation process, you'll be asked to provide your name, email address, phone number, mailing address, neighborhood name, and organization name. When creating an account, you must provide true, accurate, current, and complete information about yourself as requested during the account creation process. You must keep that information true, accurate, current, and complete after you create each account. You represent and warrant that such information is true, accurate, current, and complete. If you breach these Terms, including, without limitation, your payment obligations in Section 6 (Fees and Payment Terms), you are strictly prohibited from creating new accounts until you remedy such breach in full.</p>
+
+                <h2>3. Provision of the Services</h2>
+                
+                <h3>3.1 Our Responsibilities.</h3>
+                <p>We will (a) make the Services available to you in accordance with these Terms and our documentation, including any usage guides and policies for the Services contained in such documentation ("Documentation"), and any applicable ordering document between the parties that specifies mutually agreed upon rates for certain Services and other commercial terms, including any applicable minimum spend commitments ("Order Form"); (b) provide the Services in accordance with laws applicable to our provision of the Services to our customers generally (i.e., without regard for your particular use of the Services), subject to your use of the Services in accordance with these Terms, the applicable Documentation, and any applicable Order Form(s); (c) make commercially reasonable efforts to use industry standard measures designed to scan, detect, and delete code, files, scripts, agents, or programs intended to do harm, including, for example, viruses, worms, time bombs and Trojan horses; (d) if applicable, use trained, qualified personnel to provide the Services; and (e) use commercially reasonable efforts to provide you with applicable support for the Services. We hereby grant you a revocable, limited, non-transferable, non-assignable, and non-sublicensable (except as provided herein) license to use the Services and Documentation in accordance with the terms and conditions set forth in these Terms.</p>
+                
+                <h3>3.2 Beta Offerings.</h3>
+                <p>From time to time, we may make Services that are identified as alpha, beta, not generally available, limited release, developer preview, or any similar Services offered by us (collectively, "Beta Offerings") available to you. You may choose to use a Beta Offering in your sole discretion. We may discontinue a Beta Offering at any time, in our sole discretion and without notice to you, or decide not to make a Beta Offering generally available.</p>
+                
+                <h3>3.3 Suspension of Services.</h3>
+                <p>We may suspend the Services immediately upon notice to you for cause if we, in good faith, determine: (a) that you or an End User (as defined below) materially breaches (or we, in good faith, believe that you or an End User has materially breached) any provision of these Terms or our Acceptable Use Policy; (b) there is an unusual or material spike or increase in your use of the Services and we believe that such traffic or use is fraudulent or materially and negatively impacting the operating capability of the Services; (c) that our provision of the Services is prohibited by applicable law or regulation; (d) there is any use of the Services by you or an End User that, in our judgment, threatens the security, integrity, or availability of the Services; or (e) that information in your account is untrue, inaccurate, not current, or incomplete. In the event of such suspension for any of the above reasons except (c), you remain responsible for the Fees (as defined below); provided, however, that, notwithstanding anything to the contrary, Customer shall pay for Services rendered prior to such suspension.</p>
+                
+                <p>If we suspend the Services pursuant to this Section 3.3 or Section 6.3 (Fees and Payment Terms), we will have no liability for any damage, liabilities, losses (including any loss of data or profits), or any other consequences that you may incur in connection with any such suspension.</p>
+                
+                <h3>3.4 Changes to the Services.</h3>
+                <p>The features and functions of the Services may change over time; provided, however, we will not materially decrease the overall functionality of the Services. It is your responsibility to ensure each Customer Application (as defined below) is compatible with the then-current Services. Although we try to avoid making changes to the Services that are not backwards-compatible, if any such changes become necessary, we will use reasonable efforts to let you know at least sixty (60) days prior to implementation. In the event we make a non-backwards compatible change and such change materially diminishes the functionality of the Services ("Adverse Change"), (a) you will notify us of the Adverse Change and (b) we will agree to make reasonable efforts to work with you to resolve or otherwise address the Adverse Change, except where we, in our sole discretion, have determined that an Adverse Change is required for security reasons, by telecommunications providers, or to comply with applicable law or regulation.</p>
+
+                <h2>4. Your Responsibilities</h2>
+                <p>In addition to the representations and warranties set forth herein, you represent and warrant that you will: (a) be solely responsible for all use of the Services and Documentation under your account, including the quality and integrity of any data and other information Customer inputs into AwareNet's System or otherwise made available by Customer through the use of the Services under these Terms ("Customer Data") and each software application or service that you make available to End Users that interfaces with the Services (each, a "Customer Application"); (b) except as specifically provided in the Order Form, not transfer, resell, lease, license, or otherwise make available the Services to third parties (except to make the Services available to End Users in connection with the use of each Customer Application as permitted under these Terms) or offer them on a standalone basis; (c) use the Services only in accordance with these Terms, our Acceptable Use Policy, including our Service and Country Specific Requirements therein, the applicable Documentation, any applicable Order Form(s), and applicable law or regulation; (d) prevent, using reasonable efforts, unauthorized access to or use of the Services and notify us in writing immediately of any such unauthorized access or use; (e) to the extent allowed by applicable law, rule, or regulation, provide full cooperation regarding information requests that are mandated by law from law enforcement, regulators, or telecommunications providers; and (f) comply with the representations and warranties you make in Section 8 (Representations, Warranties, and Disclaimer).</p>
+                
+                <p>We will not be liable for any loss or damage arising from unauthorized use of your account.</p>
+
+                <h2>5. Affiliates</h2>
+                
+                <h3>5.1 Your Affiliates.</h3>
+                <p>Your Affiliates are not permitted to use the Services under these Terms. Each of your Affiliates that wants to use the Services must accept these Terms individually and create its own account.</p>
+                
+                <h3>5.2 Our Affiliates.</h3>
+                <p>Our Affiliates may provide the Services, or a portion thereof, to you in accordance with these Terms and any applicable Order Form(s). We will be responsible for the Services our Affiliates provide. We will enforce these Terms relating to the Services that our Affiliates provide. Notwithstanding anything to the contrary in these Terms, our Affiliates may directly bill you (a) for the Services they provide or (b) solely as a billing agent for us or another Affiliate of ours providing the Services, as applicable.</p>
+
+                <h2>6. Fees and Payment Terms</h2>
+                
+                <h3>6.1 Fees.</h3>
+                <p>You agree to pay fees in accordance with the applicable Order Form(s).</p>
+                
+                <h3>6.3 Payment Terms.</h3>
+                <p>Payment obligations are non-cancelable, and all fees, taxes, and communications surcharges (collectively, "Fees") are non-refundable. Except as otherwise set forth in the applicable Order Form(s) and subject to Section 6.4 (Payment Disputes), you will pay the Fees due under these Terms in accordance with the following applicable payment method:</p>
+                
+                <p><strong>6.3.1 Credit Card Payment Terms.</strong> If you elect to add funds to your account by credit card and use such funds to pay the Fees due, you are responsible for ensuring that such funds cover the Fees due. If your account does not have sufficient funds or your credit card declines a charge for the Fees due, we reserve the right to suspend the Services to all of your accounts until the Fees due are paid in full.</p>
+                
+                <p><strong>6.3.2 Invoicing Payment Terms.</strong> If you elect to receive invoices and we approve you in writing for the same, invoices will be sent to you each month via email to the email address(es) you designate in your account. You will pay the Fees due within thirty (30) days of the date of the invoice. Except as otherwise set forth in the applicable Order Form(s) or an invoice to the extent you procure the Services without an Order Form, the Fees are payable in United States dollars. If you fail to pay the Fees and remedy such failure within fifteen (15) days of the date we provide you with written notice of the same, we may (a) assess, and you will pay, a late fee of the lesser of one and one-half percent (1.5%) per month or the maximum amount allowable by applicable law and (b) suspend the Services to all of your accounts until the Fees are paid in full.</p>
+                
+                <h3>6.4 Payment Disputes.</h3>
+                <p>You will notify us in writing within thirty (30) days of the invoice date for any Fees that you wish to reasonably dispute. You may withhold the disputed Fees until the dispute is resolved; provided, however, that such dispute is reasonable. Where you are disputing any Fees, you must act reasonably and in good faith and will cooperate diligently with us to resolve the dispute. We will not charge you a late fee or suspend the provision of the Services for unpaid Fees that are in reasonable dispute, unless you fail to cooperate diligently with us or we determine your dispute is not reasonable or brought in good faith.</p>
+
+                <h2>7. Ownership, Customer Data, and Confidentiality</h2>
+                
+                <h3>7.1 Ownership.</h3>
+                <p>As between the parties, we exclusively own and reserve all right, title, and interest in and to the Services, the Documentation, our Confidential Information (as defined below), the Collected Data (as defined below), and the Feedback (as defined below). "Collected Data" means any data that is derived from the use of the Services that does not directly or indirectly identify you, End Users (as defined herein), or any natural person and includes, without limitation, (a) data such as volumes, frequencies, bounce rates and Service performance data and (b) subject to any restrictions under applicable laws, data that is anonymized, de-identified, and/or aggregated such that it could no longer directly or indirectly identify you, End Users, or any natural person. "Feedback" means any feedback or suggestions provided by you or an End User regarding the Services. You hereby assign to us all right, title, and interest that you have in and to the Feedback, and you represent and warrant that you have the authority and right to assign to us your rights in and to the Feedback. You agree that we may implement the Feedback in any manner as we see fit and that you have no right to collect any royalties or fees in or to such Feedback. Except as explicitly set forth herein, nothing in these Terms shall provide you any ownership, right, or license to the Services, Documentation, our Confidential Information, the Collected Data, and the Feedback. As between the parties, you exclusively own and reserve all right, title, and interest in and to each Customer Application, your Confidential Information, and Customer Data, subject to our rights to process Customer Data in accordance with these Terms. As used herein, "End User" means any user of any software application or service made available by Customer that interfaces with the Services.</p>
+                
+                <h3>7.2 Customer Data.</h3>
+                <p>You hereby grant us and our Affiliates the right and license to process Customer Data as necessary to provide the Services in a manner consistent with these Terms. If you do not agree, you must stop using the Services immediately.</p>
+                
+                <h3>7.3 Confidentiality</h3>
+                
+                <p><strong>7.3.1 Definition.</strong> "Confidential Information" means any information or data, regardless of whether it is in tangible form, disclosed by either party ("Disclosing Party") to the other party ("Receiving Party") that is marked or otherwise designated as confidential or proprietary or that should otherwise be reasonably understood to be confidential given the nature of the information and/or the circumstances surrounding disclosure. To the extent allowed by applicable law, rule, or regulation, including any statutes set forth on an Order Form, Confidential Information includes, without limitation, Order Form(s), Customer Data, security reports and attestations, audit reports, customer lists, pricing, concepts, processes, plans, designs and other strategies, "know how", financial, and other business and/or technical information and materials of Disclosing Party and its Affiliates. Confidential Information does not include any information which Receiving Party can prove via a written instrument: (a) is publicly available through no breach of these Terms or fault of Receiving Party; (b) was properly known by Receiving Party, and to its knowledge, without any restriction, prior to disclosure by Disclosing Party; (c) was properly disclosed to Receiving Party, and to its knowledge, without any restriction, by another person without breach of Disclosing Party's rights; or (d) is independently developed by Receiving Party without use of or reference to the Confidential Information of Disclosing Party.</p>
+                
+                <p><strong>7.3.2 Use and Disclosure.</strong> Except as otherwise authorized by Disclosing Party in writing, Receiving Party will not (a) use any Confidential Information of Disclosing Party for any purpose outside of exercising Receiving Party's rights or fulfilling its obligations under these Terms or (b) disclose or make Confidential Information of Disclosing Party available to any party, except to its Affiliates or its and its Affiliates' respective employees, legal counsel, accountants, contractors, and in our case, subcontractors (collectively, "Representatives") who have a "need to know" as necessary for Receiving Party to exercise its rights or fulfill its obligations under these Terms. Receiving Party is responsible for its Representatives' compliance with Section 7.3. Receiving Party will protect the confidentiality of Confidential Information of Disclosing Party using the same degree of care that it uses to protect the confidentiality of its own confidential information but in no event less than reasonable care. Notwithstanding the foregoing, you may disclose our SOC2 or similar report, which will constitute our Confidential Information, only to an End User or an End User's employee or contract worker who has a "need to know" for such SOC2 or similar report and is legally bound to written terms of confidentiality that are at least as protective as the terms of Section 7.3.</p>
+                
+                <p><strong>7.3.3 Compelled Disclosure.</strong> Receiving Party may disclose Confidential Information of Disclosing Party if so required pursuant to a regulation, law, subpoena, or court order (collectively, "Compelled Disclosures"); provided, however, that Receiving Party gives Disclosing Party written notice of a Compelled Disclosure (to the extent legally permitted). Receiving Party will provide reasonable cooperation to Disclosing Party in connection with a Compelled Disclosure at Disclosing Party's sole expense.</p>
+                
+                <p><strong>7.3.4 Injunctive Relief.</strong> The parties expressly acknowledge and agree that no adequate remedy may exist at law for an actual or threatened breach of Section 7.3 and that, in the event of an actual or threatened breach of the provisions of Section 7.3, the non-breaching party will be entitled to seek immediate injunctive and other equitable relief, without waiving any other rights or remedies available to it.</p>
+
+                <h2>8. Representations, Warranties, and Disclaimer</h2>
+                
+                <h3>8.1 Customer Representations and Warranties.</h3>
+                <p>In addition to the representations and warranties provided herein, you represent and warrant that: (a) you have provided, and will continue to provide, adequate notices and have obtained, and will continue to obtain, the necessary permissions and consents to provide Customer Data to us for use and disclosure pursuant to Section 7.2 (Customer Data), and you have sufficient rights, licenses, or permissions necessary to provide the Customer Data to AwareNet; (b) you will comply with the terms and conditions set forth in the Acceptable Use Policy; (c) you understand and will comply with all applicable laws and regulations related to or governing collection, storage, use, and transmission of data; (d) the Customer Data does not and will not contain any information or materials that is unlawful, hateful, threatening, obscene, defamatory, offensive, or otherwise unacceptable (as determined by AwareNet); (e) the Customer Data does not and will not violate any law, regulation, or rights of any third party including, without limitation, intellectual property rights or rights of publicity or privacy; (f) the Customer Data does not and will not include any protected health information; (g) the Customer Data does not and will not infringe or misappropriate any patent, patent application, copyright, trade secret, contract, or other proprietary right of any third party, and there are no claims or threatened claims to the contrary; (h) the Customer Data does not and shall not contain any lock, clock, timer, Trojan horse, Easter egg, time bomb, counter, copy protection feature, replication devices or defect ("virus" or "worm" as such terms are commonly used in the computer industry), or other device which might lock, disable, or erase the Services, prevent AwareNet or other third parties from fully utilizing the Services, or require action or intervention by AwareNet or other persons or entities to allow AwareNet to utilize the Services; (i) you will not introduce any lock, clock, timer, Trojan horse, Easter egg, time bomb, counter, copy protection feature, replication devices or defect ("virus" or "worm" as such terms are commonly used in the computer industry), or other device into the Services; (j) you have authority to enter into these Terms; (k) you will not allow any third parties (except to parties specifically identified in writing in the Order Form) or unauthorized users to use or access the Services; and (l) you will not disclose any of AwareNet's Confidential Information to any third parties.</p>
+                
+                <h3>8.2 AwareNet Representations and Warranties.</h3>
+                <p>We represent and warrant that: (a) the Services perform materially in accordance with the applicable Documentation; (b) to our knowledge, we have the legal right to provide the Services to Customer; and (c) we will comply with all applicable laws and regulations related to or governing collection, storage, use, and transmission of data. Our sole obligation, and your sole and exclusive remedy, in the event of any failure by us to comply with Section 8.2(a), we will, at our sole and exclusive option, (y) remediate any material non-conformity or (z) refund to you the Fees you actually paid for the time period during which the affected Services do not comply with Section 8.2(a).</p>
+                
+                <h3>8.3 Anti-Corruption and International Trade Laws.</h3>
+                <p>Each party represents and warrants that (a) it will conduct business in accordance with all applicable anti-corruption, anti-money laundering, economic and trade sanctions, export controls, and other international trade laws, regulations, and governmental orders (collectively, "Anti-Corruption and Trade Laws") in the jurisdictions that apply directly or indirectly to the Services, including, without limitation, the United States and (b) it has not made, offered, promised to make, or authorized any payment or anything of value in violation of Anti-Corruption and Trade Laws. You will promptly notify us in writing of any actual or potential violation of Anti-Corruption and Trade Laws in connection with the use of the Services and take all appropriate steps to remedy or resolve such violations, including any steps requested by us. You represent that you have obtained and warrant that you will continue to obtain all licenses or other authorizations required to export, re-export, or transfer the Services. Each party represents and warrants that it (and, in your case, also End Users) is not on any government prohibited, denied, unverified-party, sanctions, debarment, or exclusion list or export-controlled related restricted party list (collectively, "Sanctions Lists"). You will (a) immediately discontinue your use of the Services if you are placed on any Sanctions List and (b) remove an End User's access to the Services if such End User becomes placed on any Sanctions List. You represent and warrant that you have not, and you represent and warrant that you will not, export, re-export, or transfer the Services to an entity on any Sanctions List without prior authorization from the applicable governmental authority. Notwithstanding anything to the contrary in these Terms, either party may terminate these Terms immediately upon written notice to the other party if the other party is in breach of its obligations in this Section 8.3. If your account is blocked because it is operating in a country or region prohibited under this Section 8.3, you will receive notice of your account being inoperable when you attempt to log into your account in such prohibited country or region.</p>
+                
+                <h3>8.4 DISCLAIMER.</h3>
+                <p><strong>WITHOUT LIMITING A PARTY'S EXPRESS WARRANTIES AND OBLIGATIONS UNDER THESE TERMS, AND EXCEPT AS EXPRESSLY PROVIDED IN SECTION 8, THE SERVICES ARE PROVIDED "AS IS," AND WE MAKE NO WARRANTY OF ANY KIND, WHETHER EXPRESS, IMPLIED, STATUTORY, OR OTHERWISE, AND WE SPECIFICALLY DISCLAIM ALL IMPLIED WARRANTIES, INCLUDING ANY IMPLIED WARRANTY OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, OR NON-INFRINGEMENT TO THE FULLEST EXTENT PERMITTED BY LAW. WE ADDITIONALLY DISCLAIM ALL WARRANTIES RELATED TO THIRD PARTY TELECOMMUNICATIONS PROVIDERS. YOU ACKNOWLEDGE THAT THE INTERNET AND TELECOMMUNICATIONS PROVIDERS' NETWORKS ARE INHERENTLY INSECURE. ACCORDINGLY, YOU AGREE WE ARE NOT LIABLE FOR ANY CHANGES TO, INTERCEPTION OF, OR LOSS OF CUSTOMER DATA WHILE IN TRANSIT VIA THE INTERNET OR A TELECOMMUNICATIONS PROVIDER'S NETWORK. BETA OFFERINGS ARE PROVIDED "AS IS" AND "AS AVAILABLE" WITH NO WARRANTIES WHATSOEVER, AND WE WILL HAVE NO LIABILITY AND NO OBLIGATION TO INDEMNIFY FOR ANY BETA OFFERING WHATSOEVER.</strong></p>
+
+                <h2>9. Mutual Indemnification</h2>
+                
+                <h3>9.1 Indemnification by Us.</h3>
+                
+                <p><strong>9.1.1 Scope of Indemnification.</strong> We will defend you from and against any claim, demand, suit, or proceeding made or brought against you by a third party alleging that our provision of the Services actually infringes such third party's intellectual property rights that are registered in the United States ("Infringement Claim") or arising from our material breach of our representations and warranties set forth in Section 8.2. We will indemnify you from any damages, fines or penalties imposed by a government or regulatory body, attorneys' fees, and costs awarded against you or for settlement amounts approved by us in writing for an Infringement Claim or arising from our material breach of our representations and warranties set forth in Section 8.2.</p>
+                
+                <p><strong>9.1.2 Infringement Options.</strong> If our provision of the Services has become, or in our opinion is likely to become, the subject of any Infringement Claim, we may at our option and expense: (a) procure the right to continue providing the Services as set forth in these Terms; (b) modify the Services to make them non-infringing; or (c) if the foregoing options are not reasonably practicable, terminate these Terms, or, if applicable, terminate the Services that are the subject of any Infringement Claim, and refund you any unused pre-paid fees.</p>
+                
+                <p><strong>9.1.3 Limitations.</strong> We will have no liability or obligation under Section 9.1 with respect to any Infringement Claim: (a) arising out of your use of the Services in breach of these Terms; (b) arising out of the combination, operation, or use of the Services with other applications, portions of applications, products, or services where the Services would not by themselves be infringing; or (c) arising from Services for which there is no charge.</p>
+                
+                <h3>9.2 Indemnification by You.</h3>
+                <p>To the extent allowed by applicable law, rule, or regulation, you will indemnify, defend, and hold harmless us, our officers, directors, employees, and Affiliates (collectively, "AwareNet Indemnified Parties") from and against any claim, demand, suit, or proceeding made or brought against a AwareNet Indemnified Party by a third party alleging or arising out of (a) your or any End Users' breach of these Terms or (b) a Customer Application, including, without limitation, any claims that a Customer Application, or your or any End Users' use of a Customer Application, infringes, misappropriates, or otherwise violates such third party's intellectual property rights (collectively, "Customer Indemnifiable Claims"). To the extent allowed by applicable law, rule, or regulation, you will indemnify us from any damages, fines or penalties imposed by a government or regulatory body, attorneys' fees, and costs awarded against an AwareNet Indemnified Party or for settlement amounts approved by you for a Customer Indemnifiable Claim.</p>
+                
+                <h3>9.3 Conditions of Indemnification.</h3>
+                <p>As a condition of the foregoing indemnification obligations: (a) the indemnified party ("Indemnified Party") must promptly notify the indemnifying party in writing ("Indemnifying Party") of any Infringement Claim or Customer Indemnifiable Claim (individually and collectively referred to as a "Claim"); provided, however, that any failure to give such prompt notice will not relieve Indemnifying Party of its obligations under Section 9 except to the extent that Indemnifying Party was actually and materially prejudiced by such failure; (b) Indemnifying Party will have the sole and exclusive authority to defend or settle any Claim; and (c) Indemnified Party will reasonably cooperate with Indemnifying Party in connection with Indemnifying Party's activities under Section 9 at Indemnifying Party's expense. Indemnified Party reserves the right, at its own expense, to participate in the defense of any Claim. Notwithstanding anything to the contrary in Section 9, Indemnifying Party will not settle any Claims for which it has an obligation to indemnify pursuant to Section 9 admitting liability or fault on behalf of Indemnified Party, nor create any obligation on behalf of Indemnified Party, without Indemnified Party's prior written consent, which will not be unreasonably withheld, conditioned, or delayed.</p>
+                
+                <h3>9.4 Exclusive Remedy.</h3>
+                <p>Section 9 states Indemnifying Party's sole liability to, and Indemnified Party's exclusive remedy against, the other party for any third-party claims.</p>
+
+                <h2>10. Limitation of Liability</h2>
+                
+                <h3>10.1 LIMITATION ON INDIRECT, CONSEQUENTIAL, AND RELATED DAMAGES.</h3>
+                <p><strong>SUBJECT TO THE EXCEPTIONS SET FORTH IN SECTION 10.3, IN NO EVENT WILL EITHER PARTY HAVE ANY LIABILITY ARISING OUT OF OR RELATED TO THESE TERMS FOR ANY LOST PROFITS, REVENUES, GOODWILL, OR INDIRECT, SPECIAL, INCIDENTAL, CONSEQUENTIAL, COVER, LOST DATA, BUSINESS INTERRUPTION, OR PUNITIVE DAMAGES, WHETHER AN ACTION IS IN CONTRACT OR TORT AND REGARDLESS OF THE THEORY OF LIABILITY, EVEN IF A PARTY HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES OR IF A PARTY'S REMEDY OTHERWISE FAILS OF ITS ESSENTIAL PURPOSE. THE FOREGOING DISCLAIMER WILL NOT APPLY TO THE EXTENT PROHIBITED BY LAW.</strong></p>
+                
+                <h3>10.2 LIMITATION OF LIABILITY.</h3>
+                <p><strong>SUBJECT TO THE EXCEPTIONS SET FORTH IN SECTION 10.3, IN NO EVENT WILL THE AGGREGATE LIABILITY OF EITHER PARTY ARISING OUT OF OR RELATED TO THESE TERMS EXCEED THE AMOUNTS PAID OR PAYABLE BY YOU UNDER THESE TERMS FOR THE SERVICES GIVING RISE TO THE LIABILITY DURING THE TWELVE (12) MONTH PERIOD PRECEDING THE FIRST INCIDENT OUT OF WHICH THE LIABILITY AROSE. THE FOREGOING LIMITATION WILL APPLY WHETHER AN ACTION IS IN CONTRACT OR TORT AND REGARDLESS OF THE THEORY OF LIABILITY.</strong></p>
+                
+                <h3>10.3 EXCEPTIONS TO THE LIMITATION OF LIABILITY.</h3>
+                <p><strong>TO THE EXTENT ALLOWED BY APPLICABLE LAW, RULE, OR REGULATION, NOTWITHSTANDING ANYTHING TO THE CONTRARY IN SECTION 10.1 (LIMITATION ON INDIRECT, CONSEQUENTIAL, AND RELATED DAMAGES) AND SECTION 10.2 (LIMITATION OF LIABILITY), THE LIMITATIONS IN SECTION 10.1 AND SECTION 10.2 DO NOT APPLY TO, AND THERE SHALL BE NO LIMITATION OF LIABILITY FOR, THE FOLLOWING EXCEPTIONS: (a) YOUR BREACH OF YOUR REPRESENTATIONS AND WARRANTIES; (b) YOUR BREACH OF SECTION 6 (FEES AND PAYMENT TERMS); (c) AMOUNTS PAYABLE PURSUANT TO A PARTY'S INDEMNIFICATION OBLIGATIONS UNDER SECTION 9 (MUTUAL INDEMNIFICATION); OR (d) YOUR BREACH OF THE CONFIDENTIALITY OBLIGATIONS SET FORTH HEREIN, INCLUDING, WITHOUT LIMITATION, THE OBLIGATIONS SET FORTH UNDER SECTION 7 (OWNERSHIP, CUSTOMER DATA, AND CONFIDENTIALITY).</strong></p>
+                
+                <p><strong>THE PROVISIONS OF SECTION 10 ALLOCATE THE RISKS PURSUANT TO THESE TERMS BETWEEN THE PARTIES, AND THE PARTIES HAVE RELIED ON THE LIMITATIONS SET FORTH IN SECTION 10 IN DETERMINING WHETHER TO ENTER INTO OR OTHERWISE ACCEPT THESE TERMS.</strong></p>
+
+                <h2>11. Use of Marks</h2>
+                <p>You hereby grant us the right and license to use your name and a description of your use case to refer to you on our website, earnings releases and calls, or marketing or promotional materials, subject to your standard trademark usage guidelines that you provide to us in writing.</p>
+
+                <h2>12. Term, Termination, and Survival</h2>
+                
+                <h3>12.1 Term.</h3>
+                <p>These Terms, as may be updated from time to time, will be effective as of the Effective Date and continue until terminated in accordance with Section 12.2 (Termination) ("Term").</p>
+                
+                <h3>12.2 Termination.</h3>
+                
+                <p><strong>12.2.1 For Convenience.</strong> Either party may terminate these Terms and close all of your accounts for any reason upon thirty (30) days written notice to the other party.</p>
+                
+                <p><strong>12.2.2 Material Breach.</strong> We may terminate these Terms (including all Order Form(s)) and close all of your accounts in the event you commit any material breach of these Terms and fail to remedy such material breach within fifteen (15) days of the date we provide written notice of such material breach to you. For the avoidance of doubt, your breach of our Acceptable Use Policy, including our Service and Country Specific Requirements therein, will be considered a material breach of these Terms. You may also terminate these Terms (including all Order Form(s)) in the event we commit a material breach of these Terms and fail to remedy such material breach within fifteen (15) days of the date we receive the written notice of such material breach that you provide to us.</p>
+                
+                <p><strong>12.2.3 Insolvency.</strong> Subject to applicable law, either party may terminate these Terms immediately and close all of your accounts by providing written notice to the other party in the event of the other party's liquidation, commencement of dissolution proceedings, or any other proceeding relating to a receivership, failure to continue business, assignment for the benefit of creditors, or becoming the subject of bankruptcy.</p>
+                
+                <p><strong>12.2.4 Change in Law.</strong> Either party may immediately terminate these Terms upon a change in law that prevents the provision of the Services.</p>
+                
+                <h3>12.3 Survival.</h3>
+                <p>Upon termination or expiration of these Terms, the terms of this Section 12.3, and the terms of the following Sections will survive: Section 3.1(b) (regarding our Security Overview), Section 6 (Fees and Payment Terms), Section 7 (Ownership, Customer Data, and Confidentiality), Section 8 (Representations, Warranties, and Disclaimer), Section 9 (Mutual Indemnification), Section 10 (Limitation of Liability), and Section 13 (General).</p>
+                
+                <h3>12.4 Records.</h3>
+                <p>Upon termination, AwareNet shall make reasonable efforts to promptly work with Customer to ensure that Customer's Data is returned to Customer in a format useable by Customer.</p>
+
+                <h2>13. General</h2>
+                
+                <h3>13.1 No Waiver and Order of Precedence.</h3>
+                <p>No failure or delay by either party in exercising any right or enforcing any provision under these Terms will constitute a waiver of that right, provision, or any other provision. Any waiver must be in writing and signed by each party to be legally binding. Titles and headings of sections of these Terms are for convenience only and will not affect the construction of any provision of these Terms. In the event of any conflict or inconsistency among the following documents, the order of precedence will be: (1) the Order Form, (2) these Terms, (3) our Acceptable Use Policy, (4) any other terms incorporated by reference herein, and (5) the applicable Documentation.</p>
+                
+                <h3>13.2 Assignment.</h3>
+                <p>Except for as provided specifically in the Order Form, neither party may subcontract, assign, delegate, or otherwise transfer these Terms, any applicable Order Form(s), or performance of its obligations, in whole or in part, without the prior written consent of the other party. Any attempt by a party to subcontract, assign, delegate, or transfer without the required consent shall be null and void. Subject to this Section 13.2, these Terms and any applicable Order Form(s) will be binding on each party and each party's permissible successors and assigns.</p>
+                
+                <h3>13.3 Relationship.</h3>
+                <p>Each party is an independent contractor in the performance of each and every part of these Terms. Nothing in these Terms is intended to create or will be construed as creating an employer-employee relationship or a partnership, agency, joint venture, or franchise. Each party will be solely responsible for all of its respective employees and agents and its respective labor costs and expenses arising in connection with its respective employees and agents. Each party will also be solely responsible for any and all claims, liabilities, damages, or debts of any type that may arise on account of each of its respective activities, or those of its respective employees and agents, in the performance of these Terms. Neither party has the authority to commit the other party in any way and will not attempt to do so or imply that it has the right to do so.</p>
+                
+                <h3>13.4 Severability.</h3>
+                <p>If any provision of these Terms is held by a court or other tribunal of competent jurisdiction to be unenforceable, that provision will be limited or eliminated to the minimum extent necessary to make it enforceable and, in any event, the rest of these Terms will continue in full force and effect.</p>
+                
+                <h3>13.5 Notices.</h3>
+                <p>Notices to us under these Terms will be provided via email to <a href="mailto:legal-notification@awarenet.us">legal-notification@awarenet.us</a>. Notices to you under these Terms will be provided via (a) email to the email address you designate in your account or (b) electronic means via your account portal (e.g., a pop-up window).</p>
+                
+                <h3>13.6 Force Majeure.</h3>
+                <p>No failure, delay, or default in performance of any obligation of a party will constitute an event of default or breach of these Terms to the extent that such failure to perform, delay, or default arises out of a cause, existing or future, that is beyond the control and without negligence of such party, including action or inaction of governmental, civil, or military authority, fire, strike, lockout, or other labor dispute, flood, terrorist act, war, riot, theft, earthquake, or other natural disaster (each a "Force Majeure Event"). The party affected by such Force Majeure Event will: (a) take all reasonable actions to minimize the consequences of such Force Majeure Event; (b) shall be excused from performance to the extent that and for so long as such performance is delayed by such Force Majeure Event; and (c) if applicable, the delivery of the Services affected shall be rescheduled. If, as applicable, the delivery of Services affected are not able to be rescheduled and continued and the Force Majeure Event persists for more than thirty (30) days, then the unaffected party may terminate these Terms.</p>
+                
+                <h3>13.7 Government Terms.</h3>
+                <p>We provide the Services, including any related software and technology, for ultimate federal government end use solely in accordance with these Terms. If you (or any End Users) are an agency, department, or other entity of any government, the use, duplication, reproduction, release, modification, disclosure, or transfer of the Services, or any related documentation of any kind, including technical data, software, and manuals, is restricted by these Terms. All other use is prohibited and no rights other than those provided in these Terms are conferred. The Services were developed fully at private expense.</p>
+                
+                <h3>13.8 Dispute Resolution.</h3>
+                <p>In the event of a dispute, claim, or controversy arising out of or in connection with the Terms, or the breach, termination, enforcement, interpretation, or validity thereof, or otherwise between the parties (a "Dispute"), mediation shall be a condition precedent to the institution of legal or equitable proceedings. Either party may request mediation in writing by providing notice to the other party describing the nature of the Dispute with sufficient factual detail to allow the other party to understand the nature of the claims (the "Notice"). The parties shall thereafter confer in an attempt to select an agreeable mediator by mutual consent, and in the absence of such mutual consent, the mediator shall be chosen by United States Arbitration and Mediation, Inc. of St. Louis, Missouri. The parties will share equally the fees and expenses of the mediator and endeavor to hold the mediation within ninety (90) days of the date of the Notice. Each party will be responsible for its own incurred expenses arising out of mediation. Any mediation proceedings will take place in the City or County of St. Louis, Missouri, unless otherwise consented to in writing by the parties. Any agreement reached at mediation shall be an enforceable settlement agreement.</p>
+                
+                <h3>13.9 Governing Law and Venue.</h3>
+                
+                <p><strong>(a) Venue.</strong> In the event the parties are unable to resolve the Dispute at mediation, either party may commence judicial proceedings in the Missouri State Courts located in St. Louis City, Missouri, which shall be the exclusive venue for any litigation between the parties. To the extent allowed by applicable law, rule, or regulation, in any such proceeding, the prevailing party shall be entitled to receive and the non-prevailing party shall be obligated to pay the prevailing party's reasonable costs and attorneys' fees. <strong>TO THE EXTENT ALLOWED BY APPLICABLE LAW, RULE, OR REGULATION, THE PARTIES EACH HEREBY AGREE TO WAIVE ANY RIGHT TO TRIAL BY JURY WITH RESPECT TO ANY ACTION OR PROCEEDING BETWEEN THE PARTIES. THE PARTIES EACH HEREBY ACKNOWLEDGE AND AGREE THAT THESE TERMS CONSTITUTES A WRITTEN CONSENT TO WAIVER OF TRIAL BY JURY PURSUANT TO ANY APPLICABLE STATE STATUTES.</strong></p>
+                
+                <p><strong>(b) Governing Law.</strong> The Terms and all other terms, conditions, and agreements between the parties shall be exclusively governed by and construed in accordance with the internal laws of the State of Missouri, without regard to its conflict of law principles.</p>
+                
+                <h3>13.10 Class Action Waiver.</h3>
+                <p>Each party agrees that any Disputes between the parties must be brought against each other on an individual basis only. That means neither party can bring a Dispute as a plaintiff or class member in a class action, consolidated action, or representative action. An arbitrator cannot combine more than one person's or entity's Disputes into a single case and cannot preside over any consolidated class or representative proceeding. Each party agrees the arbitrator's decision or award in one person's or entity's case can only impact the person or entity that brought a Dispute and cannot impact or otherwise be used to decide Disputes with other people or entities, including other AwareNet customers. If a court decides that this Section 13.10 is not enforceable or valid, then this Section 13.10 will be null and void without effect the rest of these Terms, and the rest of the Terms will still apply.</p>
+                
+                <h3>13.11 Compliance with Laws.</h3>
+                <p>AwareNet shall comply with applicable laws, and at Customer's written request, AwareNet shall, within a reasonable period of time, execute a statement that it complies with such applicable laws.</p>
+                
+                <h3>13.12 Records.</h3>
+                <p>The Parties acknowledge that AwareNet aspires to record data only from cameras recording public places where there is no expectation of privacy. AwareNet agrees to keep copies of the footage from the cameras and Customer Data for at least fifteen (15) days and take reasonable actions to make such footage and Customer Data available to Customer in the event Customer requires the same and requests such footage in writing. At any time, AwareNet, at its sole discretion and with or without notice to you, may remove a camera from the Services. Within a reasonable period after AwareNet receives Customer's written request to deactivate a camera from the Services, AwareNet shall deactivate such camera from the Services; provided, however, that such camera shall be in Customer's service area.</p>
+                
+                <h3>13.13 Miscellaneous.</h3>
+                <p>These Terms and any Order Form are not intended to and shall not create any rights enforceable by any third party. These Terms may be executed in one or more counterparts each of which shall be deemed an original and all of which shall constitute one and the same agreement. No change in these Terms shall be made except in writing executed by both parties.</p>
+                
+                <h3>13.14 Entire Agreement.</h3>
+                <p>Except as provided in these Terms and any exhibits or attachments, applicable Order Form(s), or other terms incorporated by reference into these Terms, these Terms supersede all prior and contemporaneous proposals, statements, sales materials, presentations, or agreements, oral and written. The parties agree that, without limitation, Section 7.3 (Confidentiality) hereby supersedes and prevails over all prior, contemporaneous, and future non-disclosure or confidentiality agreements between the parties in their entirety. No oral or written information or advice given by us, our agents, or our employees will create a warranty or in any way increase the scope of the warranties or obligations under these Terms. Any term or condition stated in your vendor registration form or registration portal or in any purchase order document or similar document provided by you will be construed solely as evidence of your internal business processes, and the terms and conditions contained thereon will be null and void and have no effect with regard to these Terms between the parties and be non-binding against us even if accepted or signed by us after the Effective Date.</p>
+                
+                <p><strong>BY CLICKING THROUGH THESE TERMS OR OTHERWISE AGREEING BY USE OF THE SERVICES, YOU HEREBY AGREE THAT YOU HAVE REVIEWED, UNDERSTAND, AND AGREE TO THE TERMS AND CONDITIONS OF THESE TERMS, AND TO THE EXTENT APPLICABLE, FURTHER AGREE TO ENSURE THAT EACH OF YOUR EMPLOYEES AND OTHER END USERS DO THE SAME.</strong></p>
+
+                <h2>Exhibit A - Acceptable Use Policy</h2>
+                <p><em>Last Updated: August 11, 2021</em></p>
+                
+                <p>This Acceptable Use Policy ("AUP") describes rules that apply to any party ("Customer") using any products and services ("Services") provided by AwareNet LLC or any of its affiliates (collectively, "AwareNet") and any user of any software application or service made available by Customer that interfaces with the Services ("End User"). The examples described in this AUP are not exhaustive. Customer is responsible for its End Users' compliance with this AUP. If Customer or any End User violates this AUP, AwareNet may suspend Customer's use of the Services. This AUP may be updated by AwareNet from time to time upon reasonable notice, which may be provided via Customer's account, e-mail, or by posting an updated version of this AUP at https://www.awarenet.us/legal/customer-tos/aup.</p>
+                
+                <h3>No Inappropriate Content or Users.</h3>
+                <p>Do not use the Services to transmit or store any content or communications (commercial or otherwise) that is illegal, harmful, unwanted, inappropriate, objectionable, confirmed to be criminal misinformation, or otherwise poses a threat to the public. This prohibition includes use of the Services by a hate group or content or communications that originate from a hate group or are exploitive, abusive, or hate speech.</p>
+                
+                <h3>Prohibited Activities.</h3>
+                <p>Do not use the Services to engage in or encourage any activity that is illegal, deceptive, harmful, violating others' rights, or harmful to AwareNet's business operations or reputation, including:</p>
+                <ul>
+                    <li><strong>Violations of Laws.</strong> Violating laws, regulations, governmental orders, or industry standards or guidance in any applicable jurisdiction (collectively, "Applicable Laws"). This includes violating Applicable Laws requiring (a) consent be obtained prior to transmitting, recording, collecting, or monitoring data or communications or (b) compliance with opt-out requests for any data or communications.</li>
+                    <li><strong>Interference with the Services.</strong> Interfering with or otherwise negatively impacting any aspect of the Services or any third-party networks that are linked to the Services.</li>
+                    <li><strong>Reverse Engineering.</strong> Reverse engineering, copying, disassembling, or decompiling the Services.</li>
+                    <li><strong>Falsification of Identity or Origin.</strong> Creating a false identity or any attempt to mislead others as to the identity of the sender or the origin of any data or communications.</li>
+                </ul>
+                
+                <h3>No Service Integrity Violations.</h3>
+                <p>Do not violate the integrity of the Services, including:</p>
+                <ul>
+                    <li><strong>Bypassing Service Limitations.</strong> Attempting to bypass, exploit, defeat, or disable limitations or restrictions placed on the Services.</li>
+                    <li><strong>Security Vulnerabilities.</strong> Finding security vulnerabilities to exploit the Services or attempting to bypass any security mechanism or filtering capabilities.</li>
+                    <li><strong>Disabling the Services.</strong> Any denial of service (DoS) attack on the Services or any other conduct that attempts to disrupt, disable, or overload the Services.</li>
+                    <li><strong>Harmful Code or Bots.</strong> Transmitting code, files, scripts, agents, or programs intended to do harm, including viruses or malware, or using automated means, such as bots, to gain access to or use the Services.</li>
+                    <li><strong>Unauthorized Access.</strong> Attempting to gain unauthorized access to the Services.</li>
+                </ul>
+                
+                <h3>Data Safeguards.</h3>
+                <p>Customer is responsible for determining whether the Services offer appropriate safeguards for Customer's use of the Services, including, but not limited to, any safeguards required by Applicable Laws, prior to transmitting or processing, or prior to permitting End Users to transmit or process, any data or communications via the Services.</p>
+                
+                <p>Violations of this AUP, including any prohibited content or communications, may be reported to <a href="mailto:support@awarenet.us">support@awarenet.us</a>. Customer agrees to immediately report any violation of this AUP to AwareNet and provide cooperation, as requested by AwareNet, to investigate and/or remedy that violation.</p>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Aware<em>Net</em>. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Collapsible drawer groups
+            document.querySelectorAll('.drawer-toggle').forEach(toggle => {
+                toggle.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const subItems = this.nextElementSibling;
+                    const isOpen = subItems.classList.contains('open');
+                    document.querySelectorAll('.drawer-sub-items.open').forEach(el => el.classList.remove('open'));
+                    document.querySelectorAll('.drawer-toggle.open').forEach(el => el.classList.remove('open'));
+                    if (!isOpen) {
+                        subItems.classList.add('open');
+                        this.classList.add('open');
+                    }
+                });
+            });
+
+            // Slide-out drawer
+            const hamburger = document.getElementById('hamburger');
+            const drawer = document.getElementById('drawer');
+            const drawerOverlay = document.getElementById('drawer-overlay');
+            const drawerClose = document.getElementById('drawer-close');
+
+            function openDrawer() {
+                drawer.classList.add('open');
+                drawerOverlay.style.display = 'block';
+                document.body.style.overflow = 'hidden';
+            }
+
+            function closeDrawer() {
+                drawer.classList.remove('open');
+                drawerOverlay.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+
+            if (hamburger) {
+                hamburger.addEventListener('click', openDrawer);
+                drawerClose.addEventListener('click', closeDrawer);
+                drawerOverlay.addEventListener('click', closeDrawer);
+                drawer.querySelectorAll('nav a:not(.drawer-toggle)').forEach(link => {
+                    link.addEventListener('click', closeDrawer);
+                });
+            }
+        });
+    </script>
+
+</body>
+</html>
