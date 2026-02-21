@@ -639,8 +639,26 @@
                 });
             });
 
+            // Restore drawer state from localStorage
+            const savedState = localStorage.getItem('drawerMenuState');
+            if (savedState) {
+                try {
+                    const openMenus = JSON.parse(savedState);
+                    openMenus.forEach(index => {
+                        const toggles = document.querySelectorAll('.drawer-toggle');
+                        if (toggles[index]) {
+                            toggles[index].classList.add('open');
+                            toggles[index].nextElementSibling.classList.add('open');
+                        }
+                    });
+                } catch (e) {
+                    // Ignore parse errors
+                }
+            }
+
             // Drawer - Collapsible drawer groups
-            document.querySelectorAll('.drawer-toggle').forEach(toggle => {
+            document.querySelectorAll('.drawer-toggle').forEach((toggle, index) => {
+                toggle.setAttribute('data-menu-index', index);
                 toggle.addEventListener('click', function(e) {
                     e.preventDefault();
                     const subItems = this.nextElementSibling;
@@ -653,6 +671,12 @@
                         subItems.classList.add('open');
                         this.classList.add('open');
                     }
+                    // Save state to localStorage
+                    const openMenus = [];
+                    document.querySelectorAll('.drawer-toggle.open').forEach(el => {
+                        openMenus.push(parseInt(el.getAttribute('data-menu-index')));
+                    });
+                    localStorage.setItem('drawerMenuState', JSON.stringify(openMenus));
                 });
             });
 
