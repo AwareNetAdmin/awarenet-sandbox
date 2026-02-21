@@ -452,6 +452,8 @@
 
             // Collapsible drawer groups
             let drawerHighlightTimeout = null;
+            let currentlyActiveToggle = null;
+            
             document.querySelectorAll('.drawer-toggle').forEach((toggle, index) => {
                 toggle.setAttribute('data-menu-index', index);
                 toggle.addEventListener('click', function(e) {
@@ -463,8 +465,20 @@
                     document.querySelectorAll('.drawer-sub-items.open').forEach(el => el.classList.remove('open'));
                     document.querySelectorAll('.drawer-toggle.open').forEach(el => el.classList.remove('open'));
                     
-                    // Clear all active highlights immediately
-                    document.querySelectorAll('.drawer-toggle.active').forEach(el => el.classList.remove('active'));
+                    // Clear any pending highlight timeout
+                    if (drawerHighlightTimeout) {
+                        clearTimeout(drawerHighlightTimeout);
+                        drawerHighlightTimeout = null;
+                    }
+                    
+                    // Remove active class from previously active toggle
+                    if (currentlyActiveToggle) {
+                        currentlyActiveToggle.classList.remove('active');
+                        currentlyActiveToggle = null;
+                    }
+                    
+                    // Double-check: remove active from all toggles
+                    document.querySelectorAll('.drawer-toggle').forEach(t => t.classList.remove('active'));
                     
                     // Toggle this one
                     if (!isOpen) {
@@ -473,11 +487,6 @@
                         
                         // Scroll to show last sub-item if needed, then highlight this toggle
                         const toggleElement = this;
-                        
-                        // Clear any pending highlight timeout to prevent race conditions
-                        if (drawerHighlightTimeout) {
-                            clearTimeout(drawerHighlightTimeout);
-                        }
                         
                         drawerHighlightTimeout = setTimeout(() => {
                             const drawerNav = document.querySelector('.drawer nav');
@@ -493,8 +502,12 @@
                                 }
                             }
                             
+                            // One more safety check before adding active
+                            document.querySelectorAll('.drawer-toggle').forEach(t => t.classList.remove('active'));
+                            
                             // Highlight this toggle after scroll
                             toggleElement.classList.add('active');
+                            currentlyActiveToggle = toggleElement;
                             drawerHighlightTimeout = null;
                         }, 50); // Small delay to ensure DOM has updated
                     }
