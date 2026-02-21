@@ -784,24 +784,12 @@
                                 }
                             }
                             
-                            // One more safety check before adding active
-                            document.querySelectorAll('.drawer-toggle').forEach(t => {
-                                if (t.classList.contains('active')) {
-                                    console.log('SAFETY: Removing active from:', t.textContent.trim());
-                                }
-                                t.classList.remove('active');
-                            });
+                            // Nuclear option: remove 'active' from EVERYTHING in the entire document
+                            document.querySelectorAll('.active').forEach(el => el.classList.remove('active'));
                             
-                            // Highlight this toggle after scroll
-                            console.log('Adding active to:', toggleElement.textContent.trim());
+                            // Highlight this specific toggle after scroll
                             toggleElement.classList.add('active');
                             currentlyActiveToggle = toggleElement;
-                            
-                            // DEBUG: Log all elements with active class
-                            setTimeout(() => {
-                                const allActive = document.querySelectorAll('.active');
-                                console.log('All elements with .active class:', Array.from(allActive).map(el => el.textContent.trim()));
-                            }, 100);
                             drawerHighlightTimeout = null;
                         }, 50); // Small delay to ensure DOM has updated
                     }
