@@ -103,6 +103,31 @@
             color: #3b82f6;
         }
         
+        .enroll-button {
+            display: inline-block;
+            background: #1e40af;
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-top: 2rem;
+            transition: all 0.3s;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .enroll-button:hover {
+            background: #3b82f6;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+        }
+        
+        .button-container {
+            text-align: center;
+            margin-top: 2rem;
+        }
+        
         /* Footer */
         footer {
             background: #1e293b;
@@ -415,6 +440,10 @@
                 <p>Also, please check the <a href="qa.html">FAQ</a> page if you have questions about using your camera with AwareNet.</p>
                 
                 <p><strong>Tip:</strong> On smaller devices such as a phone, use the icon in the upper-right corner of the form to open it in a separate window. It seems to work better that way.</p>
+                
+                <div class="button-container">
+                    <a href="https://docs.google.com/forms/d/1UDLMbRmp4YxcGkKXn2QHTqNMEgT7YNK6PX_Jz8Kgti4/viewform" class="enroll-button" target="_blank" rel="noopener noreferrer">Open Enrollment Form</a>
+                </div>
             </div>
         </div>
     </div>
