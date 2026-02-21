@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Member Terms of Service - AwareNet</title>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            font-size: 1.2rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(rgba(255,255,255,0.20), rgba(255,255,255,0.20)), url('street.jpg') center center / cover no-repeat;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border-bottom: 4px solid #1e40af;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            height: 40px;
+        }
+
+        .logo img {
+            height: 100%;
+            width: auto;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #1e40af;
+        }
+
+        /* Hamburger */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 6px 4px;
+            background: none;
+            border: none;
+        }
+
+        .hamburger span {
+            display: block;
+            width: 26px;
+            height: 3px;
+            background: white;
+            border-radius: 2px;
+            transition: all 0.3s;
+        }
+
+        /* Slide-out drawer */
+        .drawer-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.4);
+            z-index: 999;
+        }
+
+        .drawer {
+            position: fixed;
+            top: 0;
+            left: -280px;
+            width: 280px;
+            height: 100%;
+            background: #1e40af;
+            z-index: 1000;
+            transition: left 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 4px 0 15px rgba(0,0,0,0.3);
+        }
+
+        .drawer.open {
+            left: 0;
+        }
+
+        .drawer-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .drawer-logo-text {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #fff;
+        }
+
+        .drawer-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.6rem;
+            cursor: pointer;
+            line-height: 1;
+        }
+
+        .drawer nav {
+            display: flex;
+            flex-direction: column;
+            padding: 1rem 0;
+            overflow-y: auto;
+            flex: 1;
+        }
+
+        .drawer nav a {
+            text-decoration: none;
+            color: white;
+            font-size: 1.35rem;
+            font-weight: 500;
+            padding: 0.75rem 1.5rem;
+            border-bottom: 1px solid rgba(255,255,255,0.15);
+            transition: background 0.2s;
+            text-align: left;
+            display: block;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .drawer nav a:hover {
+            background: rgba(255,255,255,0.15);
+        }
+
+        .drawer nav a.drawer-sub-item {
+            font-size: 1.2rem;
+            font-weight: 400;
+            padding: 0.5rem 1.5rem 0.5rem 2.5rem;
+            opacity: 0.85;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .drawer-group {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+        }
+
+        .drawer-toggle {
+            display: flex !important;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .drawer-sub-items {
+            display: none;
+            flex-direction: column;
+        }
+
+        .drawer-sub-items.open {
+            display: flex;
+        }
+
+        .drawer-chevron {
+            float: right;
+            transition: transform 0.3s;
+            display: inline-block;
+            margin-left: 0.75rem;
+            font-size: 1.4rem;
+            font-weight: bold;
+            line-height: 1;
+        }
+
+        .drawer-toggle.open .drawer-chevron {
+            transform: rotate(90deg);
+        }
+
+        /* Page hero */
+        .page-hero {
+            background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+        }
+
+        .page-hero h1 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 2.5rem;
+            letter-spacing: 0.02em;
+            margin-bottom: 0.5rem;
+        }
+
+        .page-hero p {
+            font-size: 1.5rem;
+            opacity: 0.9;
+        }
+
+        /* Main Content */
+        .main-content {
+            padding: 4rem 0;
+            background: #f8fafc;
+        }
+
+        .content-wrapper {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.07);
+        }
+
+        .content-wrapper h2 {
+            color: #1e40af;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .content-wrapper h2:first-child {
+            margin-top: 0;
+        }
+
+        .content-wrapper h3 {
+            color: #1e40af;
+            margin-top: 1.5rem;
+            margin-bottom: 0.5rem;
+            font-size: 1.3rem;
+        }
+
+        .content-wrapper p {
+            margin-bottom: 1rem;
+        }
+
+        .content-wrapper a {
+            color: #1e40af;
+            text-decoration: underline;
+            font-weight: 500;
+        }
+
+        .content-wrapper strong {
+            font-weight: 600;
+        }
+
+        /* Footer */
+        footer {
+            background: #1f2937;
+            color: #9ca3af;
+            padding: 2rem 0;
+            text-align: center;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .page-hero h1 {
+                font-size: 2rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .logo {
+                height: 35px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav>
+                <button class="hamburger" id="hamburger" aria-label="Open menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <div class="logo" style="height: 48px; display: flex; align-items: center; gap: 0.5rem;">
+                    <span style="background: rgba(255,255,255,0.45); border-radius: 50px; padding: 2px 6px; display: flex; align-items: center;">
+                        <img src="logo.svg" alt="AwareNet" style="height: 48px; width: auto;" />
+                    </span>
+                    <span style="font-size: 3rem; font-weight: bold; color: #1e40af; text-shadow: -1px -1px 0 white, 1px -1px 0 white, -1px 1px 0 white, 1px 1px 0 white;">Aware<em>Net</em></span>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="getting-started.html">Getting Started</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Slide-out drawer -->
+    <div class="drawer-overlay" id="drawer-overlay"></div>
+    <div class="drawer" id="drawer">
+        <button class="drawer-close" id="drawer-close">&times;</button>
+        <div class="drawer-header">
+            <span style="background: rgba(255,255,255,0.45); border-radius: 50px; padding: 2px 6px; display: flex; align-items: center;">
+                <img src="logo.svg" alt="AwareNet" style="height: 40px; width: auto;" />
+            </span>
+            <span class="drawer-logo-text">Aware<em>Net</em></span>
+        </div>
+        <nav>
+            <a href="index.html" class="drawer-item">Home</a>
+
+            <div class="drawer-group">
+                <a href="#" class="drawer-item drawer-toggle">About <span class="drawer-chevron">›</span></a>
+                <div class="drawer-sub-items">
+                    <a href="contact.html" class="drawer-sub-item">Contact Us</a>
+                    <a href="feature-summary.html" class="drawer-sub-item">Feature Summary</a>
+                    <a href="introduction-slide-deck.html" class="drawer-sub-item">Introduction Slide Deck</a>
+                    <a href="our-team.html" class="drawer-sub-item">Our Team</a>
+                    <a href="customers.html" class="drawer-sub-item">Customers</a>
+                </div>
+            </div>
+
+            <a href="getting-started.html" class="drawer-item">Getting Started</a>
+
+            <div class="drawer-group">
+                <a href="#" class="drawer-item drawer-toggle">FAQ <span class="drawer-chevron">›</span></a>
+                <div class="drawer-sub-items">
+                    <a href="qa.html" class="drawer-sub-item">Q&amp;A</a>
+                    <a href="alert-process.html" class="drawer-sub-item">Alert Process</a>
+                    <a href="review-alert.html" class="drawer-sub-item">Review Alert</a>
+                    <a href="privacy-masking.html" class="drawer-sub-item">Privacy Masking</a>
+                </div>
+            </div>
+
+            <a href="supported-cameras.html" class="drawer-item">Supported Cameras</a>
+
+            <div class="drawer-group">
+                <a href="#" class="drawer-item drawer-toggle">Reolink Email Setup <span class="drawer-chevron">›</span></a>
+                <div class="drawer-sub-items">
+                    <a href="#" class="drawer-sub-item">Gmail App Password</a>
+                    <a href="#" class="drawer-sub-item">Email Sent Folder</a>
+                </div>
+            </div>
+
+            <a href="#" class="drawer-item">Enroll a Camera</a>
+            <a href="camera-location.html" class="drawer-item">Camera Location</a>
+
+            <div class="drawer-group">
+                <a href="#" class="drawer-item drawer-toggle">Configuration Notes <span class="drawer-chevron">›</span></a>
+                <div class="drawer-sub-items">
+                    <a href="#" class="drawer-sub-item">Duo, Duo 2, Duo 3</a>
+                    <a href="#" class="drawer-sub-item">False Alerts</a>
+                </div>
+            </div>
+
+            <a href="pricing.html" class="drawer-item">Pricing</a>
+
+            <div class="drawer-group">
+                <a href="#" class="drawer-item drawer-toggle">Legal <span class="drawer-chevron">›</span></a>
+                <div class="drawer-sub-items">
+                    <a href="member-tos.html" class="drawer-sub-item">Member TOS</a>
+                    <a href="#" class="drawer-sub-item">Customer TOS</a>
+                    <a href="#" class="drawer-sub-item">Customer Order Form</a>
+                </div>
+            </div>
+        </nav>
+    </div>
+
+    <!-- Page Hero -->
+    <section class="page-hero">
+        <div class="container">
+            <h1>Member Terms of Service</h1>
+            <p>Member Agreement</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <section class="main-content">
+        <div class="container">
+            <div class="content-wrapper">
+                
+                <h2>1. OUR SERVICES</h2>
+                <p>This Member Agreement (the "Terms") governs your rights and responsibilities related to AwareNet's services including all of AwareNet's websites, domains, apps, products, services, features and marketing campaigns (the "Services"). When you enroll a camera or send us video or pictures, you become a "Member." If you are not a Member, you may still be able to access certain aspects of our Services as a "Visitor." By accessing or using our Services, whether as a Member or Visitor, you acknowledge and agree that you have read, understand, and agree to be bound by these Terms as a legally binding contract with AwareNet (even if you are using the Services on behalf of a company), so please take a moment to read these legally binding Terms.</p>
+                
+                <p>If you are accepting these Terms and using the Services on behalf of a company, partnership, organization, or other legal entity, you represent and warrant that you are authorized to do so and that you have the authority to bind such entity to these Terms, in which case the words "you" and "your" as used in these Terms shall refer to such entity.</p>
+                
+                <p>Throughout these Terms, we use "AwareNet", "we", "us" and "our" to refer to the people offering Services to you. The Services are operated and provided to you by AwareNet LLC, 6544 Neosho St., St. Louis, MO 63109</p>
+                
+                <p><strong>IMPORTANT: U.S. MEMBERS AND VISITORS, PLEASE REVIEW THE ARBITRATION AGREEMENT SET FORTH IN SECTION 16(a) BELOW CAREFULLY, AS IT WILL REQUIRE YOU TO RESOLVE DISPUTES WITH AWARENET ON AN INDIVIDUAL BASIS THROUGH FINAL AND BINDING ARBITRATION.</strong></p>
+
+                <h2>2. PARTICIPATING</h2>
+                
+                <h3>a. Eligibility.</h3>
+                <p>You may use our Services only if you can legally form a binding contract with AwareNet, and only in compliance with these Terms and all applicable laws. You can't use the Services if (1) you are a child for whom consent is required to fully use the Services (e.g., as is the case if you are under 13 pursuant to COPPA); (2) you are a registered sex offender in any jurisdiction or are otherwise subject to applicable law, order or legal action barring you from using or accessing an online service that permits use by minor children; (3) our Services are not directed to your geographic territory; or (4) you are otherwise prohibited by applicable laws from accessing or receiving our Services. We reserve the right to refuse Enrollment for, access to, or use of our Services by any person or household at any time and for any reason.</p>
+                
+                <h3>b. Enrollment.</h3>
+                <p>You may enroll one or more cameras for use with the Services ("Enrollment(s)"). Your Enrollment must provide us with accurate and complete information. We reserve the right to reject and terminate any Enrollments submitted with false or inaccurate information, or otherwise submitted in violation of these Terms.</p>
+                
+                <h3>c. Becoming a Member.</h3>
+                <p>When you enroll a camera with AwareNet, or send us video or pictures, you become a Member.</p>
+                
+                <h3>d. Permitted Activities.</h3>
+                <p>You may use, access, search, interact with, or otherwise make use of our Services only for the purposes for which they are provided and by the means we make available (such as our website, apps, and APIs), and in each case subject to any Supplemental Terms we provide governing their permitted uses.</p>
+
+                <h2>3. OUR LICENSE GRANT TO YOU.</h2>
+                <p>Subject to your complete and ongoing compliance with these Terms and all applicable guidelines and policies, AwareNet hereby grants you a limited, non-exclusive, non-transferable, non-sublicensable, and freely revocable license to access and use the Services as provided herein. The foregoing license grant is not a sale of the Services or any portion thereof, and AwareNet retains all of our right, title, and interest in the Services and all copies thereof.</p>
+
+                <h2>4. RIGHTS YOU GRANT</h2>
+                
+                <h3>a. Generally.</h3>
+                <p>Some areas of the Services allow Members to post, publish, submit, upload, transmit, or otherwise make available on the Services content such as profile pictures or information, photos, images, music, videos, information, comments, likes, recommendations, questions, messages, and other content or information ("Content") (any such Content that a Member does make available or submit is referred to as "Member Content"). You retain ownership of your Member Content.</p>
+                
+                <h3>b. License Grant to AwareNet.</h3>
+                <p>You hereby grant to AwareNet a non-exclusive, transferable, fully sublicensable (through multiple-tiers), royalty-free, and worldwide license, to host, use, distribute, modify, copy, publish, list information regarding, edit, translate, distribute, syndicate, publicly perform, publicly display, and make derivative works of your Member Content. You represent and warrant that you are the creator and owner of your Member Content, or that you have the necessary licenses, rights, consents and permissions to authorize AwareNet to exercise the licenses granted by you in this section in the manner contemplated by these Terms.</p>
+                
+                <h3>c. License Grant to Other Members.</h3>
+                <p>You also hereby grant each Member of the Services a non-exclusive license to access your Member Content through the Services and to use, reproduce, distribute, display, and perform such Member Content as permitted through the functionality of the Services and under these Terms.</p>
+                
+                <h3>d. Feedback.</h3>
+                <p>We welcome you to share any feedback, suggestions, or ideas you have about AwareNet and our Services with us ("Feedback"); You agree that in sharing your Feedback, you hereby grant AwareNet an unrestricted, perpetual, irrevocable, non-exclusive, sublicensable, transferable, fully-paid, royalty-free right to use the Feedback as we see fit and in connection with any of our products and services now known or hereinafter developed.</p>
+                
+                <h3>e. Software.</h3>
+                <p>Using AwareNet may include downloading software to your computer, phone, tablet, or other device. We may require you to accept updates to our Services that you have installed on your computer or mobile device. You acknowledge and agree that we may automatically update that software, and the then-current version of these Terms will apply to any updates.</p>
+
+                <h2>5. BEING A GOOD NEIGHBOR</h2>
+                
+                <h3>a. Community Guidelines.</h3>
+                <p>At AwareNet, we believe that neighborly behavior is the foundation of healthy communities. We reserve the right to proactively moderate Content, although we expressly disclaim any obligation to do so, and we can remove Content, suspend, delete, limit, or deactivate your access to Services, or otherwise refuse service to you, if you violate these Terms, or our other policies, or if you infringe intellectual property, or otherwise engage in behavior that we think may harm AwareNet or an AwareNet neighborhood.</p>
+                
+                <h3>b. Prohibited Conduct.</h3>
+                <p>Without limiting other restrictions contained in these Terms, you agree that you will not, under any circumstances (i) gain or attempt to gain unauthorized access to any part of the Services; (ii) interfere with, disrupt, or damage our Services or attempt to do the same (such as by posting viruses, instigating a denial of service attack, or spamming Members); (iii) attempt to gain access to or tamper with non-public areas of the Services, our computer systems, and any technical delivery systems of our providers; (iv) attempt to prove, scan, or test the vulnerability of our systems, networks, or Services, or breach any security or authentication measure; (v) conduct facial recognition or other biometric analysis of the Content (as defined below) posted on AwareNet; (vi) develop, support or use software, devices, scripts, robots or any other means or processes (including crawlers, browser plugins, and add-ons or any other technology) to scrape the Services or otherwise copy profiles and other data from the Services; or (vii) otherwise access or use the Services in an unlawful or unanticipated manner. For clarity, any attempt to engage in any of the behaviors listed in this section is also prohibited.</p>
+                
+                <h3>c. Disputes Between Members; Waiver of Claims Against AwareNet.</h3>
+                <p>In the real world and online, neighbors sometimes disagree. If you have a dispute with another Member, we hope that you will be able to work it out amicably. However, if you can't, please understand that AwareNet is not responsible for the actions of our Members. Each of our Members is solely responsible for their own actions and behavior, whether they are using AwareNet or chatting with a neighbor over the back fence. Accordingly, you agree that AwareNet has no responsibility for the conduct of Members or other third parties and, to the maximum extent permitted by applicable law, you hereby release the AwareNet Entities (defined below) from losses, liabilities, claims, demands, and damages (actual and consequential) of every kind and nature, known and unknown, arising out of or in any way connected with disputes involving you and other Members. If you are a California resident, you hereby waive California Civil Code §1542, which says: "A general release does not extend to claims that the creditor or releasing party does not know or suspect to exist in his or her favor at the time of executing the release, and that, if known by him or her, would have materially affected his or her settlement with the debtor or releasing party."</p>
+
+                <h2>6. MEMBER TRANSACTIONS</h2>
+                
+                <h3>a. Engaging Other Members.</h3>
+                <p>AwareNet does not interview, run background checks on, monitor, supervise, direct or control Members. Use of the Services does not make us an employer, placement agency, representative, or agent of or for you or any other Member or service provider, and you acknowledge and agree that no such relationship is intended or created by these Terms or your use of the Services. If you and another Member decide to work together, the two of you, and not AwareNet, are solely responsible for complying with any applicable laws, such as tax and employment laws. Members are not independent contractors, employees, joint venturers, franchisees, or service providers to or for AwareNet.</p>
+                
+                <h3>b. Prohibited Transactions.</h3>
+                <p>You may not use the Services to solicit, advertise for, or contact in any form, Members for any purpose not related to the Services. You may not use the Services to collect the contact information or other personal information of Members, by electronic means or otherwise, without our prior written consent.</p>
+                
+                <h3>c. AwareNet Only Provides a Venue.</h3>
+                <p>AwareNet is not a party to interactions, transactions or disputes between Members, and while we may, in our discretion, help facilitate the resolution of disputes we have no control over and do not guarantee the integrity, responsibility, or actions of any Members. When interacting with other Members you should exercise caution and common sense to protect your personal safety and property, just as you would when interacting with other persons whom you don't know. <strong>NEITHER AWARENET NOR OUR AFFILIATES ARE RESPONSIBLE FOR THE CONDUCT, WHETHER ONLINE OR OFFLINE, OF ANY USER OF THE SERVICES. AWARENET AND OUR AFFILIATES WILL NOT BE LIABLE FOR ANY CLAIM, INJURY OR DAMAGE ARISING IN CONNECTION WITH YOUR USE OF THE SERVICES.</strong></p>
+
+                <h2>7. NOTIFICATION.</h2>
+                
+                <h3>a. Notifications.</h3>
+                <p>By default, you will receive notifications from AwareNet related to your use of and interactions with the Services within the Services, to the email address to which your Enrollment is linked, and on your device or browser. You may also opt in to other kinds of notifications.</p>
+                
+                <h3>b. Text Messages.</h3>
+                <p>AwareNet provides a text message service that provides Members with notifications relevant to their neighborhood, Enrollment, or other Services, such as urgent alerts. AwareNet does not charge for our text notifications, but your carrier may charge you for such messages. Text notifications may not be delivered if your phone is not in range of a transmission site, or if sufficient network capacity is not available at a particular time. Further, factors beyond the control of the user's wireless carrier or wireless internet provider may interfere with message delivery, including equipment, terrain, proximity to buildings, foliage, and weather. You acknowledge that notifications may not be timely received and that neither AwareNet nor your wireless carrier guarantees that text notifications will be delivered. These notifications are not intended to replace any primary phone service, such as a traditional landline or mobile phone that may be used to contact emergency services. You acknowledge and agree that AwareNet is not liable, and you shall not seek to hold AwareNet liable, for any damages related to your use of the text notification service.</p>
+
+                <h2>9. THIRD-PARTY SITES AND SERVICES.</h2>
+                <p>Our Services may contain links to third-party websites, advertisers, services, special offers, or other events or activities that are not owned or controlled by AwareNet. We don't endorse or assume any responsibility for any such third-party websites, information, materials, products, or services. If you access any third-party website, advertisement, service, or other Content from AwareNet, you do so at your own risk. AwareNet may not warn you that you are leaving the Services and are subject to the terms and conditions of another website or domain, which is not under the control of AwareNet. You agree that AwareNet has no liability arising from your use of or access to any third-party website, service, or Content.</p>
+
+                <h2>10. CHANGES TO OUR SERVICE.</h2>
+                <p>We may offer additional Services and product features, or add, change, or discontinue our existing Services and product features at any time and in any region, with or without notice to you. If you are dissatisfied, your sole remedy is to stop using our Services or the affected feature.</p>
+
+                <h2>11. RESTRICTIONS FROM OUR LICENSORS.</h2>
+                <p>Some of the information and Services available through AwareNet are licensed from or supported by third parties. These third-party terms and disclosures apply to your use of the Services.</p>
+
+                <h2>12. INDEMNIFICATION.</h2>
+                <p>You agree to defend, indemnify, and hold AwareNet and our affiliates, related companies, officers, directors, employees, agents, representatives, partners, and licensors (the "AwareNet Entities") harmless from any claims, liabilities, damages, losses, and expenses, including without limitation reasonable attorney's fees and costs, made by any third party due to or arising out of any and all of the following (a) your use of the Services; (b) your violation of these Terms; (c) your violation of applicable laws or regulations; (d) your violation of any rights of another party, including any Members; (e) your interactions and transactions with other Members; or (f) your Member Content. We reserve the right to control the defense of any matter for which you are required to indemnify us, and you agree to cooperate with our defense of these claims and to not settle any claim without our prior written consent. You agree that the provisions of this section will survive any termination of your Enrollment(s), the Terms, and/or your access to the Services.</p>
+
+                <h2>13. DISCLAIMERS; LIMITATION OF LIABILITY</h2>
+                
+                <h3>a. Disclaimers; No Warranties.</h3>
+                <p>You understand and agree that to the maximum extent permitted by applicable law your access to and use of the Services or any Content are at your own risk. Our Services are provided to you on an "AS IS" and "AS AVAILABLE" basis, with all faults. <strong>WITHOUT LIMITING THE FOREGOING AND TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, THE AWARENET ENTITIES EXPRESSLY DISCLAIM ALL WARRANTIES, REPRESENTATIONS, AND CONDITIONS OF ANY KIND, WHETHER EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE IMPLIED WARRANTIES OR CONDITIONS OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NON-INFRINGEMENT.</strong> The AwareNet Entities make no warranty or representation and disclaim all responsibility and liability for (i) the completeness, accuracy, availability, timeliness, security, or reliability of the Services; (ii) any harm to computer systems, loss of data, or other harm that results from access to or use of the Services; (iii) the deletion of, or the failure to store or to transmit, any Content and other communications maintained by the Services; (iv) viruses or other harmful components distributed by the Services; and (v) whether the Services will meet requirements or be available on an uninterrupted, secure, or error-free basis. We can't guarantee continuous or secure access to the Services, and operation of the Services may be interfered with by numerous factors outside of our control. No advice or information, whether oral or written, obtained from the AwareNet Entities or through the Services will create any warranty not expressly made herein.</p>
+                
+                <h3>b. Liability Limits.</h3>
+                <p><strong>YOU UNDERSTAND AND AGREE THAT, TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, THE AWARENET ENTITIES SHALL NOT BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL OR PUNITIVE DAMAGES, OR ANY LOSS OF PROFITS OR REVENUES, WHETHER INCURRED DIRECTLY OR INDIRECTLY, OR ANY LOSS OF DATA, USE, GOODWILL, OR OTHER INTANGIBLE LOSSES, RESULTING FROM (I) YOUR ACCESS TO OR USE OF OR INABILITY TO ACCESS OR USE THE SERVICES; (II) ANY CONDUCT OR CONTENT OF ANY THIRD PARTY ON THE SERVICES, INCLUDING WITHOUT LIMITATION, ANY DEFAMATORY, OFFENSIVE OR ILLEGAL CONDUCT OF OTHER MEMBERS OR THIRD PARTIES; (III) ANY CONTENT OBTAINED FROM THE SERVICES; OR (IV) UNAUTHORIZED ACCESS, USE, OR ALTERATION OF YOUR TRANSMISSIONS OR CONTENT. IN NO EVENT SHALL THE AGGREGATE LIABILITY OF AWARENET ENTITIES EXCEED THE GREATER OF (A) THE TOTAL AMOUNT PAID OR PAYABLE TO AWARENET BY YOU FOR THE SERVICES DURING THE SIX-MONTH PERIOD PRIOR TO THE ACT, OMISSION, OR OCCURRENCE GIVING RISE TO SUCH LIABILITY; OR (B) ONE HUNDRED U.S. DOLLARS ($100). THE LIMITATIONS OF THIS SUBSECTION SHALL APPLY TO ANY THEORY OF LIABILITY, WHETHER BASED ON WARRANTY, CONTRACT, STATUTE, TORT OR OTHERWISE, AND WHETHER OR NOT THE PARTIES HAVE BEEN INFORMED OF THE POSSIBILITY OF ANY SUCH DAMAGE, AND EVEN IF A REMEDY SET FORTH HEREIN IS FOUND TO HAVE FAILED ITS ESSENTIAL PURPOSE.</strong></p>
+                
+                <h3>c. No Liability for Conduct of other Members.</h3>
+                <p><strong>YOU ARE SOLELY RESPONSIBLE FOR ALL OF YOUR COMMUNICATIONS AND INTERACTIONS WITH OTHER MEMBERS OR OTHER USERS OF THE SERVICES. YOU UNDERSTAND THAT AWARENET DOES NOT MAKE ANY ATTEMPT TO VERIFY THE STATEMENTS OF MEMBERS OR OTHER USERS OF THE SERVICES. AWARENET MAKES NO WARRANTY THAT ANY GOODS OR SERVICES PROVIDED BY THIRD PARTIES WILL MEET YOUR REQUIREMENTS OR BE AVAILABLE ON AN UNINTERRUPTED, SECURE, OR ERROR-FREE BASIS. AWARENET MAKES NO WARRANTY REGARDING THE QUALITY OF SUCH GOODS OR SERVICES, NOR THE ACCURACY, TIMELINESS, TRUTHFULNESS, COMPLETENESS, OR RELIABILITY OF ANY CONTENT MADE AVAILABLE BY THIRD PARTIES ON OR THROUGH THE SERVICES.</strong></p>
+                
+                <h3>d. Exclusion of Damages.</h3>
+                <p><strong>CERTAIN JURISDICTIONS DO NOT ALLOW THE EXCLUSION OR LIMITATION OF CERTAIN DAMAGES. IF THESE LAWS APPLY TO YOU, SOME OR ALL OF THE ABOVE EXCLUSIONS OR LIMITATIONS MAY NOT APPLY TO YOU, AND YOU MAY HAVE ADDITIONAL RIGHTS.</strong></p>
+                
+                <h3>e. Basis of the Bargain.</h3>
+                <p><strong>THE LIMITATIONS OF DAMAGES SET FORTH ABOVE ARE FUNDAMENTAL ELEMENTS OF THE BASIS OF THE BARGAIN BETWEEN AWARENET ENTITIES AND YOU.</strong></p>
+
+                <h2>14. DISPUTE RESOLUTION.</h2>
+                <p>If a dispute arises between you and AwareNet, our goal is to provide you with a neutral and cost‐effective means of resolving the dispute quickly. Accordingly, if you have a dispute with AwareNet, you agree to contact us and try to resolve the dispute informally before pursuing other avenues, including arbitration as set forth in Section 16(a) below.</p>
+
+                <h2>15. GENERAL.</h2>
+                
+                <h3>a. Term and Termination.</h3>
+                <p>The Terms commence on the date when you accept them (as described in the preamble above) and remain in full force and effect for as long as you access or use the Services, unless terminated earlier in accordance with the Terms.</p>
+                
+                <p><strong>i. Termination by You.</strong> You may terminate these Terms with AwareNet at any time by discontinuing your use of the Services.</p>
+                
+                <p><strong>ii. Termination by AwareNet.</strong> We may stop providing you with all or part of the Services at any time for any or no reason, with or without notice, without liability to you.</p>
+                
+                <p><strong>iii. Survival.</strong> In the event of termination, whether by you or by us, Section 3 (Rights You Grant), Section 12 (Indemnification), Section 13 (Disclaimers; Limitation of Liability), Section 14 (Dispute Resolution), Section 15 (General), and Section 16 (Jurisdiction Specific Provisions) of these Terms shall survive.</p>
+                
+                <h3>b. Infringement.</h3>
+                <p>If you believe Content on the Services infringes your copyright, you can reach our notification agent at the contact information set out in the introductory paragraph above. If you are in the U.S., your notice must satisfy the requirements enumerated in 17 U.S.C. §512(c)(3).</p>
+                
+                <h3>c. Integration.</h3>
+                <p>These Terms and other Supplemental Terms and policies referenced herein, constitute the entire agreement between you and us with respect to our Services, and supersede any other agreements or understandings (oral or written), except that in the event of any conflict between these Terms and Supplemental Terms the Supplemental Terms shall control solely with regard to the Services to which they apply.</p>
+                
+                <h3>d. Updates.</h3>
+                <p>We reserve the right to amend these Terms and any Supplemental Terms at any time. We will notify you of any material changes as legally required (for example, by emailing you, or by posting an amendment notice). Such changes to the Terms and Supplemental Terms shall be effective immediately for new Visitors. Changes to applicable policies and guidelines are effectively immediately unless otherwise stated. If you keep using AwareNet after a change to Terms or any applicable Supplemental Terms is effective, you accept and agree to be bound by the new terms; if you disagree with the new terms, you must stop using the Services.</p>
+                
+                <h3>e. Notices.</h3>
+                <p>Notice to AwareNet under these Terms must be in writing and sent to AwareNet using the relevant contact information set out in the introductory paragraph above. Notices will be deemed given upon personal delivery, upon delivery if by mail, or upon valid transmission through email.</p>
+                
+                <h3>f. No Agency.</h3>
+                <p>These Terms do not create any agency, partnership, joint venture, joint controllership, employment or franchise relationship between you and AwareNet.</p>
+                
+                <h3>g. Miscellaneous.</h3>
+                <p>To the extent allowed by applicable law, the English version of these Terms is binding, and other translations are for convenience only. You may not assign any of your rights or obligations under these Terms without our prior written consent, which consent may be withheld in our sole discretion. If any provision of these Terms is found unenforceable, then that provision will be severed from these Terms and not affect the validity and enforceability of any remaining provisions. Except as expressly provided in this Agreement, this Agreement is intended solely for the benefit of you and the AwareNet Entities, and is not intended to confer any benefits upon, or create any rights in favor of, any Person other than you and the AwareNet Entities. Our failure to act in a particular circumstance does not waive our right to act with respect to that or other circumstances. We shall be excused for any problem due to a circumstance beyond our reasonable control. You represent and warrant on an ongoing basis and at all relevant times that you are not, nor is any entity or person that (directly or indirectly) owns, controls, or is affiliated with you, acts on your behalf or is otherwise associated with you, subject to financial, economic or trade sanctions or embargoes, or otherwise designated on any list of prohibited or restricted parties. or territories, including any such lists maintained from time to time by the US Government or other applicable government authority. In the event that, at any relevant time, the warranty outlined in the preceding sentence ceases to be true, complete, and accurate, you shall notify us immediately.</p>
+
+                <h2>16. JURISDICTION-SPECIFIC PROVISIONS.</h2>
+                
+                <h3>a. United States.</h3>
+                <p>If you live in the United States, this section applies to you.</p>
+                
+                <p><strong>i. Governing law, Jurisdiction and Venue.</strong> These Terms are governed by Missouri law, without giving effect to any conflict of law principles, except as may be otherwise provided in the Arbitration Agreement section of these Terms. However, the governing law provision regarding the interpretation of these Terms is not intended to create any other substantive right to non-Missourians to assert claims under Missouri law whether that be by statute, common law, or otherwise. This section is only intended to specify the use of Missouri law to interpret these Terms. Both you and AwareNet agree that all claims and disputes arising out of or relating to these Terms (and any Supplemental Terms unless expressly otherwise set forth in such Supplemental Terms) that are not subject to arbitration per these Terms will be resolved exclusively in the U.S. District Court for the Eastern District of Missouri or a state court located in St. Louis City, and you hereby submit to the exclusive jurisdiction thereof.</p>
+                
+                <p><strong>ii. Arbitration Agreement.</strong> You and AwareNet agree to the arbitration and dispute resolution terms in this section (the "Arbitration Agreement"). For the purposes of this Arbitration Agreement, references to "AwareNet," "you," "we" and "us" include our respective subsidiaries, affiliates, agents, employees, employers, partners, predecessors in interest, successors, assigns, and heirs. We encourage you to carefully read these important terms, which include a requirement that claims arising out of or relating to these Terms (and any Supplemental Terms unless expressly otherwise set forth in such Supplemental Terms) shall be brought individually and subject to arbitration, subject to the exceptions in Section 16(a)(iii), Section 16(a)(iv), and Section 16(a)(v), and include instructions for how to opt out if you do not agree.</p>
+                
+                <p><strong>iii. Small Claims Court.</strong> Notwithstanding the foregoing, either you or AwareNet may bring an individual action in small claims court.</p>
+                
+                <p><strong>iv. Emergency Equitable Relief.</strong> Notwithstanding the foregoing, either you or AwareNet may seek emergency equitable relief before a state or federal court in order to maintain the status quo pending arbitration. A request for interim measures shall not be deemed a waiver of any other rights or obligations under this Arbitration Agreement.</p>
+                
+                <p><strong>v. Claims not Subject to Arbitration.</strong> Notwithstanding the foregoing, claims of defamation, violation of the Computer Fraud and Abuse Act, and infringement or misappropriation of the other party's patent, copyright, trademark, or trade secrets shall not be subject to this Arbitration Agreement.</p>
+                
+                <p><strong>vi. Applicability.</strong> You agree that any dispute or claim relating in any way to your access or use of the Services, or to any aspect of your relationship with AwareNet, will be resolved by binding arbitration, rather than in court, except that you may assert certain qualifying claims in small claims court in accordance with the terms above.</p>
+                
+                <p><strong>vii. Arbitration rules and forum.</strong> These Terms evidence a transaction involving interstate commerce and that notwithstanding the provision above with respect to the applicable substantive law, the Federal Arbitration Act, 9 U.S.C. §1 et seq. ("FAA") will govern the interpretation and enforcement of this Arbitration Agreement and any arbitration proceedings. If for whatever reason the FAA is inapplicable, the state law governing arbitration agreements in the state in which you reside shall apply. To begin an arbitration proceeding, you must send a letter requesting arbitration and describing your claim to AwareNet, 6544 Neosho St, St Louis, MO 63109, attn: Legal Department, with copy to <a href="mailto:legal-arbitration@awarenet.us">legal-arbitration@awarenet.us</a>. Your letter must include (1) the name, telephone number, mailing address, and e‐mail address of the party seeking arbitration; (2) a statement of the legal claims being asserted and the factual bases of those claims; (3) a description of the remedy sought and an accurate, good‐faith calculation of the amount in controversy in United States Dollars; (4) the party's portion of the applicable filing fee. The arbitration will be conducted by JAMS, an established alternative dispute resolution provider. Disputes involving claims and counterclaims under $250,000, not inclusive of attorneys' fees and interest, shall be subject to JAMS's most current version of the Streamlined Arbitration Rules and procedures available at <a href="http://www.jamsadr.com/rules-streamlined-arbitration/">http://www.jamsadr.com/rules-streamlined-arbitration/</a>. All other claims shall be subject to JAMS's most current version of the Comprehensive Arbitration Rules and Procedures, available at <a href="http://www.jamsadr.com/rules-comprehensive-arbitration/">http://www.jamsadr.com/rules-comprehensive-arbitration/</a>. JAMS's rules are also available at <a href="http://www.jamsadr.com">www.jamsadr.com</a> or by calling JAMS at 800-352-5267. If JAMS is not available to arbitrate, the parties will select an alternative arbitral forum. If the arbitrator finds that you can't afford to pay JAMS's filing, administrative, hearing, and/or other fees and can't obtain a waiver from JAMS, AwareNet will pay them for you. In addition, AwareNet will reimburse all such JAMS's filing, administrative, hearing and/or other fees for claims, such amounts totaling less than $10,000, unless the arbitrator determines the claims are frivolous. You may choose to have the arbitration conducted by telephone, based on written submissions, or in person in the county where you reside, or at another mutually agreed location. Any judgment on the award rendered by the arbitrator may be entered in any court of competent jurisdiction.</p>
+                
+                <p><strong>viii. Authority of arbitrator.</strong> The arbitrator shall have exclusive authority to (i) determine the scope and enforceability of this Arbitration Agreement and (ii) resolve any dispute related to the interpretation, applicability, enforceability or formation of this Arbitration Agreement including, but not limited to, any claim that all or any part of this Arbitration Agreement is void or voidable. The exceptions to the preceding sentence are (1) all disputes arising out of or relating to the class action waiver, including any claim that all or part of the class action waiver is unenforceable, illegal, void or voidable, or such class action waiver has been breached, shall be decided by a court of competent jurisdiction and not by an arbitrator; (2) all disputes arising out of or relating to the payment of arbitration fees shall be decided only by a court of competent jurisdiction and not by an arbitrator; and (3) all disputes arising out of or relating to whether either party has satisfied any condition precedent to arbitration shall be decided only by a court of competent jurisdiction and not by an arbitrator. The arbitration will decide the rights and liabilities, if any, of you and AwareNet. The arbitrator shall have the authority to grant motions dispositive of all or part of any claim. The arbitrator shall have the authority to award monetary damages and to grant any non-monetary remedy or relief available to an individual under applicable law, the arbitral forum's rules, and the Terms (including the Arbitration Agreement). The arbitrator shall issue a written award and statement of decision describing the essential findings and conclusions on which the award is based, including the calculation of any damages awarded. The arbitrator has the same authority to award relief on an individual basis that a judge in a court of law would have. The award of the arbitrator is final and binding upon you and us. Any judgment on the award rendered by the arbitrator may be entered in any court of competent jurisdiction.</p>
+                
+                <p><strong>ix. Waiver of jury trial.</strong> YOU AND AWARENET HEREBY WAIVE ANY CONSTITUTIONAL AND STATUTORY RIGHTS TO SUE IN COURT AND HAVE A TRIAL IN FRONT OF A JUDGE OR A JURY. There is no judge or jury in arbitration, and court review of an arbitration award is subject to very limited review. This clause shall not preclude parties from seeking provision remedies in aid of arbitration from a court of appropriate jurisdiction.</p>
+                
+                <p><strong>x. Waiver of class or other non-individualized relief.</strong> ALL CLAIMS AND DISPUTES WITHIN THE SCOPE OF THIS ARBITRATION AGREEMENT MUST BE ARBITRATED ON AN INDIVIDUAL BASIS AND NOT ON A CLASS OR COLLECTIVE BASIS, ONLY INDIVIDUAL RELIEF IS AVAILABLE, AND CLAIMS OF MORE THAN ONE CUSTOMER OR USER can't BE ARBITRATED OR CONSOLIDATED WITH THOSE OF ANY OTHER CUSTOMER OR USER. If a decision is issued stating that applicable law precludes enforcement of any of this subsection's limitations as to a given claim for relief, then the claim must be severed from the arbitration and brought into the federal or state court located in St. Louis, Missouri. All other claims shall be arbitrated.</p>
+                
+                <p><strong>xi. 30-day right to opt out.</strong> You have the right to opt out of the provisions of these Terms that mandate arbitration by sending written notice of your decision to opt out to: <a href="mailto:legal-arbitration@awarenet.us">legal-arbitration@awarenet.us</a>, within 30 days after first becoming subject to a version of these Terms containing an arbitration provision. Your notice must include your name and address, your AwareNet username (if any), the email address you used to enroll (if you enrolled), and an unequivocal statement that you want to opt out of this Arbitration Agreement. If you opt out of arbitration, all other parts of these Terms will continue to apply to you. Opting out of arbitration has no effect on any other arbitration agreements that you may currently have, or may enter into in the future, with us.</p>
+                
+                <p><strong>xii. Severability.</strong> Except as provided in Section 16(a)(x) (Waiver of Class or Other Non-Individualized Relief), if any part or parts of this Arbitration Agreement are found under the law to be invalid or unenforceable, then such specific part or parts shall be of no force and effect and shall be severed and the remainder of the Arbitration Agreement shall continue in full force and effect.</p>
+                
+                <p><strong>xiii. Survival of Arbitration Agreement.</strong> This Arbitration Agreement will survive the termination of your relationship with AwareNet.</p>
+                
+                <p><strong>xiv. Material Changes.</strong> Notwithstanding any provision in these Terms to the contrary, we agree that if AwareNet makes any future material change to this Arbitration Agreement, you may reject that change within thirty (30) days of such change becoming effective by writing AwareNet at the following address: <a href="mailto:legal-arbitration@awarenet.us">legal-arbitration@awarenet.us</a>.</p>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Aware<em>Net</em>. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Collapsible drawer groups
+            document.querySelectorAll('.drawer-toggle').forEach(toggle => {
+                toggle.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const subItems = this.nextElementSibling;
+                    const isOpen = subItems.classList.contains('open');
+                    document.querySelectorAll('.drawer-sub-items.open').forEach(el => el.classList.remove('open'));
+                    document.querySelectorAll('.drawer-toggle.open').forEach(el => el.classList.remove('open'));
+                    if (!isOpen) {
+                        subItems.classList.add('open');
+                        this.classList.add('open');
+                    }
+                });
+            });
+
+            // Slide-out drawer
+            const hamburger = document.getElementById('hamburger');
+            const drawer = document.getElementById('drawer');
+            const drawerOverlay = document.getElementById('drawer-overlay');
+            const drawerClose = document.getElementById('drawer-close');
+
+            function openDrawer() {
+                drawer.classList.add('open');
+                drawerOverlay.style.display = 'block';
+                document.body.style.overflow = 'hidden';
+            }
+
+            function closeDrawer() {
+                drawer.classList.remove('open');
+                drawerOverlay.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+
+            if (hamburger) {
+                hamburger.addEventListener('click', openDrawer);
+                drawerClose.addEventListener('click', closeDrawer);
+                drawerOverlay.addEventListener('click', closeDrawer);
+                drawer.querySelectorAll('nav a:not(.drawer-toggle)').forEach(link => {
+                    link.addEventListener('click', closeDrawer);
+                });
+            }
+        });
+    </script>
+
+</body>
+</html>
