@@ -460,7 +460,6 @@
                     // Close all others
                     document.querySelectorAll('.drawer-sub-items.open').forEach(el => el.classList.remove('open'));
                     document.querySelectorAll('.drawer-toggle.open').forEach(el => el.classList.remove('open'));
-                    document.querySelectorAll('.drawer-toggle.active').forEach(el => el.classList.remove('active'));
                     // Toggle this one
                     if (!isOpen) {
                         subItems.classList.add('open');
@@ -482,7 +481,8 @@
                                 }
                             }
                             
-                            // Highlight the toggle after scroll
+                            // Clear all active highlights, then highlight this toggle
+                            document.querySelectorAll('.drawer-toggle.active').forEach(el => el.classList.remove('active'));
                             toggleElement.classList.add('active');
                         }, 50); // Small delay to ensure DOM has updated
                     }
