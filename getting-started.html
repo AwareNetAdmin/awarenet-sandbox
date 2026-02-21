@@ -500,12 +500,18 @@
                     }
                     
                     // Double-check: remove active from all toggles
-                    document.querySelectorAll('.drawer-toggle').forEach(t => t.classList.remove('active'));
+                    document.querySelectorAll('.drawer-toggle').forEach(t => {
+                        if (t.classList.contains('active')) {
+                            console.log('Removing active from:', t.textContent.trim());
+                        }
+                        t.classList.remove('active');
+                    });
                     
                     // Toggle this one
                     if (!isOpen) {
                         subItems.classList.add('open');
                         this.classList.add('open');
+                        console.log('Opening menu:', this.textContent.trim());
                         
                         // Scroll to show last sub-item if needed, then highlight this toggle
                         const toggleElement = this;
@@ -525,11 +531,23 @@
                             }
                             
                             // One more safety check before adding active
-                            document.querySelectorAll('.drawer-toggle').forEach(t => t.classList.remove('active'));
+                            document.querySelectorAll('.drawer-toggle').forEach(t => {
+                                if (t.classList.contains('active')) {
+                                    console.log('SAFETY: Removing active from:', t.textContent.trim());
+                                }
+                                t.classList.remove('active');
+                            });
                             
                             // Highlight this toggle after scroll
+                            console.log('Adding active to:', toggleElement.textContent.trim());
                             toggleElement.classList.add('active');
                             currentlyActiveToggle = toggleElement;
+                            
+                            // DEBUG: Log all elements with active class
+                            setTimeout(() => {
+                                const allActive = document.querySelectorAll('.active');
+                                console.log('All elements with .active class:', Array.from(allActive).map(el => el.textContent.trim()));
+                            }, 100);
                             drawerHighlightTimeout = null;
                         }, 50); // Small delay to ensure DOM has updated
                     }
