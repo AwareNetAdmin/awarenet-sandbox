@@ -467,6 +467,7 @@
             }
 
             // Collapsible drawer groups
+            let drawerHighlightTimeout = null;
             document.querySelectorAll('.drawer-toggle').forEach((toggle, index) => {
                 toggle.setAttribute('data-menu-index', index);
                 toggle.addEventListener('click', function(e) {
@@ -483,7 +484,13 @@
                         
                         // Scroll to show last sub-item if needed, then highlight this toggle
                         const toggleElement = this;
-                        setTimeout(() => {
+                        
+                        // Clear any pending highlight timeout to prevent race conditions
+                        if (drawerHighlightTimeout) {
+                            clearTimeout(drawerHighlightTimeout);
+                        }
+                        
+                        drawerHighlightTimeout = setTimeout(() => {
                             const drawerNav = document.querySelector('.drawer nav');
                             const lastSubItem = subItems.querySelector('a:last-child');
                             if (lastSubItem && drawerNav) {
@@ -500,6 +507,7 @@
                             // Clear all active highlights, then highlight this toggle
                             document.querySelectorAll('.drawer-toggle.active').forEach(el => el.classList.remove('active'));
                             toggleElement.classList.add('active');
+                            drawerHighlightTimeout = null;
                         }, 50); // Small delay to ensure DOM has updated
                     }
                     // Save state to localStorage
