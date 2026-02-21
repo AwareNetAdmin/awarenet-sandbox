@@ -456,6 +456,22 @@
                     if (!isOpen) {
                         subItems.classList.add('open');
                         this.classList.add('open');
+                        
+                        // Scroll to show last sub-item if needed
+                        setTimeout(() => {
+                            const drawerNav = document.querySelector('.drawer nav');
+                            const lastSubItem = subItems.querySelector('a:last-child');
+                            if (lastSubItem && drawerNav) {
+                                const drawerRect = drawerNav.getBoundingClientRect();
+                                const lastItemRect = lastSubItem.getBoundingClientRect();
+                                
+                                // Check if last item is below the visible area
+                                if (lastItemRect.bottom > drawerRect.bottom) {
+                                    const scrollAmount = lastItemRect.bottom - drawerRect.bottom + 20; // 20px padding
+                                    drawerNav.scrollBy({ top: scrollAmount, behavior: 'smooth' });
+                                }
+                            }
+                        }, 50); // Small delay to ensure DOM has updated
                     }
                     // Save state to localStorage
                     const openMenus = [];
