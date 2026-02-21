@@ -478,9 +478,14 @@
                     e.preventDefault();
                     const subItems = this.nextElementSibling;
                     const isOpen = subItems.classList.contains('open');
+                    
                     // Close all others
                     document.querySelectorAll('.drawer-sub-items.open').forEach(el => el.classList.remove('open'));
                     document.querySelectorAll('.drawer-toggle.open').forEach(el => el.classList.remove('open'));
+                    
+                    // Clear all active highlights immediately
+                    document.querySelectorAll('.drawer-toggle.active').forEach(el => el.classList.remove('active'));
+                    
                     // Toggle this one
                     if (!isOpen) {
                         subItems.classList.add('open');
@@ -508,8 +513,7 @@
                                 }
                             }
                             
-                            // Clear all active highlights, then highlight this toggle
-                            document.querySelectorAll('.drawer-toggle.active').forEach(el => el.classList.remove('active'));
+                            // Highlight this toggle after scroll
                             toggleElement.classList.add('active');
                             drawerHighlightTimeout = null;
                         }, 50); // Small delay to ensure DOM has updated
