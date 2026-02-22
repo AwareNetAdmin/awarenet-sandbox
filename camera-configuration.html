@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Camera Location - AwareNet</title>
+    <title>Camera Configuration - AwareNet</title>
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&display=swap" rel="stylesheet">
     <style>
         * {
@@ -95,18 +95,39 @@
         }
         
         .content-wrapper ul {
-            margin-left: 1.5rem;
-            margin-bottom: 1rem;
+            list-style: none;
+            margin: 2rem 0;
         }
         
         .content-wrapper li {
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
         }
         
         .content-wrapper a {
             color: #007BBF;
             text-decoration: underline;
             font-weight: 500;
+        }
+        
+        .option-box {
+            background: #f8fafc;
+            border: 2px solid #007BBF;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            transition: all 0.3s;
+        }
+        
+        .option-box:hover {
+            background: #e7f3ff;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,123,191,0.2);
+        }
+        
+        .option-box h3 {
+            color: #007BBF;
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
         }
         
         /* Footer */
@@ -149,36 +170,25 @@
             z-index: 999;
         }
 
+        .drawer-overlay.active {
+            display: block;
+        }
+
         .drawer {
             position: fixed;
             top: 0;
-            left: -280px;
-            width: 280px;
+            left: -300px;
+            width: 300px;
             height: 100%;
-            background: #007BBF;
+            background: linear-gradient(135deg, #007BBF 0%, #3b82f6 100%);
+            box-shadow: 2px 0 10px rgba(0,0,0,0.3);
+            transition: left 0.3s;
             z-index: 1000;
-            transition: left 0.3s ease;
-            display: flex;
-            flex-direction: column;
-            box-shadow: 4px 0 15px rgba(0,0,0,0.3);
+            overflow-y: auto;
         }
 
-        .drawer.open {
+        .drawer.active {
             left: 0;
-        }
-
-        .drawer-header {
-            padding: 1.5rem;
-            border-bottom: 1px solid rgba(255,255,255,0.2);
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-        }
-
-        .drawer-logo-text {
-            font-size: 1.8rem;
-            font-weight: bold;
-            color: #fff;
         }
 
         .drawer-close {
@@ -188,36 +198,94 @@
             background: none;
             border: none;
             color: white;
-            font-size: 1.6rem;
+            font-size: 2rem;
             cursor: pointer;
-            line-height: 1;
+            padding: 0;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .drawer-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .drawer-logo-text {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: white;
         }
 
         .drawer nav {
-            display: flex;
-            flex-direction: column;
             padding: 1rem 0;
-            overflow-y: auto;
-            flex: 1;
-        }
-
-        .drawer nav a {
-            text-decoration: none;
-            color: white;
-            font-size: 1.35rem;
-            font-weight: 500;
-            padding: 0.75rem 1.5rem;
-            border-bottom: 1px solid rgba(255,255,255,0.15);
-            transition: background 0.2s;
-            text-align: left;
             display: block;
-            width: 100%;
-            box-sizing: border-box;
         }
 
-        /* Only show hover on non-touch devices to prevent stuck hover on iOS */
+        .drawer-item {
+            display: block;
+            padding: 0.75rem 1.5rem;
+            color: white;
+            text-decoration: none;
+            transition: background 0.3s;
+        }
+
+        .drawer-item:hover {
+            background: rgba(255,255,255,0.15);
+        }
+
+        .drawer-group {
+            margin: 0;
+        }
+
+        .drawer-toggle {
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+        }
+
+        .drawer-chevron {
+            transition: transform 0.3s;
+            font-size: 1.2rem;
+        }
+
+        .drawer-toggle.open .drawer-chevron {
+            transform: rotate(90deg);
+        }
+
+        .drawer-sub-items {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+            background: rgba(0,0,0,0.1);
+        }
+
+        .drawer-sub-items.open {
+            max-height: 500px;
+        }
+
+        .drawer-sub-item {
+            display: block;
+            padding: 0.5rem 1.5rem 0.5rem 2.5rem;
+            color: rgba(255,255,255,0.9);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: background 0.3s;
+        }
+
+        .drawer-sub-item:hover {
+            background: rgba(255,255,255,0.1);
+        }
+
         @media (hover: hover) and (pointer: fine) {
-            .drawer nav a:hover {
+            .drawer-toggle:hover {
                 background: rgba(255,255,255,0.15);
             }
         }
@@ -226,52 +294,6 @@
             background: rgba(255,255,255,0.25);
         }
 
-        .drawer nav a.drawer-sub-item {
-            font-size: 1.2rem;
-            font-weight: 400;
-            padding: 0.5rem 1.5rem 0.5rem 2.5rem;
-            opacity: 0.85;
-            border-bottom: 1px solid rgba(255,255,255,0.08);
-        }
-
-        .drawer-group {
-            display: flex;
-            flex-direction: column;
-            width: 100%;
-        }
-
-        .drawer-toggle {
-            display: flex !important;
-            justify-content: space-between;
-            align-items: center;
-            width: 100%;
-            box-sizing: border-box;
-        }
-
-        .drawer-sub-items {
-            display: none;
-            flex-direction: column;
-        }
-
-        .drawer-sub-items.open {
-            display: flex;
-        }
-
-        .drawer-chevron {
-            float: right;
-            transition: transform 0.3s;
-            display: inline-block;
-            margin-left: 0.75rem;
-            font-size: 1.4rem;
-            font-weight: bold;
-            line-height: 1;
-        }
-
-        .drawer-toggle.open .drawer-chevron {
-            transform: rotate(90deg);
-        }
-
-        /* Responsive */
         @media (max-width: 768px) {
             .nav-links {
                 display: none;
@@ -292,7 +314,6 @@
     </style>
 </head>
 <body>
-    <!-- Header -->
     <header>
         <div class="container">
             <nav>
@@ -356,7 +377,6 @@
 
             <a href="supported-cameras.html" class="drawer-item">Supported Cameras</a>
 
-
             <div class="drawer-group">
                 <a href="#" class="drawer-item drawer-toggle">Camera Setup <span class="drawer-chevron">›</span></a>
                 <div class="drawer-sub-items">
@@ -364,7 +384,10 @@
                     <a href="camera-location.html" class="drawer-sub-item">Location</a>
                 </div>
             </div>
-            <a href="enroll-a-camera.html" class="drawer-item">Enroll a Camera</a>            <a href="pricing.html" class="drawer-item">Pricing</a>
+
+            <a href="enroll-a-camera.html" class="drawer-item">Enroll a Camera</a>
+
+            <a href="pricing.html" class="drawer-item">Pricing</a>
 
             <div class="drawer-group">
                 <a href="#" class="drawer-item drawer-toggle">Legal <span class="drawer-chevron">›</span></a>
@@ -377,37 +400,26 @@
         </nav>
     </div>
 
-    <!-- Main Content -->
     <section class="main-content">
         <div class="container">
-            <h1 class="page-title">Camera Location</h1>
+            <h1 class="page-title">Camera Configuration</h1>
+            
             <div class="content-wrapper">
-                <p>After you have completed the <a href="getting-started.html">Getting Started</a> steps, you are ready to physically install/mount your camera in the desired location. Here are some tips:</p>
-
-                <ul>
-                    <li>Battery-powered cameras (like the Reolink Argus 3 Pro) typically have a maximum range of 25-30 feet for sensing motion (they use "passive infrared" sensors). So we recommend placing this type of camera as close as possible to the street or alley (an adjacent pole, tree or garage).</li>
-                    
-                    <li>Outlet-powered cameras and power-over-ethernet cameras typically have a longer maximum range (30-60 feet, or more) for sensing motion (they use software to "see" changes in the picture). So we recommend placing this type of camera on an exterior wall of your house or garage.</li>
-                    
-                    <li>Generally, cameras sense objects moving side-to-side in the field of view better than objects moving straight towards or away from the camera. So for all cameras, we recommend pointing the camera roughly perpendicular to the street or alley (straight across to the other side).</li>
-                    
-                    <li>For all cameras, we recommend placing them 8-15 feet above the street or alley. Each situation is unique, but generally, higher than 15 feet will likely reduce the capability of the camera.</li>
-                    
-                    <li>If you are using a camera that relies on light coming from the camera (regular or infra-red), be sure the leading edge of the camera extends a bit beyond any nearby wall or object so the light is not reflected back into the camera lens.</li>
-                    
-                    <li>Landscape lighting pointed at the camera will typically cause the camera picture to be darker than normal.</li>
-                    
-                    <li>Wall lighting that is level with the camera can also cause the camera picture to be darker than normal. Generally, it is best to position the camera above or below the wall light so the light fixture is not in the camera's field of view. Either way, a night time test is recommend before permanent installation.</li>
-                    
-                    <li>NOTE: For Reolink cameras, the mounting screws they include are adequate for drywall or other light-weight material, but you will snap off the screw heads if you use them for wood without drilling a proper pilot hole.</li>
-                    
-                    <li>Having at least one street camera per block is the goal. Depending on the distance of the camera from the street, or for wide streets, it may be best to have one camera on each side of the street. Having at least one alley camera per block would complete the coverage.</li>
-                </ul>
+                <p>Select your camera manufacturer for configuration instructions:</p>
+                
+                <div class="option-box">
+                    <h3>Reolink</h3>
+                    <p>Configuration instructions for Reolink cameras</p>
+                </div>
+                
+                <div class="option-box">
+                    <h3>Axis</h3>
+                    <p>Configuration instructions for Axis cameras</p>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
     <footer>
         <div class="container">
             <p>&copy; 2026 Aware<em>Net</em>. All rights reserved.</p>
@@ -416,23 +428,6 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Restore drawer state from localStorage
-            const savedState = localStorage.getItem('drawerMenuState');
-            if (savedState) {
-                try {
-                    const openMenus = JSON.parse(savedState);
-                    openMenus.forEach(index => {
-                        const toggles = document.querySelectorAll('.drawer-toggle');
-                        if (toggles[index]) {
-                            toggles[index].classList.add('open');
-                            toggles[index].nextElementSibling.classList.add('open');
-                        }
-                    });
-                } catch (e) {
-                    // Ignore parse errors
-                }
-            }
-
             // Collapsible drawer groups
             let drawerHighlightTimeout = null;
             let currentlyActiveToggle = null;
@@ -445,8 +440,17 @@
                     const isOpen = subItems.classList.contains('open');
                     
                     // Close all others
-                    document.querySelectorAll('.drawer-sub-items.open').forEach(el => el.classList.remove('open'));
-                    document.querySelectorAll('.drawer-toggle.open').forEach(el => el.classList.remove('open'));
+                    document.querySelectorAll('.drawer-sub-items').forEach(item => {
+                        item.classList.remove('open');
+                    });
+                    document.querySelectorAll('.drawer-toggle').forEach(t => {
+                        t.classList.remove('open');
+                    });
+                    
+                    // Clear all active highlights
+                    document.querySelectorAll('.drawer-toggle').forEach(t => {
+                        t.classList.remove('active');
+                    });
                     
                     // Clear any pending highlight timeout
                     if (drawerHighlightTimeout) {
@@ -454,87 +458,66 @@
                         drawerHighlightTimeout = null;
                     }
                     
-                    // Remove active class from previously active toggle
-                    if (currentlyActiveToggle) {
-                        currentlyActiveToggle.classList.remove('active');
-                        currentlyActiveToggle = null;
-                    }
-                    
-                    // Double-check: remove active from all toggles
-                    document.querySelectorAll('.drawer-toggle').forEach(t => {
-                        if (t.classList.contains('active')) {
-                            console.log('Removing active from:', t.textContent.trim());
-                        }
-                        t.classList.remove('active');
-                    });
-                    
                     // Toggle this one
                     if (!isOpen) {
-                        subItems.classList.add('open');
                         this.classList.add('open');
-                        console.log('Opening menu:', this.textContent.trim());
+                        subItems.classList.add('open');
                         
-                        // Scroll to show last sub-item if needed, then highlight this toggle
-                        const toggleElement = this;
-                        
-                        drawerHighlightTimeout = setTimeout(() => {
-                            const drawerNav = document.querySelector('.drawer nav');
-                            const lastSubItem = subItems.querySelector('a:last-child');
-                            if (lastSubItem && drawerNav) {
-                                const drawerRect = drawerNav.getBoundingClientRect();
-                                const lastItemRect = lastSubItem.getBoundingClientRect();
-                                
-                                // Check if last item is below the visible area
-                                if (lastItemRect.bottom > drawerRect.bottom) {
-                                    const scrollAmount = lastItemRect.bottom - drawerRect.bottom + 20; // 20px padding
-                                    drawerNav.scrollBy({ top: scrollAmount, behavior: 'smooth' });
-                                }
+                        // Auto-scroll to show the last sub-item
+                        setTimeout(() => {
+                            const lastSubItem = subItems.querySelector('.drawer-sub-item:last-child');
+                            if (lastSubItem) {
+                                lastSubItem.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
                             }
                             
-                            // Nuclear option: remove 'active' from EVERYTHING in the entire document
-                            document.querySelectorAll('.active').forEach(el => el.classList.remove('active'));
-                            
-                            // Highlight this specific toggle after scroll
-                            toggleElement.classList.add('active');
-                            currentlyActiveToggle = toggleElement;
-                            drawerHighlightTimeout = null;
-                        }, 50); // Small delay to ensure DOM has updated
+                            // Highlight this toggle after scroll
+                            drawerHighlightTimeout = setTimeout(() => {
+                                // Clear all active states first
+                                document.querySelectorAll('.drawer-toggle').forEach(t => {
+                                    t.classList.remove('active');
+                                });
+                                // Add active only to this toggle
+                                this.classList.add('active');
+                                currentlyActiveToggle = this;
+                            }, 50);
+                        }, 50);
                     }
-                    // Save state to localStorage
-                    const openMenus = [];
-                    document.querySelectorAll('.drawer-toggle.open').forEach(el => {
-                        openMenus.push(parseInt(el.getAttribute('data-menu-index')));
-                    });
-                    localStorage.setItem('drawerMenuState', JSON.stringify(openMenus));
                 });
             });
 
-            // Slide-out drawer
+            // Prevent drawer sub-items from closing the drawer
+            document.querySelectorAll('.drawer-sub-item').forEach(item => {
+                item.addEventListener('click', function(e) {
+                    // Let the link navigate normally, don't prevent default
+                });
+            });
+
+            // Drawer functionality
             const hamburger = document.getElementById('hamburger');
             const drawer = document.getElementById('drawer');
             const drawerOverlay = document.getElementById('drawer-overlay');
             const drawerClose = document.getElementById('drawer-close');
 
             function openDrawer() {
-                drawer.classList.add('open');
-                drawerOverlay.style.display = 'block';
-                document.body.style.overflow = 'hidden';
+                drawer.classList.add('active');
+                drawerOverlay.classList.add('active');
             }
 
             function closeDrawer() {
-                drawer.classList.remove('open');
-                drawerOverlay.style.display = 'none';
-                document.body.style.overflow = 'auto';
+                drawer.classList.remove('active');
+                drawerOverlay.classList.remove('active');
             }
 
-            if (hamburger) {
-                hamburger.addEventListener('click', openDrawer);
-                drawerClose.addEventListener('click', closeDrawer);
-                drawerOverlay.addEventListener('click', closeDrawer);
-                drawer.querySelectorAll('nav a:not(.drawer-toggle)').forEach(link => {
+            hamburger.addEventListener('click', openDrawer);
+            drawerClose.addEventListener('click', closeDrawer);
+            drawerOverlay.addEventListener('click', closeDrawer);
+
+            // Close drawer when clicking regular drawer items (but not toggles or sub-items)
+            drawer.querySelectorAll('nav a:not(.drawer-toggle)').forEach(link => {
+                if (!link.classList.contains('drawer-sub-item')) {
                     link.addEventListener('click', closeDrawer);
-                });
-            }
+                }
+            });
         });
     </script>
 </body>
