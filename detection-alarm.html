@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reolink Camera Configuration - AwareNet</title>
+    <title>Detection Alarm - AwareNet</title>
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&display=swap" rel="stylesheet">
     <style>
         * {
@@ -97,6 +97,10 @@
             font-size: 1.8rem;
         }
         
+        .content-wrapper h2:first-child {
+            margin-top: 0;
+        }
+        
         .content-wrapper p {
             margin-bottom: 1rem;
         }
@@ -107,17 +111,13 @@
         }
         
         .content-wrapper li {
-            margin-bottom: 0.5rem;
+            margin-bottom: 1rem;
         }
         
         .content-wrapper a {
             color: #007BBF;
             text-decoration: underline;
             font-weight: 500;
-        }
-        
-        .content-wrapper strong {
-            font-weight: 600;
         }
         
         /* Footer */
@@ -392,61 +392,23 @@
 
     <section class="main-content">
         <div class="container">
-            <h1 class="page-title">Reolink Camera Configuration</h1>
+            <h1 class="page-title">Detection Alarm</h1>
             
             <div class="content-wrapper">
-                <p>The screenshot below shows a typical main Settings page from the Reolink iOS app for a Reolink camera. Your menu may be different depending on your camera and other factors.</p>
+                <h2>Person</h2>
+                <p>Configuration for person detection.</p>
                 
-                <p style="text-align: center; margin: 2rem 0;">
-                    <img src="reolink-settings-screenshot.jpg" alt="Reolink Settings Screenshot" style="max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);">
-                </p>
+                <h2>Vehicle</h2>
+                <p>Configuration for vehicle detection.</p>
                 
-                <p>At the top of the Settings page, next to a picture of the camera, it shows:</p>
-                <ul>
-                    <li>The name you have given the camera (e.g. 123 Main Street)</li>
-                    <li>The model of the camera (e.g. Reolink Duo 2 WiFi)</li>
-                    <li>The amount used and capacity of the data card in the camera</li>
-                </ul>
+                <h2>Animal</h2>
+                <p>Configuration for animal detection.</p>
                 
-                <p>Click on the camera name to display the Device Info page</p>
+                <h2>Motion</h2>
+                <p>Configuration for general motion detection.</p>
                 
-                <p>Information for each of the other options is listed below. In some cases, a link is provided to see more details about the option. When appropriate, an option is identified as <strong style="color: #dc3545;">CRITICAL</strong> or <strong style="color: #dc3545;">Important</strong>. Please give these extra attention.</p>
-                
-                <h2>Wi-Fi</h2>
-                <p>Selecting your WiFi Network. Once this is set during the initial camera setup, you probably don't need to do anything here. This does not apply for PoE cameras.</p>
-                
-                <h2>Display</h2>
-                <p><strong>Optional.</strong> All things related to what you see on live and recorded video.</p>
-                
-                <h2>Sounds</h2>
-                <p><strong>Optional.</strong> Control whether audio is recorded with the video and control the volume for the speaker (used for you talking to someone and for the alert siren).</p>
-                
-                <h2>Lights</h2>
-                <p><strong>Optional.</strong> Control use of floodlights, spotlights, and infrared lights.</p>
-                
-                <h2>Detection Alarm</h2>
-                <p><strong style="color: #dc3545;">Important.</strong> Control the Sensitivity, Delay time, and Object Size for motion of Persons, Vehicles, and Animals. <a href="detection-alarm.html">More details →</a></p>
-                
-                <h2>Camera Recording</h2>
-                <p><strong style="color: #dc3545;">CRITICAL.</strong> Control what is recorded to the data card in the camera (or, optionally, to the cloud).</p>
-                
-                <h2>Push Notifications</h2>
-                <p><strong>Optional.</strong> It controls which events/alerts appear on your smartphone. There are separate settings (see Email Alerts below) for which events/alerts are sent to AwareNet. Many camera owners choose to leave this turned off.</p>
-                
-                <h2>Email Alerts</h2>
-                <p><strong style="color: #dc3545;">CRITICAL!</strong> This option controls which events/alerts are sent to AwareNet. It is <strong style="color: #dc3545;">CRITICAL</strong> to the success of AwareNet to set this correctly. There are separate settings (Camera Recording) for which events/alerts are displayed on your smartphone.</p>
-                
-                <h2>FTP</h2>
-                <p><strong>Optional.</strong> Used by "techies" to automatically copy video clips to a separate storage server.</p>
-                
-                <h2>Siren</h2>
-                <p><strong>Optional.</strong> Control if and when a siren sound is activated. This feature can be useful as an additional deterrent, but may annoy nearby neighbors. Instead of triggering a default siren sound from the camera according to a schedule, it can play a 5 second recording / announcement (e.g. "Alert, your activity is subject to real-time monitoring and response").</p>
-                
-                <h2>Share Device</h2>
-                <p><strong>Optional.</strong> Displays the UID (unique camera id) and a QR code which is a digital representation of the UID. To give someone access to your camera, you must give them either the UID or the QR code, plus a userid and a password.</p>
-                
-                <h2>Advanced</h2>
-                <p><strong>Optional.</strong> Manage access to the camera and set the date/time.</p>
+                <h2>Non-Detection Zone</h2>
+                <p>Configuration for areas to exclude from detection.</p>
             </div>
         </div>
     </section>
