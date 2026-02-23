@@ -39,7 +39,7 @@
         }
 
         .nav-links {
-            display: flex;
+            display: none;
             list-style: none;
             gap: 2rem;
         }
@@ -54,7 +54,7 @@
         .nav-links a:hover { color: #007BBF; }
 
         .hamburger {
-            display: none;
+            display: flex;
             flex-direction: column;
             gap: 5px;
             cursor: pointer;
@@ -256,8 +256,6 @@
 
         @media (max-width: 768px) {
             .page-hero h1 { font-size: 2rem; }
-            .nav-links { display: none; }
-            .hamburger { display: flex; }
         }
     </style>
 </head>

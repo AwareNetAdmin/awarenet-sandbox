@@ -52,7 +52,7 @@
         }
         
         .nav-links {
-            display: flex;
+            display: none;
             list-style: none;
             gap: 2rem;
         }
@@ -119,7 +119,7 @@
         
         /* Hamburger */
         .hamburger {
-            display: none;
+            display: flex;
             flex-direction: column;
             gap: 5px;
             cursor: pointer;
@@ -273,13 +273,7 @@
 
         /* Responsive */
         @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-            }
 
-            .hamburger {
-                display: flex;
-            }
 
             .logo {
                 height: 35px;
