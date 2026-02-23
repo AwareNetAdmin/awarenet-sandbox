@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="version" content="0.1.41">
+    <meta name="version" content="0.1.42">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>False Alerts - AwareNet</title>
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&display=swap" rel="stylesheet">
@@ -259,23 +259,83 @@
             color: #005a8f;
         }
 
-        .cause-section {
-            background: #f8fafc;
+        /* FAQ/Accordion styles */
+        .faq-list {
+            max-width: 900px;
+            margin: 2rem auto 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .faq-item {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+            overflow: hidden;
+        }
+
+        .faq-question {
+            width: 100%;
+            background: none;
+            border: none;
+            text-align: left;
+            padding: 1.1rem 1.5rem;
+            font-size: 1.375rem;
+            font-weight: 600;
+            color: #007BBF;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+            transition: background 0.2s;
+            line-height: 1.4;
+        }
+
+        .faq-question:hover {
+            background: #f0f5ff;
+        }
+
+        .faq-question.open {
+            background: #007BBF;
+            color: white;
             border-left: 4px solid #007BBF;
-            padding: 1.5rem;
-            margin: 1.5rem 0;
-            border-radius: 4px;
         }
 
-        .cause-section h3 {
-            margin-top: 0;
+        .faq-chevron {
+            flex-shrink: 0;
+            font-size: 2.5rem;
+            font-weight: bold;
+            transition: transform 0.3s;
+            line-height: 1;
         }
 
-        .solution-list {
-            background: #e7f3ff;
-            padding: 1rem 1.5rem;
-            border-radius: 4px;
-            margin-top: 1rem;
+        .faq-question.open .faq-chevron {
+            transform: rotate(90deg);
+        }
+
+        .faq-answer {
+            display: none;
+            padding: 1.1rem 1.5rem;
+            font-size: 1.2rem;
+            color: #444;
+            line-height: 1.7;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .faq-answer.open {
+            display: block;
+            background: #c0e7ff;
+            border-left: 4px solid #007BBF;
+        }
+
+        .faq-answer ul {
+            margin: 0.5rem 0 0.5rem 1.5rem;
+        }
+
+        .faq-answer li {
+            margin-bottom: 0.5rem;
         }
 
         .nav-path {
@@ -374,7 +434,6 @@
                     <a href="camera-configuration.html" class="drawer-sub-item">Configuration</a>
                     <a href="camera-location.html" class="drawer-sub-item">Location</a>
                     <a href="false-alerts.html" class="drawer-sub-item">False Alerts</a>
-                    <a href="false-alerts.html" class="drawer-sub-item">False Alerts</a>
                 </div>
             </div>
 
@@ -419,97 +478,99 @@
 
                 <p>If the listed solutions do not work or are not available in your camera settings, try <a href="https://reolink.com/us/download-center/" target="_blank">updating the firmware for your camera</a>.</p>
 
-                <div class="cause-section">
-                    <h3>Spider webs or other debris obscuring the view of the camera</h3>
-                    <div class="solution-list">
-                        <p><strong>Solution:</strong></p>
-                        <ul>
-                            <li>Gently clean the glass cover protecting the camera lens.</li>
-                            <li>If spider webs are a frequent issue, try turning off the infrared lights (which attract spiders).<br>
-                                <span class="nav-path">Settings, Light, Infrared Lights, Stay Off</span>
-                            </li>
-                            <li><strong>Note</strong> - When the infrared lights are turned off, it is usually beneficial to also set the camera to always color mode.<br>
-                                <span class="nav-path">Settings, Display, Day and Night, Color</span>
-                            </li>
-                            <li><strong>Note</strong> - When the always color mode is used and the area is dark at night, it may be beneficial to set the spotlight / floodlight to Timer Mode.<br>
-                                <span class="nav-path">Settings, Light, Spotlight, Modes, Timer Mode</span>
-                            </li>
-                        </ul>
+                <div class="faq-list">
+                    <div class="faq-item">
+                        <button class="faq-question">Spider webs or other debris obscuring the view of the camera <span class="faq-chevron">›</span></button>
+                        <div class="faq-answer">
+                            <p><strong>Solution:</strong></p>
+                            <ul>
+                                <li>Gently clean the glass cover protecting the camera lens.</li>
+                                <li>If spider webs are a frequent issue, try turning off the infrared lights (which attract spiders).<br>
+                                    <span class="nav-path">Settings, Light, Infrared Lights, Stay Off</span>
+                                </li>
+                                <li><strong>Note</strong> - When the infrared lights are turned off, it is usually beneficial to also set the camera to always color mode.<br>
+                                    <span class="nav-path">Settings, Display, Day and Night, Color</span>
+                                </li>
+                                <li><strong>Note</strong> - When the always color mode is used and the area is dark at night, it may be beneficial to set the spotlight / floodlight to Timer Mode.<br>
+                                    <span class="nav-path">Settings, Light, Spotlight, Modes, Timer Mode</span>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
-                </div>
 
-                <div class="cause-section">
-                    <h3>Yard decorations that look like the shape of a person or vehicle</h3>
-                    <div class="solution-list">
-                        <p><strong>Solution:</strong></p>
-                        <ul>
-                            <li>If practical, try making the area with the decorations a non-detection area.<br>
-                                <span class="nav-path">Settings, Detection Alarm, Non-Detection Zone</span>
-                            </li>
-                            <li>Or, increase the alarm delay for detecting.<br>
-                                <span class="nav-path">Settings, Detection Alarm, Alarm Delay, increase Person or Vehicle 1 second (do not go higher than 2)</span>
-                            </li>
-                            <li>Or, decrease overall sensitivity 5 points. It is OK to go as low as 1.<br>
-                                <span class="nav-path">Settings, Detection Alarm, Sensitivity, Motion Detection</span>
-                            </li>
-                        </ul>
+                    <div class="faq-item">
+                        <button class="faq-question">Yard decorations that look like the shape of a person or vehicle <span class="faq-chevron">›</span></button>
+                        <div class="faq-answer">
+                            <p><strong>Solution:</strong></p>
+                            <ul>
+                                <li>If practical, try making the area with the decorations a non-detection area.<br>
+                                    <span class="nav-path">Settings, Detection Alarm, Non-Detection Zone</span>
+                                </li>
+                                <li>Or, increase the alarm delay for detecting.<br>
+                                    <span class="nav-path">Settings, Detection Alarm, Alarm Delay, increase Person or Vehicle 1 second (do not go higher than 2)</span>
+                                </li>
+                                <li>Or, decrease overall sensitivity 5 points. It is OK to go as low as 1.<br>
+                                    <span class="nav-path">Settings, Detection Alarm, Sensitivity, Motion Detection</span>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
-                </div>
 
-                <div class="cause-section">
-                    <h3>Flags that are blowing in the wind (especially ones that partially obscure the view of a parked vehicle)</h3>
-                    <div class="solution-list">
-                        <p><strong>Solution:</strong></p>
-                        <ul>
-                            <li>Increase the alarm delay for detecting.<br>
-                                <span class="nav-path">Settings, Detection Alarm, Alarm Delay, increase Person or Vehicle 1 second (do not go higher than 2)</span>
-                            </li>
-                            <li>Or, reduce the sensitivity settings using one of these options:
-                                <ul>
-                                    <li>Decrease overall sensitivity 5 points. It is OK to go as low as 1.<br>
-                                        <span class="nav-path">Settings, Detection Alarm, Sensitivity, Motion Detection</span>
-                                    </li>
-                                    <li><span class="nav-path">Settings, Detection Alarm, Sensitivity, Smart Detection, decrease Person or Vehicle 5 points. Do not go lower than 50 for Person or lower than 30 for Vehicle</span></li>
-                                </ul>
-                            </li>
-                        </ul>
+                    <div class="faq-item">
+                        <button class="faq-question">Flags that are blowing in the wind (especially ones that partially obscure the view of a parked vehicle) <span class="faq-chevron">›</span></button>
+                        <div class="faq-answer">
+                            <p><strong>Solution:</strong></p>
+                            <ul>
+                                <li>Increase the alarm delay for detecting.<br>
+                                    <span class="nav-path">Settings, Detection Alarm, Alarm Delay, increase Person or Vehicle 1 second (do not go higher than 2)</span>
+                                </li>
+                                <li>Or, reduce the sensitivity settings using one of these options:
+                                    <ul>
+                                        <li>Decrease overall sensitivity 5 points. It is OK to go as low as 1.<br>
+                                            <span class="nav-path">Settings, Detection Alarm, Sensitivity, Motion Detection</span>
+                                        </li>
+                                        <li><span class="nav-path">Settings, Detection Alarm, Sensitivity, Smart Detection, decrease Person or Vehicle 5 points. Do not go lower than 50 for Person or lower than 30 for Vehicle</span></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
-                </div>
 
-                <div class="cause-section">
-                    <h3>Strong / gusting wind</h3>
-                    <div class="solution-list">
-                        <p><strong>Solution:</strong></p>
-                        <ul>
-                            <li>If practical, trim back the bush, ivy, or tree that is causing the issue.</li>
-                            <li>Or, it may be the camera is not securely mounted and the wind is causing the camera to move which can make the camera think that objects are moving. If so, mount the camera more securely.</li>
-                            <li>If the problem still occurs frequently, try the suggestions listed for "Flags that are blowing in the wind".</li>
-                        </ul>
+                    <div class="faq-item">
+                        <button class="faq-question">Strong / gusting wind <span class="faq-chevron">›</span></button>
+                        <div class="faq-answer">
+                            <p><strong>Solution:</strong></p>
+                            <ul>
+                                <li>If practical, trim back the bush, ivy, or tree that is causing the issue.</li>
+                                <li>Or, it may be the camera is not securely mounted and the wind is causing the camera to move which can make the camera think that objects are moving. If so, mount the camera more securely.</li>
+                                <li>If the problem still occurs frequently, try the suggestions listed for "Flags that are blowing in the wind".</li>
+                            </ul>
+                        </div>
                     </div>
-                </div>
 
-                <div class="cause-section">
-                    <h3>Heavy rain or snow</h3>
-                    <div class="solution-list">
-                        <p><strong>Solution:</strong></p>
-                        <ul>
-                            <li>This issue is resolved when the precipitation is reduced or stops, so there is typically no need to make any changes. But if this occurs too often, try the suggestions listed for "Flags that are blowing in the wind".</li>
-                        </ul>
+                    <div class="faq-item">
+                        <button class="faq-question">Heavy rain or snow <span class="faq-chevron">›</span></button>
+                        <div class="faq-answer">
+                            <p><strong>Solution:</strong></p>
+                            <ul>
+                                <li>This issue is resolved when the precipitation is reduced or stops, so there is typically no need to make any changes. But if this occurs too often, try the suggestions listed for "Flags that are blowing in the wind".</li>
+                            </ul>
+                        </div>
                     </div>
-                </div>
 
-                <div class="cause-section">
-                    <h3>Flashing or blinking lights</h3>
-                    <div class="solution-list">
-                        <p><strong>Solution:</strong></p>
-                        <ul>
-                            <li>If practical, try making the area with the flashing / blinking light a non-detection area.<br>
-                                <span class="nav-path">Settings, Detection Alarm, Non-Detection Zone</span>
-                            </li>
-                            <li>Or, increase the alarm delay for detecting.<br>
-                                <span class="nav-path">Settings, Detection Alarm, Alarm Delay, increase Person or Vehicle 1 second (do not go higher than 2)</span>
-                            </li>
-                        </ul>
+                    <div class="faq-item">
+                        <button class="faq-question">Flashing or blinking lights <span class="faq-chevron">›</span></button>
+                        <div class="faq-answer">
+                            <p><strong>Solution:</strong></p>
+                            <ul>
+                                <li>If practical, try making the area with the flashing / blinking light a non-detection area.<br>
+                                    <span class="nav-path">Settings, Detection Alarm, Non-Detection Zone</span>
+                                </li>
+                                <li>Or, increase the alarm delay for detecting.<br>
+                                    <span class="nav-path">Settings, Detection Alarm, Alarm Delay, increase Person or Vehicle 1 second (do not go higher than 2)</span>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
 
@@ -526,6 +587,33 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            // FAQ accordion
+            document.querySelectorAll('.faq-question').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const answer = this.nextElementSibling;
+                    const isOpen = this.classList.contains('open');
+                    // Close all
+                    document.querySelectorAll('.faq-question.open').forEach(q => q.classList.remove('open'));
+                    document.querySelectorAll('.faq-answer.open').forEach(a => a.classList.remove('open'));
+                    // Open this one if it wasn't open
+                    if (!isOpen) {
+                        this.classList.add('open');
+                        answer.classList.add('open');
+                        // Scroll to keep question visible after answer expands, accounting for sticky header
+                        setTimeout(() => {
+                            const headerHeight = document.querySelector('header').offsetHeight;
+                            const elementPosition = this.getBoundingClientRect().top + window.pageYOffset;
+                            const offsetPosition = elementPosition - headerHeight - 20; // 20px padding
+                            
+                            window.scrollTo({
+                                top: offsetPosition,
+                                behavior: 'smooth'
+                            });
+                        }, 100);
+                    }
+                });
+            });
+
             // Restore drawer state from localStorage
             const savedState = localStorage.getItem('drawerMenuState');
             if (savedState) {
