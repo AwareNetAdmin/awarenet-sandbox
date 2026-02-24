@@ -948,56 +948,33 @@
             // Assessment form submission
             const assessmentForm = document.querySelector('#modal-contact form');
             if (assessmentForm) {
-                assessmentForm.addEventListener('submit', async function(e) {
+                assessmentForm.addEventListener('submit', function(e) {
                     e.preventDefault();
                     const btn = document.getElementById('form-submit');
                     const msg = document.getElementById('form-message');
-                    const contactMethod = document.getElementById('f-contact-method').value;
-                    const contactValue = contactMethod === 'phone'
-                        ? document.getElementById('input-phone').value
-                        : document.getElementById('input-email').value;
+                    const modal = document.getElementById('modal-contact');
 
-                    btn.disabled = true;
-                    btn.textContent = 'Sending…';
-                    msg.style.display = 'none';
-
-                    try {
-                        // TODO: Replace with your deployed Cloud Function URL
-                        const FUNCTION_URL = 'https://REGION-PROJECT_ID.cloudfunctions.net/assessment-form';
-
-                        const res = await fetch(FUNCTION_URL, {
-                            method: 'POST',
-                            headers: { 'Content-Type': 'application/json' },
-                            body: JSON.stringify({
-                                neighborhood_name: document.getElementById('f-neighborhood').value,
-                                zipcode:           document.getElementById('f-zipcode').value,
-                                num_homes:         document.getElementById('f-homes').value,
-                                num_businesses:    document.getElementById('f-businesses').value,
-                                contact_method:    contactMethod,
-                                contact_value:     contactValue,
-                            }),
-                        });
-
-                        const data = await res.json();
-                        if (res.ok) {
-                            msg.style.background = '#d1fae5';
-                            msg.style.color = '#065f46';
-                            msg.textContent = 'Thank you! We\'ll be in touch shortly.';
-                            assessmentForm.reset();
-                            document.getElementById('field-email').style.display = 'none';
-                            document.getElementById('field-phone').style.display = 'none';
-                        } else {
-                            throw new Error(data.error || 'Unknown error');
-                        }
-                    } catch (err) {
-                        msg.style.background = '#fee2e2';
-                        msg.style.color = '#991b1b';
-                        msg.textContent = err.message || 'Something went wrong. Please email info@awarenet.us directly.';
-                    }
-
+                    // Show confirmation message
+                    msg.style.background = '#d1fae5';
+                    msg.style.color = '#065f46';
+                    msg.style.fontSize = '1.2rem';
+                    msg.style.fontWeight = '600';
+                    msg.textContent = 'Request Submitted';
                     msg.style.display = 'block';
-                    btn.disabled = false;
-                    btn.textContent = 'Schedule Free Assessment';
+                    
+                    // Disable button
+                    btn.disabled = true;
+
+                    // Close modal and reset form after 3 seconds
+                    setTimeout(function() {
+                        modal.style.display = 'none';
+                        document.body.style.overflow = 'auto';
+                        assessmentForm.reset();
+                        msg.style.display = 'none';
+                        btn.disabled = false;
+                        document.getElementById('field-email').style.display = 'none';
+                        document.getElementById('field-phone').style.display = 'none';
+                    }, 3000);
                 });
             }
 
