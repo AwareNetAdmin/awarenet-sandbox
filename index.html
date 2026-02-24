@@ -901,6 +901,13 @@
                         if (modalInner) {
                             modalInner.scrollTop = 0;
                         }
+                        // Focus first input field
+                        setTimeout(() => {
+                            const firstInput = modal.querySelector('input, select, textarea');
+                            if (firstInput) {
+                                firstInput.focus();
+                            }
+                        }, 100);
                     }
                 });
             });
