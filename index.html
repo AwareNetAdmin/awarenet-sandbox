@@ -896,6 +896,11 @@
                         modal.style.display = 'flex';
                         // Prevent body scroll when modal is open
                         document.body.style.overflow = 'hidden';
+                        // Reset scroll position to top
+                        const modalInner = modal.querySelector('.modal-inner');
+                        if (modalInner) {
+                            modalInner.scrollTop = 0;
+                        }
                     }
                 });
             });
