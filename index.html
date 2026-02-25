@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="version" content="0.1.42">
+    <meta name="version" content="0.1.43">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AwareNet - Neighborhood Crime Disruption Network</title>
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&display=swap" rel="stylesheet">
@@ -766,12 +766,28 @@
             </div>
             <div class="cta-buttons" style="margin-top: 2rem;">
                 <button class="btn btn-primary process-card" data-modal="modal-contact" style="font-size: 1.2rem; border: none; cursor: pointer;">Request Free Assessment</button>
-                <a href="#how-it-works" class="btn btn-secondary">▶ View Demo</a>
+                <button class="btn btn-secondary" id="view-demo-btn" style="border: none; cursor: pointer;">▶ View Demo</button>
             </div>
         </div>
     </section>
 
     <!-- Value Propositions -->
+
+    <!-- Video Demo Modal -->
+    <div id="modal-video" class="modal-overlay">
+        <div class="modal-content" style="max-width: 900px;">
+            <button class="modal-close">&times;</button>
+            <h2 class="modal-title">AwareNet Demo</h2>
+            <div class="modal-inner">
+                <div class="modal-body">
+                    <video id="demo-video" controls style="width: 100%; border-radius: 8px;">
+                        <source src="demo.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Contact Modal -->
     <div id="modal-contact" class="modal-overlay">
@@ -880,6 +896,40 @@
     <script>
         // Modal functionality
         document.addEventListener('DOMContentLoaded', function() {
+            // View Demo button
+            const viewDemoBtn = document.getElementById('view-demo-btn');
+            const videoModal = document.getElementById('modal-video');
+            const demoVideo = document.getElementById('demo-video');
+            
+            if (viewDemoBtn) {
+                viewDemoBtn.addEventListener('click', function() {
+                    videoModal.style.display = 'flex';
+                    document.body.style.overflow = 'hidden';
+                    // Reset video to start
+                    if (demoVideo) {
+                        demoVideo.currentTime = 0;
+                    }
+                });
+            }
+            
+            // Pause video when modal closes
+            const videoModalClose = videoModal.querySelector('.modal-close');
+            if (videoModalClose) {
+                videoModalClose.addEventListener('click', function() {
+                    if (demoVideo) {
+                        demoVideo.pause();
+                    }
+                });
+            }
+            
+            videoModal.addEventListener('click', function(e) {
+                if (e.target === this) {
+                    if (demoVideo) {
+                        demoVideo.pause();
+                    }
+                }
+            });
+            
             // Clear drawer menu state when home page loads
             localStorage.removeItem('drawerMenuState');
 
