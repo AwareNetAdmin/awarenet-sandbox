@@ -52,6 +52,8 @@ done
 echo "⏰ Setting cache headers..."
 $GSUTIL -m setmeta -h "Cache-Control:no-cache, no-store, must-revalidate" "$BUCKET"/*.html
 $GSUTIL -m setmeta -h "Cache-Control:no-cache, no-store, must-revalidate" "$BUCKET/logo.svg"
+$GSUTIL -m setmeta -h "Cache-Control:no-cache, no-store, must-revalidate" "$BUCKET/search.js"
+$GSUTIL -m setmeta -h "Cache-Control:no-cache, no-store, must-revalidate" "$BUCKET/search-index.json"
 
 # Set website configuration
 echo "🌐 Configuring website settings..."
