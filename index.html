@@ -14,7 +14,7 @@
         }
         
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-family: Corbel, 'Trebuchet MS', 'Lucida Sans', sans-serif;
             line-height: 1.6;
             color: #333;
         }
@@ -27,7 +27,7 @@
         
         /* Header */
         header {
-            background: linear-gradient(rgba(255,255,255,0.20), rgba(255,255,255,0.20)), url('street.jpg') center center / cover no-repeat;
+            background: #2d3748;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
             border-bottom: 4px solid #007BBF;
             position: sticky;
@@ -71,7 +71,8 @@
         
         /* Hero Section */
         .hero {
-            background: linear-gradient(135deg, #007BBF 0%, #3b82f6 100%);
+            background: linear-gradient(rgba(0,0,0,0.20), rgba(0,0,0,0.30)), 
+                        url('street-night.jpg') center center / cover no-repeat;
             color: white;
             padding: 2rem 0 4rem 0;
             text-align: center;
@@ -82,12 +83,13 @@
             font-weight: 700;
             margin-bottom: 1rem;
             line-height: 1.2;
+            color: white;
         }
         
         .hero p {
             font-size: 1.25rem;
             margin-bottom: 2rem;
-            opacity: 0.9;
+            color: white;
             max-width: 800px;
             margin-left: auto;
             margin-right: auto;
@@ -139,10 +141,14 @@
         }
         
         /* Process Cards */
+        .process-card {
+            font-family: Corbel, 'Trebuchet MS', 'Lucida Sans', sans-serif;
+        }
+        
         .process-card:hover {
             transform: scale(1.02);
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            background: rgba(229, 243, 255, 0.95) !important;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+            background: rgba(255, 255, 255, 0.25) !important;
         }
         
         /* Modal Styles */
@@ -442,6 +448,33 @@
             color: #333;
         }
         
+        /* Search */
+        .drawer-search {
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid rgba(255,255,255,0.15);
+        }
+        
+        .drawer-search-input {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 1px solid rgba(255,255,255,0.3);
+            border-radius: 4px;
+            background: rgba(255,255,255,0.1);
+            color: white;
+            font-size: 1rem;
+        }
+        
+        .drawer-search-input::placeholder {
+            color: rgba(255,255,255,0.6);
+        }
+        
+        .drawer-search-input:focus {
+            outline: none;
+            border-color: rgba(255,255,255,0.5);
+            background: rgba(255,255,255,0.15);
+        }
+        
+
         /* Footer */
         footer {
             background: #1f2937;
@@ -505,7 +538,7 @@
             left: -280px;
             width: 280px;
             height: 100%;
-            background: #007BBF;
+            background: #2d3748;
             z-index: 1000;
             transition: left 0.3s ease;
             display: flex;
@@ -723,7 +756,7 @@
             <div class="drawer-group">
                 <a href="#" class="drawer-item drawer-toggle">Cameras <span class="drawer-chevron">›</span></a>
                 <div class="drawer-sub-items">
-                    <a href="supported-cameras.html" class="drawer-sub-item">Makes and Models</a>
+                    <a href="supported-cameras.html" class="drawer-sub-item">Brands and Models</a>
                     <a href="camera-configuration.html" class="drawer-sub-item">Configuration</a>
                     <a href="camera-location.html" class="drawer-sub-item">Location</a>
                     <a href="false-alerts.html" class="drawer-sub-item">False Alerts</a>
@@ -748,20 +781,20 @@
         <div class="container">
             <h1 style="font-family: 'Oswald', sans-serif; letter-spacing: 0.02em; font-size: 2.5rem;">Neighborhood Crime Disruption</h1>
             <div style="display: flex; flex-direction: column; gap: 1rem; margin-top: 1rem;">
-                <div class="process-card" data-modal="modal1" style="background: rgba(219, 234, 254, 0.9); color: #007BBF; padding: 1rem; border-radius: 8px; display: flex; align-items: center; gap: 0.75rem; cursor: pointer; transition: all 0.3s ease; border-left: 5px solid #16a34a;">
-                    <span style="background: #007BBF; color: white; width: 2rem; height: 2rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.5rem; flex-shrink: 0;">1</span>
-                    <span style="font-size: 1.6rem; line-height: 1.1;"><strong style="color: #007BBF;">Deploy Security Cameras</strong></span>
-                    <span style="margin-left: auto; opacity: 0.6; font-size: 0.9rem;">Learn more →</span>
+                <div class="process-card" data-modal="modal1" style="background: rgba(255, 255, 255, 0.15); color: white; padding: 1rem; border-radius: 8px; display: flex; align-items: center; gap: 0.75rem; cursor: pointer; transition: all 0.3s ease; border-left: 5px solid #007BBF; border-top: 2.5px solid #007BBF; border-right: 2.5px solid #007BBF; border-bottom: 2.5px solid #007BBF; backdrop-filter: blur(4px);">
+                    <span style="background: rgba(255, 255, 255, 0.9); color: #007BBF; width: 2rem; height: 2rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.5rem; flex-shrink: 0;">1</span>
+                    <span style="font-size: 1.6rem; line-height: 1.1;"><strong style="color: white;">Deploy Security Cameras</strong></span>
+                    <span style="margin-left: auto; opacity: 0.8; font-size: 0.9rem;">Learn more →</span>
                 </div>
-                <div class="process-card" data-modal="modal2" style="background: rgba(219, 234, 254, 0.9); color: #007BBF; padding: 1rem; border-radius: 8px; display: flex; align-items: center; gap: 0.75rem; cursor: pointer; transition: all 0.3s ease; border-left: 5px solid #f97316;">
-                    <span style="background: #007BBF; color: white; width: 2rem; height: 2rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.5rem; flex-shrink: 0;">2</span>
-                    <span style="font-size: 1.6rem; line-height: 1.1;"><strong style="color: #007BBF;">Monitor Automated Alerts</strong></span>
-                    <span style="margin-left: auto; opacity: 0.6; font-size: 0.9rem;">Learn more →</span>
+                <div class="process-card" data-modal="modal2" style="background: rgba(255, 255, 255, 0.15); color: white; padding: 1rem; border-radius: 8px; display: flex; align-items: center; gap: 0.75rem; cursor: pointer; transition: all 0.3s ease; border-left: 5px solid #007BBF; border-top: 2.5px solid #007BBF; border-right: 2.5px solid #007BBF; border-bottom: 2.5px solid #007BBF; backdrop-filter: blur(4px);">
+                    <span style="background: rgba(255, 255, 255, 0.9); color: #007BBF; width: 2rem; height: 2rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.5rem; flex-shrink: 0;">2</span>
+                    <span style="font-size: 1.6rem; line-height: 1.1;"><strong style="color: white;">Monitor Automated Alerts</strong></span>
+                    <span style="margin-left: auto; opacity: 0.8; font-size: 0.9rem;">Learn more →</span>
                 </div>
-                <div class="process-card" data-modal="modal3" style="background: rgba(219, 234, 254, 0.9); color: #007BBF; padding: 1rem; border-radius: 8px; display: flex; align-items: center; gap: 0.75rem; cursor: pointer; transition: all 0.3s ease; border-left: 5px solid #ef4444;">
-                    <span style="background: #007BBF; color: white; width: 2rem; height: 2rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.5rem; flex-shrink: 0;">3</span>
-                    <span style="font-size: 1.6rem; line-height: 1.1;"><strong style="color: #007BBF;">Activate Professional Response</strong></span>
-                    <span style="margin-left: auto; opacity: 0.6; font-size: 0.9rem;">Learn more →</span>
+                <div class="process-card" data-modal="modal3" style="background: rgba(255, 255, 255, 0.15); color: white; padding: 1rem; border-radius: 8px; display: flex; align-items: center; gap: 0.75rem; cursor: pointer; transition: all 0.3s ease; border-left: 5px solid #007BBF; border-top: 2.5px solid #007BBF; border-right: 2.5px solid #007BBF; border-bottom: 2.5px solid #007BBF; backdrop-filter: blur(4px);">
+                    <span style="background: rgba(255, 255, 255, 0.9); color: #007BBF; width: 2rem; height: 2rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.5rem; flex-shrink: 0;">3</span>
+                    <span style="font-size: 1.6rem; line-height: 1.1;"><strong style="color: white;">Activate Professional Response</strong></span>
+                    <span style="margin-left: auto; opacity: 0.8; font-size: 0.9rem;">Learn more →</span>
                 </div>
             </div>
             <div class="cta-buttons" style="margin-top: 2rem;">
@@ -1171,5 +1204,8 @@
             });
         });
     </script>
+    <!-- Lunr.js Search -->
+    <script src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script>
+    <script src="search.js"></script>
 </body>
 </html>

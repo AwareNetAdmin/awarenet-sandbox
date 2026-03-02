@@ -1,0 +1,146 @@
+[
+  {
+    "id": "alert-process",
+    "title": "Alert Process",
+    "url": "alert-process.html",
+    "content": "Alert Process - AwareNet &times; Aware Net Alert Process How AwareNet detects, receives, and responds to alerts. 1 The camera automatically detects a person moving and immediately sends an email or webhook to AwareNet that includes the video clip it recorded. 2 AwareNet automatically receives the email or webhook, verifies it is from an enrolled camera, and immediately displays the alert to the person designated by the neighborhood to monitor the alerts (safety committee volunteer or paid security personnel). 3 The people receiving the alerts review the video clip and determine what, if any, action should be taken (e.g. call 911)."
+  },
+  {
+    "id": "camera-configuration",
+    "title": "Camera Configuration",
+    "url": "camera-configuration.html",
+    "content": "Camera Configuration - AwareNet &times; Aware Net Camera Configuration Select your camera brand for configuration instructions: Reolink Configuration instructions for Reolink cameras Axis Configuration instructions for Axis cameras"
+  },
+  {
+    "id": "camera-location",
+    "title": "Camera Location",
+    "url": "camera-location.html",
+    "content": "Camera Location - AwareNet &times; Aware Net Camera Location After you have completed the Getting Started steps, you are ready to physically install/mount your camera in the desired location. Here are some tips: Battery-powered cameras (like the Reolink Argus 3 Pro) typically have a maximum range of 25-30 feet for sensing motion (they use \"passive infrared\" sensors). So we recommend placing this type of camera as close as possible to the street or alley (an adjacent pole, tree or garage). Outlet-powered cameras and power-over-ethernet cameras typically have a longer maximum range (30-60 feet, or more) for sensing motion (they use software to \"see\" changes in the picture). So we recommend placing this type of camera on an exterior wall of your house or garage. Generally, cameras sense objects moving side-to-side in the field of view better than objects moving straight towards or away from the camera. So for all cameras, we recommend pointing the camera roughly perpendicular to the stree"
+  },
+  {
+    "id": "camera-recording",
+    "title": "Camera Recording",
+    "url": "camera-recording.html",
+    "content": "Camera Recording - AwareNet &times; Aware Net Camera Recording Motion Recording Schedule Control what gets saved to your data card. Detection Type - Turn off \"Any Motion\". It will record bushes and trees blown by the wind, changing shadows, etc. Turn on Person and Vehicle. Animal is optional. Days and Hours - Enable (paint blue) 24 x 7 so your camera records activity even during hours that AwareNet is not active. Your setup should look like the screenshot below. Post-recording Duration Set this to 15 seconds unless you have a reason to set it higher. Setting it higher will reduce how many days of recording are retained. Continuous Recording Schedule Not recommended unless you are doing it for a very short duration or have your camera configured to use an NVR (network video recorder) instead of a data card."
+  },
+  {
+    "id": "contact",
+    "title": "Contact Us",
+    "url": "contact.html",
+    "content": "Contact Us - AwareNet &times; Aware Net Contact Us We're here to help. Reach out anytime. 📈 Sales Questions about getting AwareNet for your neighborhood? sales@awarenet.us 🛠️ Support Need help with your existing AwareNet setup? support@awarenet.us 📞 Phone Prefer to talk? Give us a call. (314) 406-1166"
+  },
+  {
+    "id": "customer-tos",
+    "title": "Customer Terms of Service",
+    "url": "customer-tos.html",
+    "content": "Customer Terms of Service - AwareNet &times; Aware Net Customer Terms of Service (for neighborhood organizations) PLEASE REVIEW THESE TERMS CAREFULLY. ONCE ACCEPTED, THESE TERMS BECOME A BINDING LEGAL COMMITMENT BETWEEN YOU AND AWARENET. IF YOU DO NOT AGREE TO BE BOUND BY THESE TERMS, YOU SHOULD NOT ACCEPT THESE TERMS, CREATE AN ACCOUNT, AND/OR USE THE SERVICES. THE SERVICES ARE INTENDED FOR NEIGHBORHOOD USE ONLY FOR NEIGHBORHOODS LOCATED IN THE UNITED STATES. If you have any questions, you can reach Customer Support by email at support@awarenet.us . When we refer to the \"Services\" in these Terms, we mean all products and services provided by us or our Affiliates (as defined herein), as applicable, that are (a) used by you, including, without limitation, products and services that are on a trial basis or otherwise free of charge or (b) ordered by you under an Order Form. When we refer to an \"Affiliate\" in these Terms, we mean any entity that directly or indirectly controls or is contro"
+  },
+  {
+    "id": "customers",
+    "title": "Customers",
+    "url": "customers.html",
+    "content": "Customers - AwareNet &times; Aware Net Customers Neighborhoods protected by AwareNet. Flora Place St. Louis, MO Cathedral Square St. Louis, MO Saint Louis Hills St. Louis, MO Washington Pl &amp; Westminster - Lake St. Louis, MO"
+  },
+  {
+    "id": "detection-alarm",
+    "title": "Detection Alarm",
+    "url": "detection-alarm.html",
+    "content": "Detection Alarm - AwareNet &times; Aware Net Detection Alarm Person Object Size - use only as a last resort for fixing false alerts. Sensitivity - increase if the camera is failing to detect person motion. Decrease if the camera is detecting people when there are none (false person alert). Alarm Delay - set this to 2 seconds. Vehicle Object Size - use only as a last resort for fixing false alerts. Sensitivity - increase if the camera is failing to detect vehicle motion. Decrease if the camera is detecting vehicles when there are none (false vehicle alert). Alarm Delay - set this to 1 second. Animal Not used for AwareNet. Motion Not used for AwareNet. Non-Detection Zone Configuration for areas to exclude from detection. Helps minimize false alerts. Paint the areas that the camera can ignore ."
+  },
+  {
+    "id": "email-alerts",
+    "title": "Email Alerts",
+    "url": "email-alerts.html",
+    "content": "Email Alerts - AwareNet &times; Aware Net Email Alerts Configure this section carefully to ensure your camera sends the correct email alerts to AwareNet. Alarm Schedule Control what gets sent to AwareNet. Detection Type - Turn on only \"Person\" and \"Vehicle\" (turn off \"Any Motion\" and \"Animal\") Days and Hours - Enable (paint blue) midnight to 6am and 10pm to midnight, seven days a week. Your setup should look like the screenshot below. Timer Schedule Do not use! This feature will send email alerts based on elapsed time rather than detected motion. Email Settings Sender's Email - Contact your neighborhood support person to get the correct email address and password SMTP Server - Enter \"smtp.gmail.com\" Server Port - Enter \"465\" SSL or TLS - Turn on Recipient(s) - Contact your neighborhood support person to get the correct email address. Do not use the Sender email address as a recipient. Email Content Set to \"Text with Video\". Email Interval Set to \"30 seconds\"."
+  },
+  {
+    "id": "enroll-a-camera",
+    "title": "Enroll a Camera",
+    "url": "enroll-a-camera.html",
+    "content": "Enroll a Camera - AwareNet &times; Aware Net Enroll a Camera Be sure to complete the prior steps listed on the Getting Started page before enrolling. This will ensure you have the camera name and email address you need to complete this enrollment form. Also, please check the FAQ page if you have questions about using your camera with AwareNet. Enroll a Camera"
+  },
+  {
+    "id": "false-alerts",
+    "title": "False Alerts",
+    "url": "false-alerts.html",
+    "content": "False Alerts - AwareNet &times; Aware Net False Alerts Reolink False Alerts occur when: The camera thinks it detects a person, but there is no actual person for the camera to detect. The camera thinks it detects a moving vehicle, but there is no actual moving vehicle for the camera to detect. The original Duo cameras can be especially prone to false vehicle alerts, whereas the Duo 2, Duo 3, and other newer Reolink cameras are much improved. The first thing to do is to review video clips from your camera. To do this, go to the live view from your camera and then select the \"Playback\" button. This will allow you to watch video clips for the current day. Select a date from the calendar to watch videos for a different day. In the video list, each clip is marked with one or more symbols to indicate what was detected (person, vehicle, etc.). Based on a review of the video clips, look for the matching cause listed below to see the suggested solution. If you cannot determine what object has ac"
+  },
+  {
+    "id": "feature-summary",
+    "title": "Feature Summary",
+    "url": "feature-summary.html",
+    "content": "Feature Summary - AwareNet &times; Aware Net Feature Summary What AwareNet brings to your neighborhood. Consolidation and federation of automated alerts sent by otherwise standalone security cameras. Capacity to support hundreds of cameras working together to help keep your neighborhood safe. Compatible with dozens of security cameras costing less than $200 each, available on Amazon or directly from the camera manufacturer. Each camera owner maintains control of the privacy and security features for their camera. Easy-to-use software application for review and categorization of real-time alerts. Securely accessible via the internet and ideal for use on a tablet. Designated reviewer (e.g. security guard or officer) can assess real-time alerts and take immediate action when appropriate to disrupt and deter criminal activity. Important time stamps to help ensure the reviewer is processing alerts in a timely manner. GPS mapping to help ensure the patrol person is covering the full service "
+  },
+  {
+    "id": "getting-started",
+    "title": "Getting Started",
+    "url": "getting-started.html",
+    "content": "Getting Started - AwareNet &times; Aware Net Getting Started Follow these steps to get your camera working with AwareNet: Verify your camera works with AwareNet or purchase one that is . Complete the basic configuration and setup for your camera before doing the physical installation. For Reolink, follow their Quick Start Guide included with the camera. [10 - 15 minutes]. You can do the physical installation of your camera now or wait until after Step 3. Complete the camera configuration steps for use with AwareNet. [10-15 minutes] Enroll your camera with AwareNet so AwareNet will recognize the email alerts from your camera. [5 minutes] You can do the physical installation of your camera now (if you didn't do it after Step 2). See the FAQ for answers to many commonly asked questions."
+  },
+  {
+    "id": "index",
+    "title": "AwareNet - Neighborhood Crime Disruption Network",
+    "url": "index.html",
+    "content": "AwareNet - Neighborhood Crime Disruption Network &times; Aware Net Neighborhood Crime Disruption 1 Deploy Security Cameras Learn more → 2 Monitor Automated Alerts Learn more → 3 Activate Professional Response Learn more → Request Free Assessment ▶ View Demo &times; AwareNet Demo Your browser does not support the video tag. &times; Request Free Assessment Neighborhood/HOA Name Zipcode (primary) Number of Homes (estimate) Number of Businesses (estimate) Best Contact Method Select... Email Phone Email Address Phone Number Submit Request &times; Deploy Security Cameras A traditional neighborhood watch puts residents outside at night, risking their own safety , to observe activity. A traditional security patrol is limited to line-of-sight, often missing important activity . Security cameras change the equation . Mounted on houses, garages, and business buildings, they monitor streets, alleys, and parking lots - all at the same time , with no risk to volunteers . Each participating camera is"
+  },
+  {
+    "id": "introduction-slide-deck",
+    "title": "Introduction Slide Deck",
+    "url": "introduction-slide-deck.html",
+    "content": "Introduction Slide Deck - AwareNet &times; Aware Net Introduction Slide Deck An overview of AwareNet for group presentation and discussion. View Slide Deck ↗"
+  },
+  {
+    "id": "member-tos",
+    "title": "Member Terms of Service",
+    "url": "member-tos.html",
+    "content": "Member Terms of Service - AwareNet &times; Aware Net Member Terms of Service (for camera owners) 1. OUR SERVICES This Member Agreement (the \"Terms\") governs your rights and responsibilities related to AwareNet's services including all of AwareNet's websites, domains, apps, products, services, features and marketing campaigns (the \"Services\"). When you enroll a camera or send us video or pictures, you become a \"Member.\" If you are not a Member, you may still be able to access certain aspects of our Services as a \"Visitor.\" By accessing or using our Services, whether as a Member or Visitor, you acknowledge and agree that you have read, understand, and agree to be bound by these Terms as a legally binding contract with AwareNet (even if you are using the Services on behalf of a company), so please take a moment to read these legally binding Terms. If you are accepting these Terms and using the Services on behalf of a company, partnership, organization, or other legal entity, you represent"
+  },
+  {
+    "id": "our-team",
+    "title": "Our Team",
+    "url": "our-team.html",
+    "content": "Our Team - AwareNet &times; Aware Net Our Team The people behind AwareNet. Tom Scheifler Founder &amp; President Tom Scheifler enjoyed a long and successful career as an independent software contractor. Tom designed, built, and deployed many enterprise-level, bespoke software solutions for industry leading corporations including Monsanto, HP, Boeing, Maritz, Pfizer, and FleishmanHillard. In 2021, after three years of increased property crime incidents in his home town, St. Louis, MO, coupled with significant decreases in police department staff, Tom created the initial version of AwareNet for use by his neighborhood. After successful testing and implementation for his neighborhood, Tom made AwareNet available to all St. Louis City neighborhoods, at no-profit, and volunteered his time to assist residents with neighborhood security initiatives. With AwareNet now in use by five different areas in St. Louis, Tom is inspired to expand the benefits of AwareNet throughout St. Louis and beyond"
+  },
+  {
+    "id": "pricing",
+    "title": "Pricing",
+    "url": "pricing.html",
+    "content": "Pricing - AwareNet &times; Aware Net Pricing Standard Pricing Standard pricing for AwareNet is $129 per month plus a minimum of $4.50 per camera per month (10pm to 6am, 7 days per week). St. Louis City Pricing For neighborhoods in St. Louis City, Missouri, we continue to provide AwareNet at a \"no-profit\" price. More Information For more information, please contact us ."
+  },
+  {
+    "id": "privacy-masking",
+    "title": "Privacy Masking",
+    "url": "privacy-masking.html",
+    "content": "Privacy Masking - AwareNet &times; Aware Net Privacy Masking How to protect privacy using your camera's masking feature. Without Privacy Masking With Privacy Masking (set by camera owner)"
+  },
+  {
+    "id": "qa",
+    "title": "Q&amp;A",
+    "url": "qa.html",
+    "content": "Q&amp;A - AwareNet &times; Aware Net Q&amp;A Tap a question to see the answer. Do cameras deter crime? › Generally, criminals are no longer deterred by security cameras and bright lights. They assume, based on their experience, that residential security cameras are not monitored for activity at night so no one will respond to disrupt their criminal activity. The AwareNet approach involves many cameras (i.e. at least one per block) with real-time monitoring and real-time response to disrupt criminal activity while it is occurring. Although success is not guaranteed and nothing deters all crime, we have proven the AwareNet approach can be successful. Is AwareNet a business? › Yes. AwareNet is available for any neighborhood in the United States. But the founder, Tom Scheifler, is committed to provide AwareNet at no profit to all 79 neighborhoods in the city of St. Louis (his hometown). Who pays for the service? › A neighborhood organization pays for the service by signing up as an AwareNe"
+  },
+  {
+    "id": "reolink-configuration",
+    "title": "Reolink Camera Configuration",
+    "url": "reolink-configuration.html",
+    "content": "Reolink Camera Configuration - AwareNet &times; Aware Net Reolink Camera Configuration The screenshot below shows a typical main Settings page from the Reolink iOS app for a Reolink camera. Your menu may be different depending on your camera and other factors. At the top of the Settings page, next to a picture of the camera, it shows: The name you have given the camera (e.g. 123 Main Street) The model of the camera (e.g. Reolink Duo 2 WiFi) The amount used and capacity of the data card in the camera Click on the camera name to display the Device Info page Information for each of the other options is listed below. In some cases, a link is provided to see more details about the option. When appropriate, an option is identified as CRITICAL or Important . Please give these extra attention. Wi-Fi Selecting your WiFi Network. Once this is set during the initial camera setup, you probably don't need to do anything here. This does not apply for PoE cameras. Display Optional. All things related"
+  },
+  {
+    "id": "review-alert",
+    "title": "Review Alert",
+    "url": "review-alert.html",
+    "content": "Review Alert - AwareNet &times; Aware Net Review Alert How the designated reviewer monitors and acts on alerts. Alert List The main page for the reviewer is a list of alerts. The list automatically updates with the newest alerts at the top of the list. The reviewer can filter the list to suit their needs (e.g. Time/Date, Street Name, Event, Category). Reviewing an Alert Selecting an alert on the main page displays the review page for that alert. The address is a link to display Google Maps for that address. The compass direction in parenthesis is the direction the camera is facing. The reviewer categorizes each alert they review (i.e. False, Unremarkable, Unusual, Suspicious, Criminal). A comment is required for Unusual, Suspicious, and Criminal categories. The purple and blue buttons are quick navigation to other alerts (Previous On Block, Next On Block, Previous In Neighborhood, Next In Neighborhood)."
+  },
+  {
+    "id": "search",
+    "title": "Search",
+    "url": "search.html",
+    "content": "Search - AwareNet &times; Aware Net Search Results: Loading..."
+  },
+  {
+    "id": "supported-cameras",
+    "title": "Camera Brands and Models",
+    "url": "supported-cameras.html",
+    "content": "Camera Brands and Models - AwareNet &times; Aware Net Camera Brands and Models Every security camera must be powered and connected to a network. When selecting a camera, there are tradeoffs to consider based on how it is powered and how it is connected to a network. The first table below shows the available combinations of power and connection. POWER CONNECTION Cellular WiFi Ethernet Battery + Solar ✓ ✓ Plug In ✓ ✓ Ethernet ✓ The next table below shows the relative rating for each power and connection option. CATEGORY OPTION ACQUISITION $ OPERATING $ RELIABILITY PERFORMANCE DEPLOYMENT Power Battery + Solar High Low Low Low Fast Plug In Med Low Med High Varies Ethernet Low Low High High Varies Connection Cellular High High Low Low Fast WiFi Med Low Med Med Varies Ethernet Low Low High High Varies ↔️ Scroll to see all columns Below is the current list of cameras that do meet the requirements to work with AwareNet. We do our best to keep this information accurate but it is not guaranteed."
+  }
+]
