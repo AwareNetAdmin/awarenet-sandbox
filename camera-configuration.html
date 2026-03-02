@@ -202,25 +202,37 @@
             z-index: 999;
         }
 
-        .drawer-overlay.active {
-            display: block;
-        }
-
         .drawer {
             position: fixed;
             top: 0;
-            left: -300px;
-            width: 300px;
+            left: -280px;
+            width: 280px;
             height: 100%;
-            background: #f8fafc;
-            box-shadow: 2px 0 10px rgba(0,0,0,0.3);
-            transition: left 0.3s;
+            background: #2d3748;
             z-index: 1000;
-            overflow-y: auto;
+            transition: left 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 4px 0 15px rgba(0,0,0,0.3);
         }
 
-        .drawer.active {
+        .drawer.open {
             left: 0;
+        }
+
+        .drawer-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .drawer-logo-text {
+            font-family: 'Noto Sans', sans-serif;
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #fff;
         }
 
         .drawer-close {
@@ -230,95 +242,36 @@
             background: none;
             border: none;
             color: white;
-            font-size: 2rem;
+            font-size: 1.6rem;
             cursor: pointer;
-            padding: 0;
-            width: 30px;
-            height: 30px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .drawer-header {
-            padding: 1.5rem;
-            border-bottom: 1px solid rgba(255,255,255,0.2);
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .drawer-logo-text {
-            font-family: 'Noto Sans', sans-serif;
-            font-size: 1.8rem;
-            font-weight: bold;
-            color: white;
+            line-height: 1;
         }
 
         .drawer nav {
-            padding: 1rem 20px;
-            display: block;
-        }
-
-        .drawer-item {
-            display: block;
-            padding: 0.75rem 1.5rem;
-            color: white;
-            text-decoration: none;
-            transition: background 0.3s;
-        }
-
-        .drawer-item:hover {
-            background: rgba(255,255,255,0.15);
-        }
-
-        .drawer-group {
-            margin: 0;
-        }
-
-        .drawer-toggle {
-            cursor: pointer;
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: relative;
+            flex-direction: column;
+            padding: 1rem 0;
+            overflow-y: auto;
+            flex: 1;
         }
 
-        .drawer-chevron {
-            transition: transform 0.3s;
-            font-size: 1.2rem;
-        }
-
-        .drawer-toggle.open .drawer-chevron {
-            transform: rotate(90deg);
-        }
-
-        .drawer-sub-items {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease-out;
-            background: rgba(0,0,0,0.1);
-        }
-
-        .drawer-sub-items.open {
-            max-height: 500px;
-        }
-
-        .drawer-sub-item {
-            display: block;
-            padding: 0.5rem 1.5rem 0.5rem 2.5rem;
-            color: rgba(255,255,255,0.9);
+        .drawer nav a {
             text-decoration: none;
-            font-size: 0.95rem;
-            transition: background 0.3s;
+            color: white;
+            font-size: 1.35rem;
+            font-weight: 500;
+            padding: 0.75rem 1.5rem;
+            border-bottom: 1px solid rgba(255,255,255,0.15);
+            transition: background 0.2s;
+            text-align: left;
+            display: block;
+            width: 100%;
+            box-sizing: border-box;
         }
 
-        .drawer-sub-item:hover {
-            background: rgba(255,255,255,0.1);
-        }
-
+        /* Only show hover on non-touch devices to prevent stuck hover on iOS */
         @media (hover: hover) and (pointer: fine) {
-            .drawer-toggle:hover {
+            .drawer nav a:hover {
                 background: rgba(255,255,255,0.15);
             }
         }
@@ -327,6 +280,52 @@
             background: rgba(255,255,255,0.25);
         }
 
+        .drawer nav a.drawer-sub-item {
+            font-size: 1.2rem;
+            font-weight: 400;
+            padding: 0.5rem 1.5rem 0.5rem 2.5rem;
+            opacity: 0.85;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .drawer-group {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+        }
+
+        .drawer-toggle {
+            display: flex !important;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .drawer-sub-items {
+            display: none;
+            flex-direction: column;
+        }
+
+        .drawer-sub-items.open {
+            display: flex;
+        }
+
+        .drawer-chevron {
+            float: right;
+            transition: transform 0.3s;
+            display: inline-block;
+            margin-left: 0.75rem;
+            font-size: 1.4rem;
+            font-weight: bold;
+            line-height: 1;
+        }
+
+        .drawer-toggle.open .drawer-chevron {
+            transform: rotate(90deg);
+        }
+
+        /* Responsive */
         @media (max-width: 768px) {
 
 
