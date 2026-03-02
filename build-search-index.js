@@ -14,13 +14,16 @@ const searchIndex = htmlFiles.map(filename => {
   const titleMatch = content.match(/<title>(.*?)<\/title>/i);
   const title = titleMatch ? titleMatch[1].replace(' - AwareNet', '').trim() : filename;
   
-  // Extract main content (remove scripts, styles, header, footer)
+  // Extract main content (remove scripts, styles, header, footer, drawer UI)
   let textContent = content
     .replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '')
     .replace(/<style\b[^<]*(?:(?!<\/style>)<[^<]*)*<\/style>/gi, '')
     .replace(/<header\b[^<]*(?:(?!<\/header>)<[^<]*)*<\/header>/gi, '')
     .replace(/<footer\b[^<]*(?:(?!<\/footer>)<[^<]*)*<\/footer>/gi, '')
     .replace(/<nav\b[^<]*(?:(?!<\/nav>)<[^<]*)*<\/nav>/gi, '')
+    .replace(/<div class="drawer-overlay"[^>]*>[\s\S]*?<\/div>/gi, '')
+    .replace(/<div class="drawer"[^>]*>[\s\S]*?<\/div>\s*<\/div>/gi, '')
+    .replace(/<div[^>]*class="[^"]*modal[^"]*"[^>]*>[\s\S]*?<\/div>/gi, '')
     .replace(/<[^>]+>/g, ' ')
     .replace(/&times;/g, '')
     .replace(/&nbsp;/g, ' ')
@@ -31,6 +34,10 @@ const searchIndex = htmlFiles.map(filename => {
     .replace(/&#39;/g, "'")
     .replace(/\s+/g, ' ')
     .trim();
+  
+  // Remove title duplication from content start
+  const titlePattern = new RegExp(`^${title.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\s*[-–—]?\\s*AwareNet\\s*`, 'i');
+  textContent = textContent.replace(titlePattern, '').trim();
   
   return {
     id: filename.replace('.html', ''),
