@@ -469,17 +469,8 @@
                     const isOpen = subItems.classList.contains('open');
                     
                     // Close all others
-                    document.querySelectorAll('.drawer-sub-items').forEach(item => {
-                        item.classList.remove('open');
-                    });
-                    document.querySelectorAll('.drawer-toggle').forEach(t => {
-                        t.classList.remove('open');
-                    });
-                    
-                    // Clear all active highlights
-                    document.querySelectorAll('.drawer-toggle').forEach(t => {
-                        t.classList.remove('active');
-                    });
+                    document.querySelectorAll('.drawer-sub-items.open').forEach(el => el.classList.remove('open'));
+                    document.querySelectorAll('.drawer-toggle.open').forEach(el => el.classList.remove('open'));
                     
                     // Clear any pending highlight timeout
                     if (drawerHighlightTimeout) {
@@ -487,64 +478,95 @@
                         drawerHighlightTimeout = null;
                     }
                     
+                    // Remove active class from previously active toggle
+                    if (currentlyActiveToggle) {
+                        currentlyActiveToggle.classList.remove('active');
+                        currentlyActiveToggle = null;
+                    }
+                    
+                    // Double-check: remove active from all toggles
+                    document.querySelectorAll('.drawer-toggle').forEach(t => {
+                        if (t.classList.contains('active')) {
+                            console.log('Removing active from:', t.textContent.trim());
+                        }
+                        t.classList.remove('active');
+                    });
+                    
                     // Toggle this one
                     if (!isOpen) {
-                        this.classList.add('open');
                         subItems.classList.add('open');
+                        this.classList.add('open');
+                        console.log('Opening menu:', this.textContent.trim());
                         
-                        // Auto-scroll to show the last sub-item
-                        setTimeout(() => {
-                            const lastSubItem = subItems.querySelector('.drawer-sub-item:last-child');
-                            if (lastSubItem) {
-                                lastSubItem.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                        // Scroll to show last sub-item if needed, then highlight this toggle
+                        const toggleElement = this;
+                        
+                        drawerHighlightTimeout = setTimeout(() => {
+                            const drawerNav = document.querySelector('.drawer nav');
+                            const lastSubItem = subItems.querySelector('a:last-child');
+                            if (lastSubItem && drawerNav) {
+                                const drawerRect = drawerNav.getBoundingClientRect();
+                                const lastItemRect = lastSubItem.getBoundingClientRect();
+                                
+                                // Check if last item is below the visible area
+                                if (lastItemRect.bottom > drawerRect.bottom) {
+                                    const scrollAmount = lastItemRect.bottom - drawerRect.bottom + 20; // 20px padding
+                                    drawerNav.scrollBy({ top: scrollAmount, behavior: 'smooth' });
+                                }
                             }
                             
-                            // Highlight this toggle after scroll
-                            drawerHighlightTimeout = setTimeout(() => {
-                                // Clear all active states first
-                                document.querySelectorAll('.drawer-toggle').forEach(t => {
-                                    t.classList.remove('active');
-                                });
-                                // Add active only to this toggle
-                                this.classList.add('active');
-                                currentlyActiveToggle = this;
-                            }, 50);
-                        }, 50);
+                            // Nuclear option: remove 'active' from EVERYTHING in the entire document
+                            document.querySelectorAll('.active').forEach(el => el.classList.remove('active'));
+                            
+                            // Highlight this specific toggle after scroll
+                            toggleElement.classList.add('active');
+                            currentlyActiveToggle = toggleElement;
+                            drawerHighlightTimeout = null;
+                        }, 50); // Small delay to ensure DOM has updated
                     }
+                    // Save state to localStorage
+                    const openMenus = [];
+                    document.querySelectorAll('.drawer-toggle.open').forEach(el => {
+                        openMenus.push(parseInt(el.getAttribute('data-menu-index')));
+                    });
+                    localStorage.setItem('drawerMenuState', JSON.stringify(openMenus));
                 });
             });
 
-            // Prevent drawer sub-items from closing the drawer
-            document.querySelectorAll('.drawer-sub-item').forEach(item => {
-                item.addEventListener('click', function(e) {
-                    // Let the link navigate normally, don't prevent default
-                });
-            });
-
-            // Drawer functionality
+            // Slide-out drawer
             const hamburger = document.getElementById('hamburger');
             const drawer = document.getElementById('drawer');
             const drawerOverlay = document.getElementById('drawer-overlay');
             const drawerClose = document.getElementById('drawer-close');
 
             function openDrawer() {
-                drawer.classList.add('active');
-                drawerOverlay.classList.add('active');
+                drawer.classList.add('open');
+                drawerOverlay.style.display = 'block';
+                document.body.style.overflow = 'hidden';
             }
 
             function closeDrawer() {
-                drawer.classList.remove('active');
-                drawerOverlay.classList.remove('active');
+                drawer.classList.remove('open');
+                drawerOverlay.style.display = 'none';
+                document.body.style.overflow = 'auto';
             }
 
-            hamburger.addEventListener('click', openDrawer);
-            drawerClose.addEventListener('click', closeDrawer);
-            drawerOverlay.addEventListener('click', closeDrawer);
-
-            // Close drawer when clicking regular drawer items (but not toggles or sub-items)
-            drawer.querySelectorAll('nav a:not(.drawer-toggle)').forEach(link => {
-                if (!link.classList.contains('drawer-sub-item')) {
+            if (hamburger) {
+                hamburger.addEventListener('click', openDrawer);
+                drawerClose.addEventListener('click', closeDrawer);
+                drawerOverlay.addEventListener('click', closeDrawer);
+                drawer.querySelectorAll('nav a:not(.drawer-toggle)').forEach(link => {
                     link.addEventListener('click', closeDrawer);
+                });
+            }
+
+            // Close modal with Escape key
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    modals.forEach(modal => {
+                        modal.style.display = 'none';
+                        document.body.style.overflow = 'auto';
+                    });
                 }
             });
         });
