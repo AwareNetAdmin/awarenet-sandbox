@@ -458,6 +458,23 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            // Restore drawer menu state from localStorage
+            const savedState = localStorage.getItem('drawerMenuState');
+            if (savedState) {
+                try {
+                    const openMenus = JSON.parse(savedState);
+                    openMenus.forEach(index => {
+                        const toggles = document.querySelectorAll('.drawer-toggle');
+                        if (toggles[index]) {
+                            toggles[index].classList.add('open');
+                            toggles[index].nextElementSibling.classList.add('open');
+                        }
+                    });
+                } catch (e) {
+                    // Ignore parse errors
+                }
+            }
+
             // Collapsible drawer groups
             let drawerHighlightTimeout = null;
             let currentlyActiveToggle = null;
