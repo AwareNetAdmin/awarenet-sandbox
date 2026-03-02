@@ -29,7 +29,7 @@ const searchIndex = htmlFiles.map(filename => {
     id: filename.replace('.html', ''),
     title: title,
     url: filename,
-    content: textContent.substring(0, 1000) // First 1000 chars
+    content: textContent.substring(0, 10000) // First 10000 chars
   };
 });
 
