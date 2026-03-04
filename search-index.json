@@ -147,6 +147,12 @@
     "id": "tablet-setup",
     "title": "Tablet Setup",
     "url": "tablet-setup",
-    "content": "Tablet Setup Basic instructions for setting up a tablet for use with AwareNet. Requirement: Apple iPad required Download the complete setup guide for detailed instructions on configuring your iPad for use with the AwareNet reviewer web application. 📄 Download Tablet Setup Guide (PDF)"
+    "content": "Tablet Setup Basic instructions for setting up a tablet for use with AwareNet. Apple iPad required Tablet Setup"
+  },
+  {
+    "id": "training-videos",
+    "title": "Training Videos",
+    "url": "training-videos",
+    "content": "Training Videos Sign In Basics More Basics Filters Camera Map (coming soon) Previous / Next (coming soon)"
   }
 ]
