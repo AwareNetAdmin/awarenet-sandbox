@@ -13,6 +13,13 @@
         "deploy-production.sh",
         "service-account-key.json"
       ],
+      "redirects": [
+        {
+          "source": "/configuration-notes/false-alerts",
+          "destination": "/false-alerts",
+          "type": 301
+        }
+      ],
       "headers": [
         {
           "source": "**/*.@(jpg|jpeg|gif|png|svg|webp)",
@@ -48,6 +55,13 @@
         "deploy.sh",
         "deploy-production.sh",
         "service-account-key.json"
+      ],
+      "redirects": [
+        {
+          "source": "/configuration-notes/false-alerts",
+          "destination": "/false-alerts",
+          "type": 301
+        }
       ],
       "headers": [
         {
