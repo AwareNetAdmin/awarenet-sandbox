@@ -8,8 +8,23 @@ Last updated: March 4, 2026
 
 ## What This Is
 
-The AwareNet sandbox website (https://sandbox.awarenet.us) is a comprehensive information and documentation site for potential customers and members. It contains:
+The AwareNet website system consists of **two separate sites** hosted on the same Firebase project:
 
+### Production Site (www.awarenet.us)
+- **Live public website** — indexed by search engines
+- **Repository:** Separate production repo (NOT this one)
+- **Purpose:** Public-facing marketing and information
+- **Deploy:** Via separate deployment process from production repo
+
+### Sandbox Site (sandbox.awarenet.us) — THIS REPOSITORY
+- **Staging/development site** — blocked from search engines
+- **Repository:** `~/.openclaw/workspace/awarenet-sandbox` (AwareNetAdmin/awarenet-sandbox)
+- **Purpose:** Testing changes before production deployment
+- **Deploy:** Via `./deploy.sh` in this repo
+
+**Key benefit:** Changes to sandbox do NOT affect production. You can test freely on sandbox, then promote tested content to production when ready.
+
+**Content includes:**
 - Product information and feature details
 - Getting started guides
 - Camera configuration instructions (Reolink, Axis)
@@ -17,9 +32,7 @@ The AwareNet sandbox website (https://sandbox.awarenet.us) is a comprehensive in
 - Privacy and terms of service
 - Team information and contact details
 
-**Purpose:** Pre-sales education, member onboarding, support documentation
-
-**NOT indexed by search engines** — `robots.txt` and `noindex` meta tags prevent crawling to avoid confusion with production site (www.awarenet.us).
+**Sandbox protection:** `robots.txt` and `noindex` meta tags prevent search engine crawling to avoid confusion with production site.
 
 ---
 
@@ -27,14 +40,21 @@ The AwareNet sandbox website (https://sandbox.awarenet.us) is a comprehensive in
 
 ### Hosting
 - **Platform:** Firebase Hosting
-- **Project:** `awarenet` (Google Cloud Project)
-- **Custom Domain:** sandbox.awarenet.us
-- **Alternate URL:** awarenet.web.app
+- **Project:** `awarenet` (Google Cloud Project, shared by both sites)
+- **Sandbox domain:** sandbox.awarenet.us
+- **Production domain:** www.awarenet.us
+- **Firebase URL:** awarenet.web.app (serves sandbox by default)
 
-### Repository
+### Repository (Sandbox)
 - **Location:** `~/.openclaw/workspace/awarenet-sandbox`
 - **GitHub:** AwareNetAdmin/awarenet-sandbox
 - **Branch:** main
+- **Deploys to:** Firebase Hosting target `sandbox`
+
+### Repository (Production)
+- **Separate repository** from sandbox
+- **Deploys to:** Firebase Hosting target `production`
+- Changes to sandbox do NOT affect production
 
 ### Technology Stack
 - Pure HTML/CSS/JavaScript (no build tools, no framework)
@@ -195,8 +215,8 @@ awarenet-sandbox/
 ├── search.js                   # Search functionality
 ├── search-index.json           # Generated search index
 ├── build-search-index.js       # Search index builder
-├── deploy.sh                   # Deployment script
-├── deploy-production.sh        # Production deploy (future)
+├── deploy.sh                   # Sandbox deployment script
+├── deploy-production.sh        # (Legacy - production uses separate repo)
 ├── firebase.json               # Firebase config
 ├── .firebaserc                 # Firebase targets
 ├── robots.txt                  # Block search engines
@@ -212,26 +232,40 @@ awarenet-sandbox/
 ## Costs
 
 ### Firebase Hosting
+- **Project hosts:** Both sandbox AND production sites
 - **Free tier:** 10 GB storage, 360 MB/day transfer
-- **Current usage:** Well within free tier limits
+- **Current usage:** Well within free tier limits (combined)
 - **Cost if exceeded:** ~$0.026/GB storage, ~$0.15/GB transfer
 
-### Estimated monthly cost: **$0** (free tier)
+### Estimated monthly cost: **$0** (free tier, shared across both sites)
 
 ---
 
-## Production Deployment (Future)
+## Production Deployment
 
-There's a `deploy-production.sh` script for deploying to www.awarenet.us when ready.
+**Production site (www.awarenet.us) is LIVE and operational.**
 
-**Before production deploy:**
-1. Remove `robots.txt` (or change to allow indexing)
-2. Remove `noindex` meta tags from all HTML
-3. Update any sandbox-specific content
-4. Test thoroughly on sandbox first
-5. Run: `./deploy-production.sh`
+Production uses a **separate repository** from sandbox. This means:
+- Changes to this sandbox repo do NOT affect production
+- You can freely test and modify sandbox without worrying about breaking production
+- To update production, changes must be made in the production repository
 
-**Production DNS:** Needs to be configured in Google Domains or Cloud DNS to point www.awarenet.us to Firebase Hosting.
+### Promoting Sandbox Changes to Production
+
+When sandbox content is tested and ready for production:
+
+1. **Manual copy:** Copy tested HTML/content from sandbox repo to production repo
+2. **Deploy production:** Run deployment from the production repository
+3. **Verify:** Check www.awarenet.us to confirm changes are live
+
+**Important differences between sandbox and production:**
+- **Sandbox:** Has `robots.txt` blocking crawlers + `noindex` meta tags
+- **Production:** Must allow search engine indexing (no robots.txt blocking, no noindex tags)
+- **Testing:** Always test changes on sandbox first before promoting to production
+
+### Production Repository Location
+- **Separate repository** (not this one)
+- Contact Tom (tscheifler@awarenet.us) for production repository access if needed
 
 ---
 
@@ -300,9 +334,10 @@ Versions are tracked in `version.txt` and the `meta version` tag in each HTML fi
 
 ## Last Known Good State
 
-**Date:** March 4, 2026, 5:30 AM EST  
-**Commit:** 30bad04 - "Add robots.txt and noindex meta tags to prevent search engine indexing"  
-**Status:** Deployed and operational at https://sandbox.awarenet.us  
+**Date:** March 4, 2026, 5:48 AM EST  
+**Sandbox Commit:** 6b9a086 - "Add DFO (Done Fell Over) documentation for website maintenance"  
+**Sandbox Status:** Deployed and operational at https://sandbox.awarenet.us  
+**Production Status:** Live and operational at https://www.awarenet.us (separate repository)  
 **Issues:** None
 
 ---
