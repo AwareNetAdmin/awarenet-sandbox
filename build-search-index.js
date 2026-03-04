@@ -10,9 +10,17 @@ const htmlFiles = fs.readdirSync(__dirname)
 const searchIndex = htmlFiles.map(filename => {
   const content = fs.readFileSync(path.join(__dirname, filename), 'utf-8');
   
-  // Extract title
+  // Extract title and decode HTML entities
   const titleMatch = content.match(/<title>(.*?)<\/title>/i);
-  const title = titleMatch ? titleMatch[1].replace(' - AwareNet', '').trim() : filename;
+  let title = titleMatch ? titleMatch[1].replace(' - AwareNet', '').trim() : filename;
+  
+  // Decode common HTML entities in title
+  title = title
+    .replace(/&amp;/g, '&')
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g, "'");
   
   // Extract main content (remove scripts, styles, header, footer, drawer UI)
   let textContent = content
