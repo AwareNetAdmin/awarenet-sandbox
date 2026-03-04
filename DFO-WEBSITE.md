@@ -12,17 +12,17 @@ The AwareNet website system consists of **two separate sites** hosted on the sam
 
 ### Production Site (www.awarenet.us)
 - **Live public website** — indexed by search engines
-- **Repository:** Separate production repo (NOT this one)
+- **Repository:** Same repository as sandbox (this repo)
 - **Purpose:** Public-facing marketing and information
-- **Deploy:** Via separate deployment process from production repo
+- **Deploy:** Via `./deploy-production.sh` script
 
-### Sandbox Site (sandbox.awarenet.us) — THIS REPOSITORY
+### Sandbox Site (sandbox.awarenet.us)
 - **Staging/development site** — blocked from search engines
 - **Repository:** `~/.openclaw/workspace/awarenet-sandbox` (AwareNetAdmin/awarenet-sandbox)
 - **Purpose:** Testing changes before production deployment
-- **Deploy:** Via `./deploy.sh` in this repo
+- **Deploy:** Via `./deploy.sh` script
 
-**Key benefit:** Changes to sandbox do NOT affect production. You can test freely on sandbox, then promote tested content to production when ready.
+**Key benefit:** Both sites deploy from the same repository to different Firebase Hosting targets. Test changes on sandbox first (via `./deploy.sh`), then deploy to production when ready (via `./deploy-production.sh`).
 
 **Content includes:**
 - Product information and feature details
@@ -82,10 +82,12 @@ You have two options for maintaining the site:
 - **Branch:** main
 - **Deploys to:** Firebase Hosting target `sandbox`
 
-### Repository (Production)
-- **Separate repository** from sandbox
-- **Deploys to:** Firebase Hosting target `production`
-- Changes to sandbox do NOT affect production
+### Repository (Both Sites)
+- **Single repository** serves both sandbox and production
+- **Location:** `~/.openclaw/workspace/awarenet-sandbox`
+- **Sandbox target:** Deployed via `./deploy.sh`
+- **Production target:** Deployed via `./deploy-production.sh`
+- Changes require explicit deployment to each target
 
 ### Technology Stack
 - Pure HTML/CSS/JavaScript (no build tools, no framework)
@@ -276,27 +278,37 @@ awarenet-sandbox/
 
 **Production site (www.awarenet.us) is LIVE and operational.**
 
-Production uses a **separate repository** from sandbox. This means:
-- Changes to this sandbox repo do NOT affect production
-- You can freely test and modify sandbox without worrying about breaking production
-- To update production, changes must be made in the production repository
+Production and sandbox deploy from the **same repository** to different Firebase Hosting targets. This means:
+- Changes require explicit deployment to each target
+- Test freely on sandbox without affecting production
+- Deploy to production when ready
 
-### Promoting Sandbox Changes to Production
+### Deploying to Production
 
 When sandbox content is tested and ready for production:
 
-1. **Manual copy:** Copy tested HTML/content from sandbox repo to production repo
-2. **Deploy production:** Run deployment from the production repository
-3. **Verify:** Check www.awarenet.us to confirm changes are live
+1. **Test on sandbox first:** 
+   ```bash
+   ./deploy.sh
+   # Verify at https://sandbox.awarenet.us
+   ```
+
+2. **Deploy to production:**
+   ```bash
+   ./deploy-production.sh
+   ```
+
+3. **Verify:** Check https://www.awarenet.us to confirm changes are live
 
 **Important differences between sandbox and production:**
 - **Sandbox:** Has `robots.txt` blocking crawlers + `noindex` meta tags
-- **Production:** Must allow search engine indexing (no robots.txt blocking, no noindex tags)
-- **Testing:** Always test changes on sandbox first before promoting to production
+- **Production:** Allows search engine indexing (different `robots.txt` or no robots.txt)
+- **firebase.json:** Contains configuration for both targets
 
-### Production Repository Location
-- **Separate repository** (not this one)
-- Contact Tom (tscheifler@awarenet.us) for production repository access if needed
+**Both targets share:**
+- Same HTML files
+- Same images and assets
+- Same Firebase configuration (redirects, headers, etc.)
 
 ---
 
