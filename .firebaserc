@@ -1,5 +1,17 @@
 {
   "projects": {
     "default": "awarenet"
+  },
+  "targets": {
+    "awarenet": {
+      "hosting": {
+        "sandbox": [
+          "awarenet"
+        ],
+        "production": [
+          "awarenet-production"
+        ]
+      }
+    }
   }
 }

@@ -23,13 +23,13 @@ fi
 echo "🔐 Authenticating with service account..."
 export GOOGLE_APPLICATION_CREDENTIALS="$KEY_FILE"
 
-# Deploy to Firebase Hosting
-echo "📦 Deploying to Firebase..."
-firebase deploy --only hosting --non-interactive
+# Deploy to Firebase Hosting (sandbox only)
+echo "📦 Deploying to Firebase (sandbox)..."
+firebase deploy --only hosting:sandbox --non-interactive
 
 if [ $? -eq 0 ]; then
     echo "✅ Deployment complete!"
-    echo "🌍 Site available at:"
+    echo "🌍 Sandbox site available at:"
     echo "   → https://sandbox.awarenet.us"
     echo "   → https://awarenet.web.app"
 else
