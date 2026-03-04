@@ -1,0 +1,310 @@
+# DFO Document: AwareNet Sandbox Website
+
+**"Done Fell Over" — Emergency Handover Guide**
+
+Last updated: March 4, 2026
+
+---
+
+## What This Is
+
+The AwareNet sandbox website (https://sandbox.awarenet.us) is a comprehensive information and documentation site for potential customers and members. It contains:
+
+- Product information and feature details
+- Getting started guides
+- Camera configuration instructions (Reolink, Axis)
+- Pricing information
+- Privacy and terms of service
+- Team information and contact details
+
+**Purpose:** Pre-sales education, member onboarding, support documentation
+
+**NOT indexed by search engines** — `robots.txt` and `noindex` meta tags prevent crawling to avoid confusion with production site (www.awarenet.us).
+
+---
+
+## Architecture
+
+### Hosting
+- **Platform:** Firebase Hosting
+- **Project:** `awarenet` (Google Cloud Project)
+- **Custom Domain:** sandbox.awarenet.us
+- **Alternate URL:** awarenet.web.app
+
+### Repository
+- **Location:** `~/.openclaw/workspace/awarenet-sandbox`
+- **GitHub:** AwareNetAdmin/awarenet-sandbox
+- **Branch:** main
+
+### Technology Stack
+- Pure HTML/CSS/JavaScript (no build tools, no framework)
+- Client-side search using `search.js` + `search-index.json`
+- Responsive design (mobile-first)
+- Firebase Hosting for CDN and SSL
+
+---
+
+## Access & Credentials
+
+### Firebase Console
+- URL: https://console.firebase.google.com/project/awarenet
+- Account: tscheifler@awarenet.us (Tom's Google account)
+- Service account: `opah63@awarenet.iam.gserviceaccount.com`
+- Key file: `service-account-key.json` (in repo root, gitignored)
+
+### GitHub
+- Repo: https://github.com/AwareNetAdmin/awarenet-sandbox
+- Account: AwareNetAdmin
+
+### Domain (sandbox.awarenet.us)
+- Managed through Google Domains or Cloud DNS (check Firebase console for current setup)
+
+---
+
+## How to Make Changes
+
+### 1. Edit HTML Files
+All HTML files are in the repo root:
+```
+index.html              # Homepage
+getting-started.html    # Onboarding guide
+camera-configuration.html
+pricing.html
+...etc
+```
+
+**Structure:**
+- Each page has consistent header/footer navigation
+- AwareNet blue theme: `#007BBF`
+- Responsive hamburger menu for mobile
+- All pages use the same CSS (inline in `<style>` tags)
+
+### 2. Update Search Index
+After editing HTML content, rebuild the search index:
+```bash
+cd ~/.openclaw/workspace/awarenet-sandbox
+node build-search-index.js
+```
+
+This extracts text from all HTML files and builds `search-index.json` for client-side search.
+
+### 3. Deploy
+```bash
+cd ~/.openclaw/workspace/awarenet-sandbox
+./deploy.sh
+```
+
+This script:
+1. Rebuilds search index
+2. Authenticates with service account
+3. Deploys to Firebase Hosting (sandbox target)
+
+**Deploy time:** ~30-60 seconds
+
+### 4. Commit to Git
+```bash
+git add -A
+git commit -m "Description of changes"
+git push
+```
+
+---
+
+## Common Tasks
+
+### Add a New Page
+1. Copy an existing HTML file as a template
+2. Update content but keep the header/footer structure
+3. Add link to navigation (in header of all pages)
+4. Rebuild search index: `node build-search-index.js`
+5. Deploy: `./deploy.sh`
+6. Commit: `git add -A && git commit -m "Add new page" && git push`
+
+### Update Images
+1. Add image to repo root (or appropriate subdirectory)
+2. Reference in HTML: `<img src="image-name.jpg" alt="Description">`
+3. Deploy: `./deploy.sh`
+
+**Image optimization:** Keep images under 500KB when possible. Use JPG for photos, PNG for diagrams/screenshots.
+
+### Update Styles
+All CSS is inline in each HTML file's `<style>` tag. To update globally:
+1. Edit one file's styles
+2. Copy the updated `<style>` block
+3. Paste into all other HTML files (or use script to automate)
+
+**Key style sections:**
+- Header and navigation
+- Hamburger menu and drawer
+- Container and typography
+- Mobile responsive rules
+
+### Fix Broken Links
+Use the `fix-links.sh` script:
+```bash
+./fix-links.sh
+```
+
+This finds and fixes common link issues (e.g., absolute URLs that should be relative).
+
+---
+
+## Troubleshooting
+
+### Deployment Fails
+**Error: "Service account key not found"**
+- Check that `service-account-key.json` exists in repo root
+- Re-download from Firebase Console → Project Settings → Service Accounts
+
+**Error: "Permission denied"**
+- Check that service account has Firebase Hosting Admin role
+- Verify in Firebase Console → IAM & Admin
+
+**Error: "Target not found"**
+- Check `.firebaserc` file contains sandbox target
+- Should have: `"sandbox": "awarenet"`
+
+### Search Not Working
+1. Rebuild index: `node build-search-index.js`
+2. Check `search-index.json` was created and has content
+3. Redeploy: `./deploy.sh`
+
+### Styles Broken on Mobile
+- Check hamburger menu CSS: `.hamburger { display: flex; }`
+- Check nav links hidden: `.nav-links { display: none !important; }`
+- Test on actual device or Chrome DevTools mobile emulator
+
+### Page Not Found (404)
+- Firebase Hosting uses `cleanUrls: true`, so `/page` works but `/page.html` might not
+- Check file exists in repo root
+- Verify it's not in `.gitignore` or Firebase `ignore` list
+
+---
+
+## File Structure
+
+```
+awarenet-sandbox/
+├── index.html                  # Homepage
+├── getting-started.html        # Key pages
+├── camera-configuration.html
+├── pricing.html
+├── ...more pages...
+├── 404.html                    # Custom error page
+├── search.html                 # Search page
+├── search.js                   # Search functionality
+├── search-index.json           # Generated search index
+├── build-search-index.js       # Search index builder
+├── deploy.sh                   # Deployment script
+├── deploy-production.sh        # Production deploy (future)
+├── firebase.json               # Firebase config
+├── .firebaserc                 # Firebase targets
+├── robots.txt                  # Block search engines
+├── service-account-key.json    # Auth (gitignored)
+├── logo.svg                    # AwareNet logo
+├── *.jpg, *.png                # Images
+├── *.pdf                       # PDFs (e.g., Tablet-Set-Up.pdf)
+└── README.md                   # Repo documentation
+```
+
+---
+
+## Costs
+
+### Firebase Hosting
+- **Free tier:** 10 GB storage, 360 MB/day transfer
+- **Current usage:** Well within free tier limits
+- **Cost if exceeded:** ~$0.026/GB storage, ~$0.15/GB transfer
+
+### Estimated monthly cost: **$0** (free tier)
+
+---
+
+## Production Deployment (Future)
+
+There's a `deploy-production.sh` script for deploying to www.awarenet.us when ready.
+
+**Before production deploy:**
+1. Remove `robots.txt` (or change to allow indexing)
+2. Remove `noindex` meta tags from all HTML
+3. Update any sandbox-specific content
+4. Test thoroughly on sandbox first
+5. Run: `./deploy-production.sh`
+
+**Production DNS:** Needs to be configured in Google Domains or Cloud DNS to point www.awarenet.us to Firebase Hosting.
+
+---
+
+## Emergency Contacts
+
+- **Tom Scheifler** — tscheifler@awarenet.us (primary)
+- **Glenn Weikert** — (Director of Operations, has dev experience)
+
+---
+
+## Quick Reference Commands
+
+```bash
+# Navigate to repo
+cd ~/.openclaw/workspace/awarenet-sandbox
+
+# Rebuild search index
+node build-search-index.js
+
+# Deploy to sandbox
+./deploy.sh
+
+# Check Firebase status
+firebase projects:list
+
+# View deployment history
+firebase hosting:channel:list
+
+# Git operations
+git status
+git add -A
+git commit -m "Message"
+git push
+
+# View live site
+open https://sandbox.awarenet.us
+```
+
+---
+
+## Version History
+
+Versions are tracked in `version.txt` and the `meta version` tag in each HTML file.
+
+**Current version:** 0.1.44 (as of March 4, 2026)
+
+---
+
+## Notes
+
+### Known Issues
+- None currently
+
+### Future Enhancements
+- Consider Firebase Analytics for traffic insights
+- Add contact form with Firebase Functions backend
+- Video hosting optimization (currently using local MP4 files)
+
+### Important Reminders
+- **DO NOT** commit `service-account-key.json` to Git
+- **DO NOT** remove `robots.txt` or `noindex` tags on sandbox
+- **ALWAYS** rebuild search index after content changes
+- **TEST** locally by opening HTML files in browser before deploying
+
+---
+
+## Last Known Good State
+
+**Date:** March 4, 2026, 5:30 AM EST  
+**Commit:** 30bad04 - "Add robots.txt and noindex meta tags to prevent search engine indexing"  
+**Status:** Deployed and operational at https://sandbox.awarenet.us  
+**Issues:** None
+
+---
+
+**If you're reading this because Tom "done fell over," you now have everything you need to keep the sandbox site running. Good luck, and don't panic.** 🐟
