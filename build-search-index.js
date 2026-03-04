@@ -42,7 +42,7 @@ const searchIndex = htmlFiles.map(filename => {
   return {
     id: filename.replace('.html', ''),
     title: title,
-    url: filename,
+    url: filename.replace('.html', ''), // Clean URL without .html
     content: textContent.substring(0, 10000) // First 10000 chars
   };
 });

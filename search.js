@@ -8,7 +8,7 @@
         if (searchIndex) return searchIndex;
         
         try {
-            const response = await fetch('https://storage.googleapis.com/sandbox.awarenet.us/search-index.json');
+            const response = await fetch('/search-index.json');
             searchIndex = await response.json();
             
             // Build Lunr index
@@ -74,7 +74,7 @@
             e.preventDefault();
             const query = document.getElementById('drawer-search-input').value;
             if (query.trim()) {
-                window.location.href = `search.html?q=${encodeURIComponent(query)}`;
+                window.location.href = `/search?q=${encodeURIComponent(query)}`;
             }
         });
         
@@ -128,7 +128,7 @@
         initSearchBox();
         
         // If on search results page
-        if (window.location.pathname.includes('search.html')) {
+        if (window.location.pathname.includes('search')) {
             displaySearchResults();
         }
     });
